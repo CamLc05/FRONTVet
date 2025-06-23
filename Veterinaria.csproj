@@ -85,6 +85,9 @@
 	  <MauiXaml Update="Views\Citas.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Componentes\CitaCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Inventario.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

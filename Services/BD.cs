@@ -28,7 +28,7 @@ namespace Veterinaria.Services
                 Citas = new List<Cita>
                 {
                     { 
-                        new Cita {Id = 2, Fecha_cita = new DateTime(2023, 1, 15), Motivo = "Vacunación"}
+                        new Cita {Id = 2, FechaCita = DateTime.Now.AddDays(1).Date.AddHours(10), Motivo = "Vacunación"}
                     },
                 },
                 Intervenciones = "cirugia de corazón",
@@ -51,7 +51,7 @@ namespace Veterinaria.Services
                 Citas = new List<Cita>
                 {
                     { 
-                        new Cita {Id = 2, Fecha_cita = new DateTime(2023, 1, 15), Motivo = "Vacunación"}
+                        new Cita {Id = 2, FechaCita = DateTime.Now.AddDays(1).Date.AddHours(10), Motivo = "Vacunación"}
                     },
                 },
                 Intervenciones = "cirugia de corazón",
@@ -75,7 +75,7 @@ namespace Veterinaria.Services
             Citas = new List<Cita>
             {
                 { 
-                    new Cita {Id = 2, Fecha_cita = new DateTime(2023, 1, 15), Motivo = "Vacunación"}
+                    new Cita {Id = 2, FechaCita = DateTime.Now.AddDays(1).Date.AddHours(10), Motivo = "Vacunación"}
                 },
             },
             Intervenciones = "cirugia de corazón",

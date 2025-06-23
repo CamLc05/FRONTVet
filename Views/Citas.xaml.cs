@@ -34,7 +34,6 @@ public partial class Citas : ContentPage
                 {
                     Text = diasSemana[col],
                     HorizontalTextAlignment = TextAlignment.Center,
-                    FontAttributes = FontAttributes.Bold,
                     FontSize = 17
                 };
                 Grid.SetColumn(label, col);
