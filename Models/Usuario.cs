@@ -8,4 +8,6 @@ public class Usuario
     public Rol Rol { get; set; }
     public DateTime Fecha_creacion { get; set; }
 
+    public string Nombre_pila { get; set; }
+
 }

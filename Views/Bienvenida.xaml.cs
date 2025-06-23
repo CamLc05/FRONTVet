@@ -10,7 +10,7 @@ namespace Veterinaria.Views;
 
 public partial class Bienvenida : ContentPage
 {
-    public string NombreUsuario => AppGlobals.UsuarioActual.Nombre_usuario ?? "Invitado";
+    public string NombrePila => AppGlobals.UsuarioActual.Nombre_pila ?? "Invitado";
     public string RolUsuario => AppGlobals.UsuarioActual.Rol.ToString();
     public Bienvenida()
     {

@@ -28,7 +28,7 @@
                HorizontalOptions="Center" 
                Margin="0,20"/>
 
-            <Label Text="{Binding NombreUsuario}" 
+            <Label Text="{Binding NombrePila}" 
                TextColor="#121113"
                FontSize="20"
                HorizontalOptions="Center" 
