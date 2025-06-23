@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Veterinaria.Controls"
+             x:Class="Veterinaria.LoginPage"
+             Title="LoginPage"
+             BackgroundColor="#F5F5F5">
+
+    <Grid>
+        <Image Source="fondobienvenido.png"
+               Aspect="AspectFill"
+               ZIndex="0" />
+
+        <StackLayout VerticalOptions="Start" HorizontalOptions="Center">
+            <Image Source="logovetnegro.png"
+                       WidthRequest="250"
+                       HeightRequest="150"
+                       Margin="0,30,0,30"
+                       />
+
+            <Label Text="Log In"
+                   FontSize="30"
+                   FontAttributes="Bold"
+                   TextColor="#121113"
+                   HorizontalOptions="Center" 
+                   Margin="0,20"/>
+
+            <Label Text="Email"
+                   TextColor="#121113"
+                   FontAttributes="Bold"
+                   FontSize="17"/>
+
+            <Entry Placeholder="Ingresa tu correo"
+                   PlaceholderColor="#222725"
+                   TextColor="#121113"
+                   Keyboard="Email"
+                   Text="{Binding Email}"
+                   Margin="0,0,0,0"
+                   />
+            
+            <BoxView HeightRequest="0.5"
+             Color="#F17105"
+             HorizontalOptions="Fill"
+             Margin="0,0,0,30" />
+            
+            <Label Text="Contraseña"
+                   TextColor="#121113"
+                   FontAttributes="Bold"
+                   FontSize="17"/>
+
+            <controls:PasswordEntryControl
+                Placeholder="Ingresa tu contraseña"
+                PlaceholderColor="#222725"
+                TextColor="#121113"
+                PasswordText="{Binding Password}"
+                Margin="0,0,0,0"/>
+
+            <BoxView HeightRequest="0.5"
+                     Color="#F17105"
+                     HorizontalOptions="Fill"
+                     Margin="0,0,0,50" />
+
+            <Button Text="Ingresar"
+                    Command="{Binding LoginCommand}"
+                    BackgroundColor="#F17105"
+                    FontSize="17"
+                    CornerRadius="20"
+                    HeightRequest="50"
+                    TextColor="#F7F7F2"
+                    Clicked="onClick"
+                    FontAttributes="Bold"/>
+
+        </StackLayout>
+    </Grid>
+</ContentPage>

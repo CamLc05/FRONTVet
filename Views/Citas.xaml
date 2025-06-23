@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Veterinaria.Views.Citas"
+             Title="Citas"
+             BackgroundColor="#F5F5F5">
+    <Grid>
+        <StackLayout VerticalOptions="Start" HorizontalOptions="Center" Padding="0" Margin="0">
+
+            <Image Source="logovetnegro.png"
+                    WidthRequest="170"
+                    HeightRequest="80"
+                    Margin="0,20,0,5"
+             />
+
+            <Label Text="CITAS" FontSize="24" FontAttributes="None" HorizontalOptions="Center"   Margin="0"/>
+
+            <HorizontalStackLayout Padding="10" Spacing="10">
+
+                <!-- Contenedor del Entry con borde redondeado -->
+                <Grid Margin="20,20,0,20"  HorizontalOptions="Center">
+                    <Frame CornerRadius="25"
+                            BorderColor="#F17105"
+                            BackgroundColor="#F5F5F5"
+                            Padding="0"
+                            HeightRequest="50"
+                            WidthRequest="270"
+                           >
+
+                        <Grid Padding="0,0">
+
+
+                            <!-- Campo de entrada -->
+                            <Entry x:Name="BuscarEntry"
+                                    Placeholder="Buscar..."
+                                    BackgroundColor="#F5F5F5"
+                                    TextColor="Black"
+                                    FontSize="16"
+                                     />
+                            <!-- Ícono de lupa -->
+                            <Image Source="lupa.png"
+                                    HeightRequest="25"
+                                    WidthRequest="25"
+                                    VerticalOptions="Center"
+                                    Margin="200,0,0,0"/>
+                        </Grid>
+                    </Frame>
+                </Grid>
+                <!-- Botón con ícono para agregar -->
+                <ImageButton Source="plus.png"
+                                  BackgroundColor="Transparent"
+                                  HeightRequest="25"
+                                  WidthRequest="25"
+                                  Margin="10,0,20,0"
+                                />
+
+
+            </HorizontalStackLayout>
+
+
+
+
+        </StackLayout>
+
+    </Grid>
+</ContentPage>

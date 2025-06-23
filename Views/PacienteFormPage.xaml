@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Veterinaria.Views.PacienteFormPage"
+             Title="Paciente">
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Padding="20">
+                <Label Text="{Binding Titulo}" FontSize="22" FontAttributes="Bold"/>
+
+                <Label Text="Nombre"/>
+                <Entry Text="{Binding Paciente.Nombre}"/>
+
+                <Label Text="Raza"/>
+                <Entry Text="{Binding Paciente.Raza}"/>
+
+                <Label Text="Especie"/>
+                <Picker ItemsSource="{Binding Especies}"
+                        SelectedItem="{Binding Paciente.Especie}" />
+
+                <Label Text="Propietario"/>
+                <Picker ItemsSource="{Binding Propietarios}"
+                        ItemDisplayBinding="{Binding Nombre}"
+                        SelectedItem="{Binding Paciente.Propietario}" />
+
+                <!-- Botón de guardar -->
+                <Button Text="Guardar" Command="{Binding GuardarCommand}" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="Veterinaria.Controls.CustomPopup"
+    BackgroundColor="White"
+    HeightRequest="270"
+    Margin="20">
+
+
+    <VerticalStackLayout Margin="5">
+        <Image Source="iconoexito.png"
+                HeightRequest="70"
+                WidthRequest="70"
+                VerticalOptions="End"/>
+
+        <Label Text="Sesión cerrada"
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalOptions="Center" 
+                Margin="0,15"/>
+
+        <Label Text="Haz cerrado sesión con éxito"
+                FontAttributes="Bold"
+                FontSize="15"
+                HorizontalOptions="Center"
+                LineBreakMode="WordWrap"
+                MaxLines="2" 
+                WidthRequest="130"
+                HorizontalTextAlignment="Center" 
+               Margin="0,0,0,25"/>
+
+        <Button Text="Continuar"
+                Clicked="OnConfirmClicked" 
+                BackgroundColor="Transparent"
+                TextColor="Black"
+                Margin="0,10,0,0"
+                BorderColor="Green"
+                CornerRadius="20"
+                />
+
+    </VerticalStackLayout>
+</toolkit:Popup>

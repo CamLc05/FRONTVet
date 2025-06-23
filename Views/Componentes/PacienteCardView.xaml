@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Veterinaria.Views.Componentes.PacienteCardView">
+    
+    <!--Margin="5,10,15,20"
+        Izquierda: 5
+        Arriba: 10
+        Derecha: 15
+        Abajo: 20-->
+
+    <ScrollView>
+    <VerticalStackLayout Padding="10" Spacing="10">
+
+        <!-- CARD DESLIZABLE -->
+        <Grid>
+
+            <!-- Fondo visible al deslizar (Eliminar) -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Fondo izquierda (Editar) -->
+                <Frame BackgroundColor="red"
+                       CornerRadius="20"
+                       Margin="5"
+                       HeightRequest="110"
+                       HorizontalOptions="Fill"
+                       VerticalOptions="Fill"
+                       Grid.Column="0"/>
+
+                <!-- Fondo derecha (Eliminar) -->
+                <Frame BackgroundColor="#F17105"
+                       CornerRadius="20"
+                       Margin="5"
+                       HeightRequest="110"
+                       HorizontalOptions="Fill"
+                       VerticalOptions="Fill"
+                       Grid.Column="1"/>
+            </Grid>
+
+            <!-- SwipeView encima -->
+            <SwipeView>
+                <SwipeView.LeftItems>
+                    <SwipeItems>
+                        <SwipeItem Text="Eliminar"
+                                   BackgroundColor="Transparent"
+                                   IconImageSource="eliminar1.png"
+                                   Invoked="OnEliminarSwipe"
+                                   CommandParameter="{Binding Paciente}" /> 
+                    </SwipeItems>
+                </SwipeView.LeftItems>
+
+                <SwipeView.RightItems>
+                    <SwipeItems>
+                        <SwipeItem Text="Editar"
+                                   BackgroundColor="Transparent"
+                                   IconImageSource="editar1.png"
+                                   Invoked="OnEditarSwipe"
+                                   CommandParameter="{Binding Paciente}" />
+                    </SwipeItems>
+                </SwipeView.RightItems>
+
+                <!-- Contenido deslizable -->
+                <Frame BackgroundColor="#E4DFDA"
+                       HasShadow="True"
+                       CornerRadius="20"
+                       Padding="5"
+                       Margin="5"
+                       HeightRequest="110">
+
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnVerPaciente"/> 
+                    </Frame.GestureRecognizers>
+
+                    <Grid ColumnDefinitions="Auto,*,Auto"
+                          VerticalOptions="Center"
+                          Padding="5"
+                          RowSpacing="0">
+
+                        <!-- Imagen circular -->
+                        <Image Source="{Binding Paciente.FotoSource}"
+                               WidthRequest="90"
+                               HeightRequest="90"
+                               Aspect="AspectFill"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center">
+                            <Image.Clip>
+                                <EllipseGeometry Center="45,45" RadiusX="45" RadiusY="45" />
+                            </Image.Clip>
+                        </Image>
+
+                        <!-- Información del paciente -->
+                        <StackLayout Grid.Column="1"
+                                     Padding="10,0"
+                                     Spacing="2"
+                                     VerticalOptions="Center">
+                            <Label Text="{Binding Paciente.Nombre}" FontAttributes="Bold" FontSize="18" />
+                            <Label Text="{Binding Paciente.Especie, StringFormat='Especie: {0}'}" FontSize="14" />
+                            <Label Text="{Binding Paciente.Raza, StringFormat='Raza: {0}'}" FontSize="14" />
+                            <Label Text="{Binding Paciente.Propietario.Nombre, StringFormat='Propietario: {0}'}" FontSize="14" />
+                        </StackLayout>
+
+                        <!-- Aquí podrías agregar algo más si quieres en la última columna -->
+
+                    </Grid>
+                </Frame>
+            </SwipeView>
+        </Grid>
+    </VerticalStackLayout>
+</ScrollView>
+
+</ContentView>

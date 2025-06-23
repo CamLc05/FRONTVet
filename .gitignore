@@ -1,0 +1,16 @@
+﻿# Archivos y carpetas comunes a ignorar en proyectos .NET/MAUI
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.userprefs
+*.dbmdl
+*.log
+*.tlog
+*.tmp
+*.cache
+*.vscode/
+*.vspscc
+*.vssscc
+

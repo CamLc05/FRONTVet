@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Veterinaria.Views.PacienteDetalle">
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15">
+                <Image Source="{Binding FotoSource}"
+                       WidthRequest="150"
+                       HeightRequest="150"
+                       Aspect="AspectFill"
+                       HorizontalOptions="Center">
+                    <Image.Clip>
+                        <EllipseGeometry Center="75,75" RadiusX="75" RadiusY="75" />
+                    </Image.Clip>
+                </Image>
+
+                <Label Text="{Binding Nombre}" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center"/>
+                <Label Text="{Binding Especie, StringFormat='Especie: {0}'}" />
+                <Label Text="{Binding Raza, StringFormat='Raza: {0}'}" />
+                <Label Text="{Binding Sexo, StringFormat='Sexo: {0}'}" />
+                <Label Text="{Binding FechaNacimiento, StringFormat='Nacimiento: {0:dd/MM/yyyy}'}" />
+                <Label Text="{Binding Padecimiento, StringFormat='Padecimiento: {0}'}" />
+                <Label Text="{Binding Propietario.Nombre, StringFormat='Propietario: {0}'}" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

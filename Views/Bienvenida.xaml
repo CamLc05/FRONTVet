@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Veterinaria.Views.Bienvenida"
+             Title="Bienvenida"
+             BackgroundColor="#F5F5F5">
+    <Grid>
+        <Image Source="fondoinicio.png"
+               WidthRequest="220"
+               Aspect="AspectFit"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Margin="0,250,0,0"
+               ZIndex="0" />
+
+        <StackLayout VerticalOptions="Start" HorizontalOptions="Center">
+            <Image Source="logovetnegro.png"
+                   WidthRequest="250"
+                   HeightRequest="150"
+                   Margin="0,30,0,10"
+                   />
+
+            <Label Text="BIENVENIDO"
+               FontSize="30"
+               FontAttributes="Bold"
+               TextColor="#121113"
+               HorizontalOptions="Center" 
+               Margin="0,20"/>
+
+            <Label Text="Juan Pérez" 
+               TextColor="#121113"
+               FontSize="20"
+               HorizontalOptions="Center" 
+                   Margin="0,10"/>
+
+            <Label HorizontalOptions="Center" Margin="0,10">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Tienes permiso de: " FontSize="17" FontFamily="QuicksandLight"/>
+                        <Span Text="Veterinario" TextColor="#F17105" FontSize="17"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <HorizontalStackLayout Spacing="10" 
+                                   VerticalOptions="End" 
+                                   HorizontalOptions="Center"
+                                   Margin="0,300">
+
+                <HorizontalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="logout" />
+                </HorizontalStackLayout.GestureRecognizers>
+
+                <Label Text="Cerrar sesión"
+                       FontSize="17"
+                       VerticalOptions="End" />
+
+                <Image Source="iconologout.png"
+                       HeightRequest="20"
+                       WidthRequest="20"
+                       VerticalOptions="End"/>
+            </HorizontalStackLayout>
+
+
+        </StackLayout>
+    </Grid>
+</ContentPage>
+
