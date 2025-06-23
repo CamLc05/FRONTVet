@@ -2,10 +2,43 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Veterinaria.Views.PacienteDetalle">
-    <ContentPage.Content>
-        <ScrollView>
-            <VerticalStackLayout Padding="20" Spacing="15">
+             x:Class="Veterinaria.Views.PacienteDetalle"
+             Title="Detalle del Paciente"
+             BackgroundColor="#F5F5F5">
+ 
+  <ContentPage.ToolbarItems>
+        <!-- Botón Editar -->
+        <ToolbarItem 
+            IconImageSource="abierto.png"
+            Text="Editar"
+            Priority="1"
+            Order="Primary"
+            Clicked="OnEditarClicked" />
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto,*" Padding="10" Margin="20">
+        <!-- Botón Volver -->
+        <ImageButton Source="back.png"
+                     WidthRequest="30"
+                     HeightRequest="30"
+                     Margin="10"
+                     BackgroundColor="Transparent"
+                     Clicked="OnVolverClicked"
+                     HorizontalOptions="Start"
+                     VerticalOptions="Start" />
+
+        <!-- Contenido desplazable -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="20" HorizontalOptions="Center" VerticalOptions="Start">
+                
+                <!-- Logo -->
+                <Image Source="logovetnegro.png"
+                       WidthRequest="170"
+                       HeightRequest="80"
+                       Margin="0,10,0,0"
+                       HorizontalOptions="Center" />
+
+                <!-- Foto del paciente -->
                 <Image Source="{Binding FotoSource}"
                        WidthRequest="150"
                        HeightRequest="150"
@@ -16,14 +49,132 @@
                     </Image.Clip>
                 </Image>
 
-                <Label Text="{Binding Nombre}" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center"/>
-                <Label Text="{Binding Especie, StringFormat='Especie: {0}'}" />
-                <Label Text="{Binding Raza, StringFormat='Raza: {0}'}" />
-                <Label Text="{Binding Sexo, StringFormat='Sexo: {0}'}" />
-                <Label Text="{Binding FechaNacimiento, StringFormat='Nacimiento: {0:dd/MM/yyyy}'}" />
-                <Label Text="{Binding Padecimiento, StringFormat='Padecimiento: {0}'}" />
-                <Label Text="{Binding Propietario.Nombre, StringFormat='Propietario: {0}'}" />
+                <!-- Nombre -->
+                    <Label Text="{Binding Nombre}" FontSize="20" FontAttributes="Bold" Padding="10" HorizontalOptions="Center" />
+            
+
+                <!-- Especie -->
+                <Label Text="Especie"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                   />
+                   <Frame BackgroundColor="#E4DFDA"
+                                                      CornerRadius="20"
+                                                      Padding=" 10">
+                    <Label Text="{Binding Especie}" FontSize="16" />
+                </Frame>
+
+                <!-- Raza -->
+                <Label Text="Raza"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                />
+                <Frame BackgroundColor="#E4DFDA"
+                       CornerRadius="20"
+                       Padding="10">
+                    <Label Text="{Binding Raza}" FontSize="16" />
+                </Frame>
+
+                <!-- Sexo -->
+                <Label Text="Sexo"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                />
+                <Frame BackgroundColor="#E4DFDA"
+                       CornerRadius="20"
+                       Padding="10">
+                    <Label Text="{Binding Sexo}" FontSize="16" />
+                </Frame>
+
+                <!-- Fecha de nacimiento -->
+                <Label Text="Fecha de nacimiento"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                />
+                <Frame BackgroundColor="#E4DFDA"
+                       CornerRadius="20"
+                       Padding="10">
+                    <Label Text="{Binding FechaNacimiento}" FontSize="16" />
+                </Frame>
+
+                <!-- Padecimiento -->
+                <Label Text="Padecimiento"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                />
+                <Frame BackgroundColor="#E4DFDA"
+                       CornerRadius="20"
+                       Padding="10">
+                    <Label Text="{Binding Padecimiento}" FontSize="16" />
+                </Frame>
+
+                <!-- Propietario -->
+                <Label Text="Propietario"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                />
+                <Frame BackgroundColor="#E4DFDA"
+                       CornerRadius="20"
+                       Padding="10">
+                    <Label Text="{Binding Propietario.Nombre}" FontSize="16" />
+                </Frame>
+
+                <!-- Citas -->
+                <Label Text="Citas"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                />
+                <Frame BackgroundColor="#E4DFDA"
+                       CornerRadius="20"
+                       Padding="10">
+                    <Label Text="{Binding Citas}" FontSize="16" />
+                </Frame>
+
+                <!-- Intervenciones -->
+                <Label Text="Intervenciones"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                />
+                <Frame BackgroundColor="#E4DFDA"
+                       CornerRadius="20"
+                       Padding="10">
+                    <Label Text="{Binding Intervenciones}" FontSize="16" />
+                </Frame>
+
+                <!-- Vacunas -->
+                <Label Text="Vacunas"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                />
+                <Frame BackgroundColor="#E4DFDA"
+                       CornerRadius="20"
+                       Padding="10">
+                    <Label Text="{Binding Vacunas}" FontSize="16" />
+                </Frame>
+
             </VerticalStackLayout>
         </ScrollView>
-    </ContentPage.Content>
+        
+        
+        <!---boton izquierda-->
+        <ImageButton Source="back.png"
+                     WidthRequest="30"
+                     HeightRequest="30"
+                     Margin="10"
+                     BackgroundColor="Transparent"
+                     Clicked="OnVolverClicked"
+                     HorizontalOptions="Start"
+                     VerticalOptions="Start" />
+    </Grid>
+      
+ 
 </ContentPage>

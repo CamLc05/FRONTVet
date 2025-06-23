@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Veterinaria.Views.PacienteNuevo"
+             Title="Nuevo Paciente">
+  
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15" HorizontalOptions="Center">
+
+            <Image Source="logovetnegro.png"
+                   WidthRequest="170"
+                   HeightRequest="80"
+                   HorizontalOptions="Center"
+                   Margin="0,10,0,20" />
+
+            <!-- NOMBRE -->
+            <Label Text="Ingresa el nombre" FontAttributes="Bold" TextColor="Gray" />
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10">
+                <Entry Text="{Binding Nombre}" Placeholder="Nombre del paciente" BackgroundColor="#F5F5F5"
+                       TextColor="Black"
+                       FontSize="16" />
+            </Frame>
+            
+
+            <!-- ESPECIE -->
+            <Label Text="Ingresa la especia" FontAttributes="Bold" TextColor="Gray" />
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" HasShadow="True">
+                <Entry Text="{Binding Especie}" Placeholder="Especie" />
+            </Frame>
+
+            <!-- RAZA -->
+            <Label Text=" Ingresa la raza" FontAttributes="Bold" TextColor="Gray" />
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" HasShadow="True">
+                <Entry Text="{Binding Raza}" Placeholder="Raza" />
+            </Frame>
+
+            <!-- SEXO -->
+            <Label Text=" Ingresa el sexo" FontAttributes="Bold" TextColor="Gray" />
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" HasShadow="True">
+                <Entry Text="{Binding Sexo}" Placeholder="Macho o Hembra" />
+            </Frame>
+
+            <!-- NACIMIENTO -->
+            <Label Text=" Ingresa la fecha de nacimiento" FontAttributes="Bold" TextColor="Gray" />
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" HasShadow="True">
+                <DatePicker Date="{Binding FechaNacimiento}" />
+            </Frame>
+
+            <!-- PADECIMIENTO -->
+            <Label Text="Padecimiento" FontAttributes="Bold" TextColor="Gray" />
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" HasShadow="True">
+                <Entry Text="{Binding Padecimiento}" Placeholder="Alergias, enfermedades..." />
+            </Frame>
+
+            <!-- PROPIETARIO -->
+            <Label Text="Ingresa el propietario" FontAttributes="Bold" TextColor="Gray" />
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" HasShadow="True">
+                <Entry Text="{Binding Propietario.Nombre}" Placeholder="Nombre del dueño" />
+            </Frame>
+
+            <!-- BOTÓN GUARDAR -->
+            <Button Text="Guardar cambios"
+                    BackgroundColor="#F17105"
+                    TextColor="White"
+                    CornerRadius="20"
+                    FontAttributes="Bold"
+                    Margin="0,20,0,10"
+                    Clicked="OnGuardarClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+    
+</ContentPage>

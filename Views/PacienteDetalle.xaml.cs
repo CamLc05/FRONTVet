@@ -15,4 +15,15 @@ public partial class PacienteDetalle : ContentPage
         InitializeComponent();
         BindingContext = paciente;
     }
+    
+    private async void OnVolverClicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
+
+    private async void OnEditarClicked(object sender, EventArgs e)
+    {
+        // Navegar a la página de edición, pásale el paciente
+        //  await Navigation.PushAsync(new EditarPacientePage(_paciente));
+    }
 }
