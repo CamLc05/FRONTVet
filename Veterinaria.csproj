@@ -79,6 +79,9 @@
 	  <MauiXaml Update="Views\Bienvenida.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Calendario.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Citas.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

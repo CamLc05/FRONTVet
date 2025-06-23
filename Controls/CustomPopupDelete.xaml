@@ -21,13 +21,13 @@
                 HorizontalOptions="Center" 
                 Margin="0,15"/>
 
-        <Label Text="Se eliminió a la mascota con éxito"
+        <Label Text="Se eliminó a la mascota exitosamente."
                 FontAttributes="Bold"
                 FontSize="15"
                 HorizontalOptions="Center"
                 LineBreakMode="WordWrap"
                 MaxLines="2" 
-                WidthRequest="130"
+                WidthRequest="160"
                 HorizontalTextAlignment="Center" 
                Margin="0,0,0,25"/>
 
