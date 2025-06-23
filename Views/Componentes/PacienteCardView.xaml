@@ -98,13 +98,32 @@
                                      Padding="10,0"
                                      Spacing="2"
                                      VerticalOptions="Center">
-                            <Label Text="{Binding Paciente.Nombre}" FontAttributes="Bold" FontSize="18" />
-                            <Label Text="{Binding Paciente.Especie, StringFormat='Especie: {0}'}" FontSize="14" />
-                            <Label Text="{Binding Paciente.Raza, StringFormat='Raza: {0}'}" FontSize="14" />
-                            <Label Text="{Binding Paciente.Propietario.Nombre, StringFormat='Propietario: {0}'}" FontSize="14" />
+                            <Label Text="{Binding Paciente.Nombre}" TextColor="Black"/>
+                            
+                            <Label Text="Especie:" FontAttributes="Bold" TextColor="Black"/>
+                            <Label Text="{Binding Paciente.Especie}" TextColor="Gray"/>
+                            
+                            <Label Text="Raza:" FontAttributes="Bold" TextColor="Black"/>
+                            <Label Text="{Binding Paciente.Raza}" TextColor="Gray"/>
+                            
+                            <Label Text="Propietario:" FontAttributes="Bold" TextColor="Black"/>
+                            <Label Text="{Binding Paciente.Propietario.Nombre}" TextColor="Gray"/>
+                            
                         </StackLayout>
 
-                        <!-- Aquí podrías agregar algo más si quieres en la última columna -->
+                        <!--última columna -->
+                        <ImageButton
+                            Grid.Column="1"
+                            Source="info.png"
+                            BackgroundColor="Transparent"
+                            HeightRequest="25"
+                            WidthRequest="25"
+                            CommandParameter="{Binding .}"
+                            Clicked="OnDetallesPaciente"
+                            Margin="10,0,20,0"
+                            VerticalOptions="Center"
+                            HorizontalOptions="End" />
+
 
                     </Grid>
                 </Frame>

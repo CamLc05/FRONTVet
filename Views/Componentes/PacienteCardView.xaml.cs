@@ -63,6 +63,14 @@ public partial class PacienteCardView : ContentView
             await Application.Current.MainPage.Navigation.PushAsync(new PacienteDetalle(paciente));
         }
     }
+    private async void OnDetallesPaciente(object sender, EventArgs e)
+    {
+        if (sender is ImageButton button && button.CommandParameter is Producto paciente)
+        {
+            Console.WriteLine("entro");
+            await Application.Current.MainPage.Navigation.PushAsync(new PacienteDetalle(Paciente));
+        }
+    }
 
     private async Task MostrarPopup()
     {

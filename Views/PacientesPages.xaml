@@ -20,11 +20,17 @@
                 <Image Source="logovetnegro.png"
                        WidthRequest="170"
                        HeightRequest="80"
-                       Margin="0,10,0,5"
+                       Margin="0,20,0,5"
                 />
            
-                    <Label Text="PACIENTES" FontSize="24" FontAttributes="None" HorizontalOptions="Center"   Margin="0"/>
+                <Label Text="PACIENTES"
+                       FontSize="30"
+                       FontAttributes="None"
+                       TextColor="Black"
+                       HorizontalOptions="Center"
+                       Margin="0,20"/>
                 
+                    
                 <HorizontalStackLayout Padding="10" Spacing="10">
 
                     <!-- Contenedor del Entry con borde redondeado -->
