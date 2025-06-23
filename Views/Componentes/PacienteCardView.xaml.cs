@@ -5,6 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Maui.Controls;
 using Veterinaria.Models;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Extensions;
+using Veterinaria.Controls;
+using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Maui.Core;
 
 namespace Veterinaria.Views.Componentes;
 
@@ -28,22 +33,13 @@ public partial class PacienteCardView : ContentView
         var control = (PacienteCardView)bindable;
         control.BindingContext = control;
     }
-    
-   
+
+
     private async void OnEliminarSwipe(object sender, EventArgs e)
     {
         if (sender is SwipeItem item && item.CommandParameter is Paciente paciente)
         {
-            bool confirmar = await Application.Current.MainPage.DisplayAlert(
-                "¿Estás segurx?",
-                $"¿Quieres eliminar a {paciente.Nombre}?",
-                "Sí", "Cancelar");
-
-            if (confirmar)
-            {
-                // Aquí va tu lógica para eliminar
-                Console.WriteLine("Eliminado: " + paciente.Nombre);
-            }
+            await MostrarPopup();
         }
     }
 
@@ -65,6 +61,23 @@ public partial class PacienteCardView : ContentView
         {
             // Navegar a la página detalle, pasando el paciente
             await Application.Current.MainPage.Navigation.PushAsync(new PacienteDetalle(paciente));
+        }
+    }
+
+    private async Task MostrarPopup()
+    {
+        var popup = new CustomPopupDelete(); // Reemplaza con tu clase popup
+
+        var page = this.FindParentPage();
+
+        if (page != null)
+        {
+            await page.ShowPopupAsync(popup);
+        }
+        else
+        {
+            // Opcional: mostrar mensaje de error si no encontró la página
+            await Application.Current.MainPage.DisplayAlert("Error", "No se encontró la página contenedora", "OK");
         }
     }
 }
