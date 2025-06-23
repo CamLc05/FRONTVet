@@ -7,96 +7,47 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Veterinaria.Services;
+using Veterinaria.Views;
 
 namespace Veterinaria.ViewModels
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
-        private readonly AuthService _authService;
+
+        private readonly UsuarioService _usuarioService;
         private readonly Page _page;
 
-        private string _email;
-        private string _password;
-        private bool _isBusy;
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public ICommand LoginCommand { get; }
+        public Action<string, string, string>? MostrarMensaje { get; set; }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string Email
+        public LoginViewModel(UsuarioService usuarioService, Page page)
         {
-            get => _email;
-            set { _email = value; OnPropertyChanged(); }
-        }
-
-        public string Password
-        {
-            get => _password;
-            set { _password = value; OnPropertyChanged(); }
-        }
-
-        public bool IsBusy
-        {
-            get => _isBusy;
-            set { _isBusy = value; OnPropertyChanged(); }
-        }
-
-        public ICommand LoginCommand { get; }
-        public ICommand RegisterCommand { get; }
-
-        public LoginViewModel(AuthService authService, Page page)
-        {
-            _authService = authService;
             _page = page;
-
-            LoginCommand = new Command(async () => await Login(), () => !IsBusy);
-            RegisterCommand = new Command(async () => await NavigateToRegister());
+            _usuarioService = usuarioService;
+            LoginCommand = new Command(async () => await LoginAsync());
         }
 
-        private async Task Login()
+        private async Task LoginAsync()
         {
-            if (IsBusy) return;
-
-            try
+            var usuario = await _usuarioService.LoginAsync(Email, Password);
+            if (usuario != null)
             {
-                IsBusy = true;
-                ((Command)LoginCommand).ChangeCanExecute();
-
-                if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
-                {
-                    await _page.DisplayAlert("Error", "Por favor ingresa email y contraseña", "OK");
-                    return;
-                }
-
-                var isAuthenticated = await _authService.Login(Email, Password);
-
-                if (isAuthenticated)
-                {
-                    // Reemplaza esto por tu lógica de navegación
-                    await _page.Navigation.PushAsync(new MainPage());
-                }
-                else
-                {
-                    await _page.DisplayAlert("Error", "Credenciales incorrectas", "OK");
-                }
+                AppGlobals.UsuarioActual = usuario;
+                await  _page.Navigation.PushAsync(new Bienvenida());
             }
-            catch (Exception ex)
+            else
             {
-                await _page.DisplayAlert("Error", $"Error al iniciar sesión: {ex.Message}", "OK");
+                MostrarMensaje?.Invoke("Error", "Credenciales incorrectas", "OK");
             }
-            finally
-            {
-                IsBusy = false;
-                ((Command)LoginCommand).ChangeCanExecute();
-            }
+
         }
 
-        private async Task NavigateToRegister()
-        {
-            //await _page.Navigation.PushAsync(new RegisterPage());
-        }
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
