@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Text.Json;
 using Veterinaria.Models;
 
 namespace Veterinaria.Services
@@ -7,6 +8,10 @@ namespace Veterinaria.Services
     {
         private readonly HttpClient _httpClient;
         private const string BaseUrl = "https://veterinenis-d7cyg.ondigitalocean.app/api/usuarios";
+        private JsonSerializerOptions options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
 
         public UsuarioService(HttpClient httpClient)
         {
@@ -27,7 +32,12 @@ namespace Veterinaria.Services
         }
         public async Task<Usuario> ObtenerUsuarioPorIdAsync(int id)
         {
-            return await _httpClient.GetFromJsonAsync<Usuario>($"{BaseUrl}/{id}");
+            var response = await _httpClient.GetAsync($"{BaseUrl}/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<Usuario>(options);
+            }
+            return null;
         }
 
         public async Task<Usuario> LoginAsync(string email, string password)
@@ -36,7 +46,7 @@ namespace Veterinaria.Services
             var response = await _httpClient.PostAsJsonAsync($"{BaseUrl}/login", loginData);
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadFromJsonAsync<Usuario>();
+                return await response.Content.ReadFromJsonAsync<Usuario>(options);
             }
             return null; // O manejar el error de otra manera
         }

@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Text.Json;
 using Veterinaria.Models;
 
 namespace Veterinaria.Services
@@ -7,6 +8,10 @@ namespace Veterinaria.Services
     {
         private readonly HttpClient _httpClient;
         private const string BaseUrl = "https://veterinenis-d7cyg.ondigitalocean.app/api/facturas";
+        private JsonSerializerOptions options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
 
         public FacturaService(HttpClient httpClient)
         {
@@ -24,6 +29,16 @@ namespace Veterinaria.Services
         public async Task<List<Factura>> ObtenerFacturasAsync()
         {
             return await _httpClient.GetFromJsonAsync<List<Factura>>(BaseUrl);
+        }
+
+        public async Task<Factura> ObtenerFacturaPorIdAsync(int id)
+        {
+            var response = await _httpClient.GetAsync($"{BaseUrl}/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<Factura>(options);
+            }
+            return null;
         }
 
         // UPDATE

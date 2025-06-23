@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Text.Json;
 using Veterinaria.Models;
 
 namespace Veterinaria.Services
@@ -7,6 +8,10 @@ namespace Veterinaria.Services
     {
         private readonly HttpClient _httpClient;
         private const string BaseUrl = "https://veterinenis-d7cyg.ondigitalocean.app/api/servicios";
+        private JsonSerializerOptions options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
 
         public ServicioService(HttpClient httpClient)
         {
@@ -24,6 +29,16 @@ namespace Veterinaria.Services
         public async Task<List<Servicio>> ObtenerServiciosAsync()
         {
             return await _httpClient.GetFromJsonAsync<List<Servicio>>(BaseUrl);
+        }
+
+        public async Task<Servicio> ObtenerServicioPorIdAsync(int id)
+        {
+            var response = await _httpClient.GetAsync($"{BaseUrl}/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<Servicio>(options);
+            }
+            return null;
         }
 
         // UPDATE

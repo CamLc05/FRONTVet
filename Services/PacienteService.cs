@@ -1,10 +1,15 @@
 ﻿using System.Net.Http.Json;
+using System.Text.Json;
 using Veterinaria.Models;
 
 public class PacienteService
 {
     private readonly HttpClient _httpClient;
     private const string BaseUrl = "https://veterinenis-d7cyg.ondigitalocean.app/api/pacientes";
+    private JsonSerializerOptions options = new JsonSerializerOptions
+    {
+        PropertyNameCaseInsensitive = true
+    };
 
     public PacienteService(HttpClient httpClient)
     {
@@ -23,7 +28,8 @@ public class PacienteService
         var response = await _httpClient.GetAsync($"{BaseUrl}/filtrar/{Uri.EscapeDataString(nombre)}");
         if (response.IsSuccessStatusCode)
         {
-            return await response.Content.ReadFromJsonAsync<List<Paciente>>();
+            
+            return await response.Content.ReadFromJsonAsync<List<Paciente>>(options);
         }
         return new List<Paciente>();
     }
@@ -33,9 +39,19 @@ public class PacienteService
         var response = await _httpClient.GetAsync($"{BaseUrl}/citas/{pacienteId}");
         if (response.IsSuccessStatusCode)
         {
-            return await response.Content.ReadFromJsonAsync<List<Cita>>();
+            return await response.Content.ReadFromJsonAsync<List<Cita>>(options);
         }
         return new List<Cita>();
+    }
+
+    public async Task<List<Vacuna>> ObtenerVacunasPorPaciente(int pacienteId)
+    {
+        var response = await _httpClient.GetAsync($"{BaseUrl}/vacunas/{pacienteId}");
+        if (response.IsSuccessStatusCode)
+        {
+            return await response.Content.ReadFromJsonAsync<List<Vacuna>>(options);
+        }
+        return new List<Vacuna>();
     }
     // READ
     public async Task<List<Paciente>> ObtenerPacientesAsync()
