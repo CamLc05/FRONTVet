@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Veterinaria.NuevoProducto"
+              BackgroundColor="#F5F5F5">
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="5" HorizontalOptions="Center">
+           
+            <Grid RowDefinitions="Auto,*" Padding="10" Margin="20">
+                <Grid Padding="10" VerticalOptions="Start" HorizontalOptions="Fill">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />   <!-- Flecha -->
+                        <ColumnDefinition Width="*" />      <!-- Logo -->
+                        <ColumnDefinition Width="Auto" />   <!-- Botón más -->
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Botón Flecha Izquierda -->
+                    <Image Source="back1.png"
+                           WidthRequest="25"
+                           HeightRequest="25"
+                           Margin="0"
+                           BackgroundColor="Transparent"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"
+                           Grid.Column="0"> <!-- ✅ Aquí -->
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Cancelar_Clicked"/>
+                        </Image.GestureRecognizers>
+                    </Image>    
+
+                    <!-- Logo Centrado -->
+                    <Image Source="logovetnegro.png"
+                           WidthRequest="170"
+                           HeightRequest="80"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Grid.Column="1" /> 
+
+               
+                </Grid>
+            </Grid>
+            <Label Text="NUEVO" FontSize="30" FontAttributes="None" HorizontalOptions="Center" />
+            <Label Text="Producto" FontSize="15" FontAttributes="None" HorizontalOptions="Center" />
+
+
+            <Frame BackgroundColor="#E4DFDA"  CornerRadius="20" Margin="10" Padding="10" WidthRequest="300" HeightRequest="50">
+                <Editor Text="{Binding Nombre}"
+                        Placeholder="Nombre"
+                        BackgroundColor="Transparent"
+                        TextColor="Black"
+                        AutoSize="TextChanges"
+                        Margin="5"
+                        HeightRequest="20" />
+            </Frame>
+            
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300" HeightRequest="50">
+                <Editor Text="{Binding Gramaje}"
+                        Placeholder="Gramaje"
+                        BackgroundColor="Transparent"
+                        TextColor="Black"
+                        AutoSize="TextChanges"
+                        Margin="5"
+                        HeightRequest="20" />
+            </Frame>
+            
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300" HeightRequest="50">
+                <Editor Text="{Binding Precio}"
+                        Keyboard="Numeric"
+                        Placeholder="Precio"
+                        BackgroundColor="Transparent"
+                        TextColor="Black"
+                        AutoSize="TextChanges"
+                        Margin="5"
+                        HeightRequest="20" />
+            </Frame>
+
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300" HeightRequest="50">
+            <Picker Title="Tipo"
+                    Visual="None"
+                    ItemsSource="{Binding TiposProducto}"
+                    SelectedItem="{Binding Producto.Tipo}"
+                    BackgroundColor="Transparent"
+                    TextColor="Black"/>
+            </Frame>
+            
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300" HeightRequest="50">
+            <DatePicker Date="{Binding Producto.Fecha_vencimiento}"
+                        Visual="None"
+                        Format="dd/MM/yyyy" 
+                        BackgroundColor="Transparent"
+                        TextColor="Black"/>
+            </Frame>
+
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300" HeightRequest="50">
+            <Entry Placeholder="Disponibilidad"
+                   Keyboard="Numeric"
+                   Text="{Binding Producto.Disponibilidad}" 
+                   BackgroundColor="Transparent"/>
+            </Frame>
+            
+
+                
+                <Button Text="Guardar"
+                        BackgroundColor="#F17105"
+                        FontSize="17"
+                        CornerRadius="20"
+                        WidthRequest="100"
+                        HeightRequest="20"
+                        TextColor="#F7F7F2"
+                        Clicked="Guardar_Clicked"
+                        FontAttributes="Bold"/>
+
+            
+
+        </VerticalStackLayout>
+    </ScrollView>
+  
+</ContentPage>

@@ -2,32 +2,43 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Veterinaria.Views.Citas"
+             xmlns:viewmodels="clr-namespace:Veterinaria.ViewModels"
+             xmlns:views="clr-namespace:Veterinaria.Views"
+             xmlns:converters="clr-namespace:Veterinaria.Converters"
+             x:Name="PageRef"
              Title="Citas"
              BackgroundColor="#F5F5F5">
 
+    <ContentPage.BindingContext>
+        <viewmodels:CitasViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <converters:CitaStatusToColorConverter x:Key="CitaStatusToColorConverter" />
+        <converters:NotNullOrEmptyConverter x:Key="NotNullOrEmptyConverter" />
+    </ContentPage.Resources>
+
     <Grid RowDefinitions="Auto,*">
-        <!-- Encabezado, y contenido con buscador -->
 
-        <!-- ENCABEZADO (logo, título, fecha) -->
         <StackLayout Grid.Row="0" VerticalOptions="Start" HorizontalOptions="Center" Padding="0" Margin="0">
-
             <Image Source="logovetnegro.png"
                    WidthRequest="170"
                    HeightRequest="80"
                    Margin="0,20,0,5" />
 
-            <Label Text="CITAS" 
-                   FontSize="30" 
+            <Label Text="CITAS"
+                   FontSize="30"
                    FontAttributes="None"
                    TextColor="Black"
-                   HorizontalOptions="Center"   
+                   HorizontalOptions="Center"
                    Margin="0,20"/>
 
             <HorizontalStackLayout Spacing="120" VerticalOptions="Center">
                 <Label x:Name="lblFecha"
-                       FontSize="20" 
-                       FontAttributes="None" 
-                       HorizontalOptions="Start"   
+                       FontSize="20"
+                       TextColor="Black"
+                       FontAttributes="None"
+                       HorizontalOptions="Start"
                        Margin="0,20,30,10"/>
 
                 <Image Source="iconocalendario.png"
@@ -49,54 +60,79 @@
                      Margin="0,0,0,10" />
         </StackLayout>
 
-        <!-- CONTENIDO: días y buscador -->
-        <ScrollView Grid.Row="1">
-            <VerticalStackLayout Padding="0" Margin="0">
+        <Grid Grid.Row="1" RowDefinitions="Auto, Auto, *">
+            <Grid x:Name="SemanaGrid"
+                  Grid.Row="0"
+                  ColumnSpacing="20"
+                  RowSpacing="10"
+                  HorizontalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+            </Grid>
 
-                <!-- Grid de días -->
-                <Grid x:Name="SemanaGrid"
-                      ColumnSpacing="20"
-                      RowSpacing="10"
-                      HorizontalOptions="Center">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+            <HorizontalStackLayout Grid.Row="1" Spacing="10" Margin="0,30,0,20" HorizontalOptions="Center">
+                <Grid>
+                    <Frame CornerRadius="25"
+                           BorderColor="#F17105"
+                           BackgroundColor="#F5F5F5"
+                           Padding="15,2.5,0,2.5"
+                           HeightRequest="47"
+                           WidthRequest="300">
+                        <Grid Padding="0,0">
+                            <Entry x:Name="BuscarEntry"
+                                   Placeholder="Buscar..."
+                                   BackgroundColor="#F5F5F5"
+                                   TextColor="Black"
+                                   FontSize="16"/>
+                            <Image Source="lupa.png"
+                                   HeightRequest="25"
+                                   WidthRequest="25"
+                                   VerticalOptions="Center"
+                                   Margin="200,0,0,0"/>
+                        </Grid>
+                    </Frame>
                 </Grid>
 
-                <!-- Buscador y botón debajo de los días -->
-                <HorizontalStackLayout Spacing="10" Margin="0,20,0,20" HorizontalOptions="Center">
-                    <Grid>
-                        <Frame CornerRadius="25"
-                               BorderColor="#F17105"
-                               BackgroundColor="#F5F5F5"
-                               Padding="15,2.5,0,2.5"
-                               HeightRequest="47"
-                               WidthRequest="300">
-                            <Grid Padding="0,0">
-                                <Entry x:Name="BuscarEntry"
-                                       Placeholder="Buscar..."
-                                       BackgroundColor="#F5F5F5"
-                                       TextColor="Black"
-                                       FontSize="16"/>
-                                <Image Source="lupa.png"
-                                       HeightRequest="25"
-                                       WidthRequest="25"
-                                       VerticalOptions="Center"
-                                       Margin="200,0,0,0"/>
-                            </Grid>
-                        </Frame>
-                    </Grid>
+                <Image Source="plus.png"
+                       WidthRequest="35"
+                       HeightRequest="35"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"/>
+            </HorizontalStackLayout>
 
-                    <Image Source="plus.png"
-                           WidthRequest="35"
-                           HeightRequest="35"
-                           HorizontalOptions="End"
-                           VerticalOptions="Center"/>
-                </HorizontalStackLayout>
+            <CollectionView Grid.Row="2"
+                            ItemsSource="{Binding Citas}"
+                            Margin="0,0,0,20"
+                            VerticalOptions="FillAndExpand">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <views:CitaCardView Cita="{Binding .}">
+                            <views:CitaCardView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.SeleccionarCitaCommand, Source={x:Reference PageRef}}"
+                                                      CommandParameter="{Binding .}" />
+                            </views:CitaCardView.GestureRecognizers>
+                        </views:CitaCardView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <ContentView>
+                        <StackLayout Padding="100" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                            <Label Text="No hay citas para mostrar."
+                                   FontAttributes="Bold"
+                                   FontSize="Medium"
+                                   HorizontalOptions="Center" />
+                        </StackLayout>
+                    </ContentView>
+                </CollectionView.EmptyView>
+            </CollectionView>
 
-            </VerticalStackLayout>
-        </ScrollView>
+            <Label Grid.Row="2" Text="{Binding CitaSeleccionada.Motivo, StringFormat='Cita seleccionada: {0}'}"
+                   IsVisible="{Binding CitaSeleccionada, Converter={StaticResource NotNullOrEmptyConverter}}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="End"
+                   Margin="0,0,0,0" />
+        </Grid>
     </Grid>
 </ContentPage>
-
