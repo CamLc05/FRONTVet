@@ -7,107 +7,96 @@
              Title="listaPacientes"
              BackgroundColor="#F5F5F5"
              x:Name="PageRef">
-    
+   
+   <Grid Padding="0" Margin="0">
+        <StackLayout VerticalOptions="Start" HorizontalOptions="Center" Padding="0" Margin="0">
+            <Grid RowDefinitions="Auto,*" Padding="0" Margin="20">
+                <Grid Padding="0" VerticalOptions="Start" HorizontalOptions="Fill">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <!-- Flecha -->
+                        <ColumnDefinition Width="*" />
+                        <!-- Logo -->
+                        <ColumnDefinition Width="Auto" />
+                        <!-- Botón más -->
+                    </Grid.ColumnDefinitions>
 
-    <!--Margin="5,10,15,20"
-        Izquierda: 5
-        Arriba: 10
-        Derecha: 15
-        Abajo: 20-->
-   <Grid>
-            <StackLayout VerticalOptions="Start" HorizontalOptions="Center" Padding="0" Margin="0">
-                   
-                
-                <Grid RowDefinitions="Auto,*" Padding="10" Margin="20">
-                    <Grid Padding="10" VerticalOptions="Start" HorizontalOptions="Fill">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />   <!-- Flecha -->
-                            <ColumnDefinition Width="*" />      <!-- Logo -->
-                            <ColumnDefinition Width="Auto" />   <!-- Botón más -->
-                        </Grid.ColumnDefinitions>
 
-                       
 
-                        <!-- Logo Centrado -->
-                        <Image Source="logovetnegro.png"
-                               WidthRequest="170"
-                               HeightRequest="80"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"
-                               Grid.Column="1" /> 
+                    <!-- Logo Centrado -->
+                    <Image Source="logovetnegro.png"
+                            WidthRequest="170"
+                            HeightRequest="80"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Grid.Column="1" 
+                            Margin="0,0"
+                           />
 
-               
-                    </Grid>
+
+                </Grid>
+            </Grid>
+
+            <Label Text="PACIENTES"
+                    FontSize="30"
+                    FontAttributes="None"
+                    TextColor="Black"
+                    HorizontalOptions="Center"
+                    Margin="0,5"/>
+
+
+            <HorizontalStackLayout Grid.Row="1" Spacing="10" Margin="0,30,0,20" HorizontalOptions="Center">
+                <Grid>
+                    <Frame CornerRadius="25"
+               BorderColor="#F17105"
+               BackgroundColor="Transparent"
+               Padding="15,2.5,0,2.5"
+               HeightRequest="47"
+               WidthRequest="290">
+                        <Grid Padding="0,0">
+                            <Entry x:Name="BuscarEntry"
+                       Placeholder="Buscar..."
+                       BackgroundColor="Transparent"
+                       PlaceholderColor="Black"
+                       TextColor="Black"
+                       FontSize="16"/>
+                            <Image Source="lupa.png"
+                       HeightRequest="25"
+                       WidthRequest="25"
+                       VerticalOptions="Center"
+                       Margin="200,0,0,0"/>
+                        </Grid>
+                    </Frame>
                 </Grid>
 
-                <Label Text="PACIENTES"
-                       FontSize="30"
-                       FontAttributes="None"
-                       TextColor="Black"
-                       HorizontalOptions="Center"
-                       Margin="0,20"/>
-                
-                    
-                <HorizontalStackLayout Padding="10" Spacing="10">
+                <Image Source="plus.png"
+                       WidthRequest="35"
+                       HeightRequest="35"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center">
 
-                    <!-- Contenedor del Entry con borde redondeado -->
-                    <Grid Margin="20,20,0,20"  HorizontalOptions="Center">
-                        <Frame CornerRadius="25"
-                               BorderColor="#F17105"
-                               BackgroundColor="#F5F5F5"
-                               Padding="0"
-                               HeightRequest="50"
-                               WidthRequest="270"
-                              >
-                            
-                            <Grid Padding="0,0">
-                                
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnNuevoPacienteClicked"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </HorizontalStackLayout>
 
-                                <!-- Campo de entrada -->
-                                <Entry x:Name="BuscarEntry"
-                                       Placeholder="Buscar..."
-                                       BackgroundColor="#F5F5F5"
-                                       TextColor="Black"
-                                       FontSize="16"
-                                        />
-                                <!-- Ícono de lupa -->
-                                <Image Source="lupa.png"
-                                       HeightRequest="25"
-                                       WidthRequest="25"
-                                       VerticalOptions="Center"
-                                       Margin="200,0,0,0"/>
-                            </Grid>
-                        </Frame>
-                    </Grid>
-                    <!-- Botón con ícono para agregar -->
-                        <ImageButton Source="plus.png"
-                                     BackgroundColor="Transparent"
-                                     HeightRequest="25"
-                                     WidthRequest="25"
-                                     Clicked="OnNuevoPacienteClicked" 
-                                     Margin="10,0,20,0"
-                                   />
-                </HorizontalStackLayout>
+            <CollectionView ItemsSource="{Binding Pacientes}" HorizontalOptions="Center">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <views:PacienteCardView Paciente="{Binding .}">
+                            <views:PacienteCardView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.SeleccionarCommand, Source={x:Reference PageRef}}" 
+                                                        CommandParameter="{Binding .}" />
+                            </views:PacienteCardView.GestureRecognizers>
+                        </views:PacienteCardView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-                
-              
+        </StackLayout>
 
-                <CollectionView ItemsSource="{Binding Pacientes}" Margin="20">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <views:PacienteCardView Paciente="{Binding .}">
-                                <views:PacienteCardView.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding BindingContext.SeleccionarCommand, Source={x:Reference PageRef}}" 
-                                                          CommandParameter="{Binding .}" />
-                                </views:PacienteCardView.GestureRecognizers>
-                            </views:PacienteCardView>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-                
-            </StackLayout>
-        
-     </Grid>   
+    </Grid>   
     
 
  

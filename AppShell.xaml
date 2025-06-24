@@ -40,7 +40,7 @@
 
             <ShellContent
             Title="Ventas"
-            Icon="ventas_icon.png"
+            Icon="iconoventas.png"
             ContentTemplate="{DataTemplate views:Ventas}"
             Route="VentasPage" />
 

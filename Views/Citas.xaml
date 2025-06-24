@@ -76,7 +76,7 @@
                 <Grid>
                     <Frame CornerRadius="25"
                            BorderColor="#F17105"
-                           BackgroundColor="#F5F5F5"
+                           BackgroundColor="Transparent"
                            Padding="15,2.5,0,2.5"
                            HeightRequest="47"
                            WidthRequest="300">
@@ -84,6 +84,7 @@
                             <Entry x:Name="BuscarEntry"
                                    Placeholder="Buscar..."
                                    BackgroundColor="Transparent"
+                                   PlaceholderColor="Black"
                                    TextColor="Black"
                                    FontSize="16"/>
                             <Image Source="lupa.png"

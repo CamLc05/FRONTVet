@@ -3,13 +3,6 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Veterinaria.Views.Componentes.PacienteCardView">
-    
-    <!--Margin="5,10,15,20"
-        Izquierda: 5
-        Arriba: 10
-        Derecha: 15
-        Abajo: 20-->
-
     <ScrollView>
     <VerticalStackLayout Padding="10" Spacing="10">
 
@@ -26,17 +19,19 @@
                 <!-- Fondo izquierda (Editar) -->
                 <Frame BackgroundColor="red"
                        CornerRadius="20"
-                       Margin="5"
-                       HeightRequest="110"
+                       Margin="9"
+                       BorderColor="Transparent"
+                       HeightRequest="150"
                        HorizontalOptions="Fill"
                        VerticalOptions="Fill"
                        Grid.Column="0"/>
 
                 <!-- Fondo derecha (Eliminar) -->
-                <Frame BackgroundColor="#F17105"
+                    <Frame BackgroundColor="#7EB2B2"
                        CornerRadius="20"
-                       Margin="5"
-                       HeightRequest="110"
+                       Margin="9"
+                       BorderColor="Transparent"
+                       HeightRequest="150"
                        HorizontalOptions="Fill"
                        VerticalOptions="Fill"
                        Grid.Column="1"/>
@@ -48,7 +43,7 @@
                     <SwipeItems>
                         <SwipeItem Text="Eliminar"
                                    BackgroundColor="Transparent"
-                                   IconImageSource="eliminar1.png"
+                                   IconImageSource="iconobasura.png"
                                    Invoked="OnEliminarSwipe"
                                    CommandParameter="{Binding Paciente}" /> 
                     </SwipeItems>
@@ -58,7 +53,7 @@
                     <SwipeItems>
                         <SwipeItem Text="Editar"
                                    BackgroundColor="Transparent"
-                                   IconImageSource="editar1.png"
+                                   IconImageSource="iconoeditar.png"
                                    Invoked="OnEditarSwipe"
                                    CommandParameter="{Binding Paciente}" />
                     </SwipeItems>
@@ -67,9 +62,11 @@
                 <!-- Contenido deslizable -->
                 <Frame BackgroundColor="#E4DFDA"
                        CornerRadius="20"
-                       Padding="5"
-                       Margin="5"
-                       HeightRequest="110">
+                       Padding="0"
+                       Margin="0"
+                       WidthRequest="350"
+                       HeightRequest="150"
+                       BorderColor="Transparent">
 
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnVerPaciente"/> 
@@ -94,7 +91,7 @@
 
                         <!-- Información del paciente -->
                         <StackLayout Grid.Column="1"
-                                     Padding="10,0"
+                                     Padding="10"
                                      Spacing="2"
                                      VerticalOptions="Center">
                             <Label Text="{Binding Nombre}" TextColor="Black"/>
@@ -111,20 +108,22 @@
                         </StackLayout>
 
                         <!--última columna -->
-                        <ImageButton
-                            Grid.Column="1"
-                            Source="info.png"
-                            BackgroundColor="Transparent"
-                            HeightRequest="25"
-                            WidthRequest="25"
-                            CommandParameter="{Binding }"
-                            Clicked="OnDetallesPaciente"
-                            Margin="10,0,20,0"
-                            VerticalOptions="Center"
-                            HorizontalOptions="End" />
+                            <Image 
+                                    Grid.Column="1"
+                                    Source="iconomasinfo.png"
+                                    HeightRequest="65"
+                                    WidthRequest="65"
+                                    Margin="10,0,20,0"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="End">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnDetallesPaciente" />
+                                </Image.GestureRecognizers>
+                            </Image>
 
 
-                    </Grid>
+
+                        </Grid>
                 </Frame>
             </SwipeView>
         </Grid>

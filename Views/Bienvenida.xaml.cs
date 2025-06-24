@@ -22,8 +22,10 @@ public partial class Bienvenida : ContentPage
         if (popup.Result is bool confirmed && confirmed)
         {
             ((App)Application.Current).GoToLogin();
-
-
+        }
+        else
+        {
+            ((App)Application.Current).GoToLogin();
         }
     }
 }
