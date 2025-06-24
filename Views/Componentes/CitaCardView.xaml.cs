@@ -22,7 +22,7 @@ namespace Veterinaria.Views // Asegúrate de que el namespace coincida
         private async void OnEditarCitaClicked(object sender, EventArgs e)
         {
             // Navega a NuevaCita pasando la cita actual para editar
-            await Application.Current.MainPage.Navigation.PushAsync(new NuevaCita(Cita));
+            await Application.Current.MainPage.Navigation.PushAsync(new EditarCita(Cita));
         }
     }
 }
