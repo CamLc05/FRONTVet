@@ -14,42 +14,56 @@ HeightRequest="80" HorizontalOptions="Center" />
 
             <!-- Título -->
             <Label Text="VENTAS"  
-               FontSize="24"  
-               HorizontalOptions="Center"  
-               TextColor="Black"  
+                   FontSize="30"
+                   FontAttributes="None"
+                   TextColor="Black"
+                   HorizontalOptions="Center"
+                   Margin="0,20"  
                 />
+            
+            
+                 <HorizontalStackLayout Padding="10" Spacing="10">
 
-            <!-- Buscador -->
-        <Frame BackgroundColor="Transparent" CornerRadius="20" BorderColor="Orange" Padding="0" HeightRequest="50" VerticalOptions="Start">
-                <Grid ColumnDefinitions="*,Auto" Padding="5">
-                    <Entry x:Name="SearchEntry"  
-                   Placeholder="Buscar..."  
-                   BackgroundColor="Transparent"  
-                   TextColor="Black"  
-                   Margin="0,0,0,0"
-                  ></Entry>
+                    <!-- Contenedor del Entry con borde redondeado -->
+                    <Grid Margin="20,20,0,20"  HorizontalOptions="Center">
+                        <Frame CornerRadius="25"
+                               BorderColor="#F17105"
+                               BackgroundColor="#F5F5F5"
+                               Padding="0"
+                               HeightRequest="50"
+                               WidthRequest="270"
+                              >
+                            
+                            <Grid Padding="0,0">
+                                
 
-                    <ImageButton
-                    Grid.Column="1"  
-                    BackgroundColor="Transparent"  
-                    HeightRequest="24"  
-                    WidthRequest="24"  
-                    VerticalOptions="Center"  
-                    HorizontalOptions="Center"  
-                    Source="lupa.png" />
-                    <!-- Usa el nombre del icono registrado en tu proyecto -->
-                </Grid>
-            </Frame>
+                                <!-- Campo de entrada -->
+                                <Entry x:Name="BuscarEntry"
+                                       Placeholder="Buscar..."
+                                       BackgroundColor="#F5F5F5"
+                                       TextColor="Black"
+                                       FontSize="16"
+                                        />
+                                <!-- Ícono de lupa -->
+                                <Image Source="lupa.png"
+                                       HeightRequest="25"
+                                       WidthRequest="25"
+                                       VerticalOptions="Center"
+                                       Margin="200,0,0,0"/>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                   
+                </HorizontalStackLayout>
+
+                
+            
 
             <!-- Lista de ventas -->
-            <CollectionView x:Name="VentasList"
-                            SelectionMode="None">
+            <CollectionView x:Name="VentasList">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                     <Frame BackgroundColor="#E4DFDA" CornerRadius="15" Padding="10" Margin="0,5">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnVentaTapped" />
-                            </Frame.GestureRecognizers>
                             <Grid ColumnDefinitions="*,Auto">
                                 <VerticalStackLayout>
                                     <Label Text="{Binding Tipo}" FontAttributes="Bold" FontSize="18" TextColor="Black"/>

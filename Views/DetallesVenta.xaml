@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Veterinaria.Views.DetallesVenta">
+    
+    
+    <ScrollView Grid.Row="1">
+    <VerticalStackLayout Spacing="20" HorizontalOptions="Center" VerticalOptions="Start">
+        
+        <!-- Header con logo y botón regresar -->
+        <Grid Padding="10" Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Botón regresar -->
+            <Image Source="back1.png"
+                   WidthRequest="25"
+                   HeightRequest="25"
+                   BackgroundColor="Transparent"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start"
+                   Grid.Column="0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Cancelar_Clicked"/>
+                </Image.GestureRecognizers>
+            </Image>
+
+            <!-- Logo -->
+            <Image Source="logovetnegro.png"
+                   WidthRequest="170"
+                   HeightRequest="80"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Grid.Column="1" />
+        </Grid>
+
+        <!-- Tarjeta principal -->
+        <Frame BackgroundColor="#7DB6B3"
+               CornerRadius="30"
+               HasShadow="True"
+               Padding="20"
+               WidthRequest="350"
+               Margin="10">
+
+            <VerticalStackLayout Spacing="10">
+
+                <!-- Título y fecha -->
+                <Label Text="Consulta general"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       TextColor="White"/>
+                <Label Text="Martes 24 junio 2025"
+                       FontSize="16"
+                       TextColor="White"/>
+
+                <BoxView HeightRequest="1" BackgroundColor="White" Margin="0,5"/>
+
+                <!-- Datos del paciente -->
+                <Label Text="Nombre del paciente: Tyson"
+                       FontSize="16"
+                       TextColor="White"/>
+                <Label Text="Peso: 12.3 kg"
+                       FontSize="16"
+                       TextColor="White"/>
+                <Label Text="Veterinario responsable: Dr. Juan Pérez"
+                       FontSize="16"
+                       TextColor="White"/>
+                <Label Text="Motivo de consulta: Revisión general"
+                       FontSize="16"
+                       TextColor="White"/>
+                <Label Text="Status: Atendida"
+                       FontSize="16"
+                       TextColor="White"/>
+
+                <!-- Servicios -->
+                <Label Text="Servicios"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       Margin="0,10,0,5"/>
+
+                <BoxView HeightRequest="1" BackgroundColor="White" Margin="0,0,0,5"/>
+
+                <HorizontalStackLayout>
+                    <Label Text="• Consulta" TextColor="Orange" FontSize="16"/>
+                    <Label Text="$ 400.00 MXN" HorizontalOptions="EndAndExpand" TextColor="White" FontSize="16"/>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout>
+                    <Label Text="• Medicamentos" TextColor="Orange" FontSize="16"/>
+                    <Label Text="$ 200.00 MXN" HorizontalOptions="EndAndExpand" TextColor="White" FontSize="16"/>
+                </HorizontalStackLayout>
+
+                <VerticalStackLayout Padding="20,0,0,0">
+                    <Label Text="• Electrolitos" TextColor="White" FontSize="14"/>
+                    <Label Text="• Esomeprazol" TextColor="White" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <!-- Línea divisoria -->
+                <BoxView HeightRequest="1" BackgroundColor="White" Margin="0,10"/>
+
+                <!-- Footer -->
+                <HorizontalStackLayout>
+                    <Image Source="back1.png"
+                           WidthRequest="20"
+                           HeightRequest="20"
+                           VerticalOptions="Center"/>
+                    <Label Text="Regresar"
+                           FontSize="16"
+                           TextColor="White"
+                           VerticalOptions="Center"
+                           Margin="5,0"/>
+                    <Label Text="Total: $ 600.00 MXN"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           HorizontalOptions="EndAndExpand"
+                           VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+        </Frame>
+    </VerticalStackLayout>
+</ScrollView>
+
+</ContentPage>
