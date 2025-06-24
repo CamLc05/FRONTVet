@@ -3,6 +3,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Veterinaria.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 
 namespace Veterinaria.Services
@@ -21,10 +22,12 @@ namespace Veterinaria.Services
         // CREATE
         public async Task<bool> CrearProductoAsync(Producto producto)
         {
-            var json = JsonConvert.SerializeObject(producto);
+            var dto = MapProductoToDto(producto);
+            var json = JsonConvert.SerializeObject(dto);
             var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync(BaseUrl, content);
             return response.IsSuccessStatusCode;
+
         }
 
         // READ
@@ -61,11 +64,29 @@ namespace Veterinaria.Services
         // UPDATE
         public async Task<bool> ActualizarProductoAsync(int id, Producto producto)
         {
-            var json = JsonConvert.SerializeObject(producto);
+            var dto = MapProductoToDto(producto);
+            Console.WriteLine(dto);
+            var json = JsonConvert.SerializeObject(dto);
+            Console.WriteLine(json);
             var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
             var response = await _httpClient.PutAsync($"{BaseUrl}/{id}", content);
+            Console.WriteLine(response);
             return response.IsSuccessStatusCode;
+
         }
+        private ProductoRequestDto MapProductoToDto(Producto producto)
+        {
+            return new ProductoRequestDto
+            {
+                Nombre = producto.Nombre,
+                Gramaje = producto.Gramaje,
+                Precio = producto.Precio,
+                Tipo = producto.Tipo,
+                Fecha_vencimiento = producto.Fecha_vencimiento,
+                Disponibilidad = producto.Disponibilidad
+            };
+        }
+
 
         // DELETE
         public async Task<bool> EliminarProductoAsync(int id)
@@ -80,5 +101,26 @@ namespace Veterinaria.Services
     {
         [JsonPropertyName("producto")]
         public Producto Producto { get; set; }
+    }
+
+    public class ProductoRequestDto
+    {
+        [JsonProperty("nombre")]
+        public string Nombre { get; set; }
+
+        [JsonProperty("gramaje")]
+        public string Gramaje { get; set; }
+
+        [JsonProperty("precio")]
+        public float Precio { get; set; }
+        [JsonProperty("tipo")]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public TipoProducto Tipo { get; set; }
+
+        [JsonProperty("fecha_vencimiento")]
+        public DateTimeOffset? Fecha_vencimiento { get; set; }
+
+        [JsonProperty("disponibilidad")]
+        public int Disponibilidad { get; set; }
     }
 }

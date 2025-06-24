@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Veterinaria.Models"
              x:Class="Veterinaria.Views.Inventario"
+             x:Name="PageRef"
              Title="Inventario"
              BackgroundColor="#F5F5F5">
      <ScrollView>
@@ -33,7 +35,11 @@
 
                 <!-- Primera columna -->
                 <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center">
-                    <Image Source="medicamentos1.png" WidthRequest="50" HeightRequest="50" />
+                    <Image Source="medicamentos1.png" WidthRequest="50" HeightRequest="50">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SeleccionarCategoriaCommand}" CommandParameter="{x:Static models:TipoProducto.medicamento}" />
+                        </Image.GestureRecognizers>
+                    </Image>
                     <Label Text="Medicamentos" HorizontalOptions="Center" 
                            FontSize="10"
                            Padding="10"/>
@@ -44,7 +50,11 @@
 
                 <!-- Segunda columna -->
                 <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center">
-                    <Image Source="material_quirurgico.png" WidthRequest="50" HeightRequest="50" />
+                    <Image Source="material_quirurgico.png" WidthRequest="50" HeightRequest="50">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SeleccionarCategoriaCommand}" CommandParameter="{x:Static models:TipoProducto.quirurgico}" />
+                        </Image.GestureRecognizers>
+                    </Image>
                     <Label Text="Material quirúrgico" HorizontalOptions="Center"
                            FontSize="10"
                            Padding="10"/>
@@ -55,7 +65,11 @@
 
                 <!-- Tercera columna -->
                 <VerticalStackLayout Grid.Column="4" HorizontalOptions="Center">
-                    <Image Source="estetica.png" WidthRequest="50" HeightRequest="50" />
+                    <Image Source="estetica.png" WidthRequest="50" HeightRequest="50">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SeleccionarCategoriaCommand}" CommandParameter="{x:Static models:TipoProducto.estetica}" />
+                        </Image.GestureRecognizers>
+                    </Image>
                     <Label Text="Estética" HorizontalOptions="Center" 
                            FontSize="10"
                            Padding="10"/>
@@ -156,18 +170,42 @@
         </StackLayout>
 
         <!-- Botón alineado a la derecha -->
-        <ImageButton
-            Grid.Column="1"
-            Source="info.png"
-            BackgroundColor="Transparent"
-            HeightRequest="25"
-            WidthRequest="25"
-            CommandParameter="{Binding .}"
-            Margin="10,0,20,0"
-            VerticalOptions="Center"
-            HorizontalOptions="End" />
+                                        <Frame Grid.Column="1"
+       Padding="0"
+       Margin="10,0,20,0"
+       BackgroundColor="#FFF"
+       BorderColor="#F17105"
+       CornerRadius="10"
+       HeightRequest="35"
+       WidthRequest="90"
+       VerticalOptions="Center"
+       HorizontalOptions="End">
+                                            <HorizontalStackLayout Spacing="0" VerticalOptions="Center" HorizontalOptions="Center">
+                                                <Button Text="-" 
+                WidthRequest="30"
+                HeightRequest="35"
+                Padding="0"
+                FontSize="18"
+                Command="{Binding BindingContext.ReducirCantidadCommand, Source={x:Reference PageRef}}"
+                CommandParameter="{Binding .}" />
+                                                <Entry Text="{Binding CantidadOperacion, Mode=TwoWay}" 
+               WidthRequest="30"
+               HorizontalTextAlignment="Center"
+               Keyboard="Numeric"
+               FontSize="16"
+               BackgroundColor="Transparent"/>
+                                                <Button Text="+" 
+                WidthRequest="30"
+                HeightRequest="35"
+                Padding="0"
+                FontSize="18"
+                Command="{Binding BindingContext.AumentarCantidadCommand, Source={x:Reference PageRef}}"
+                CommandParameter="{Binding .}" />
+                                            </HorizontalStackLayout>
+                                        </Frame>
 
-    </Grid>
+
+                                    </Grid>
 </Frame>
 
                 </SwipeView>

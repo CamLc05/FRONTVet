@@ -67,11 +67,15 @@
             
             
             <Label Text="Fecha:" FontSize="18" TextColor="#121113" HorizontalOptions="Start" Margin="0,10" />
-            <DatePicker Date="{Binding NuevaCita.FechaCita}" Format="dd/MM/yyyy" />
+            <DatePicker
+                Date="{Binding FechaSeleccionada, Mode=TwoWay}"/>  
+
 
             <Label Text="Hora:" FontSize="18" TextColor="#121113" HorizontalOptions="Start" Margin="0,10" />
-            <TimePicker Time="{Binding NuevaCita.FechaCita, Mode=TwoWay}" />
-            
+            <TimePicker
+                Time="{Binding HoraSeleccionada, Mode=TwoWay}" />
+
+
             <Label Text="Veterinario:" FontSize="18" TextColor="#121113" HorizontalOptions="Start" />
             <Picker Title="Selecciona un veterinario"
             ItemsSource="{Binding Veterinarios}"

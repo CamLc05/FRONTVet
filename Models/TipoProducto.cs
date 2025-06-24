@@ -1,5 +1,5 @@
 using System.Runtime.Serialization;
-
+namespace Veterinaria.Models;
 public enum TipoProducto
 {
     [EnumMember(Value = "medicamentos")]

@@ -28,6 +28,11 @@ public class Producto
 
     [JsonProperty("disponibilidad")]
     public int Disponibilidad { get; set; }
+
+    // En Producto.cs
+    [JsonIgnore]
+    public int? CantidadOperacion { get; set; } = 1;
+
 }
 
 // Clase contenedora para la respuesta de la API

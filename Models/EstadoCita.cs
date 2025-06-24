@@ -4,6 +4,7 @@ public enum EstadoCita
 {
     pendiente,
     activa,
-    atendida
+    atendida,
+    cancelada
 
 }

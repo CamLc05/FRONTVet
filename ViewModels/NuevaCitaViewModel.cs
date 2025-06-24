@@ -31,6 +31,30 @@ namespace Veterinaria.ViewModels
                 OnPropertyChanged();
             }
         }
+        public TimeSpan HoraSeleccionada
+        {
+            get => NuevaCita.FechaCita.TimeOfDay;
+            set
+            {
+                var fecha = NuevaCita.FechaCita.Date;
+                NuevaCita.FechaCita = new DateTimeOffset(fecha + value, TimeSpan.Zero);
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(NuevaCita));
+            }
+        }
+        public DateTime FechaSeleccionada
+        {
+            get => NuevaCita.FechaCita.DateTime;
+            set
+            {
+                if (NuevaCita.FechaCita.DateTime != value)
+                {
+                    NuevaCita.FechaCita = new DateTimeOffset(value, TimeSpan.Zero);
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(NuevaCita));
+                }
+            }
+        }
 
         private Paciente _pacienteSeleccionado;
         public Paciente PacienteSeleccionado
