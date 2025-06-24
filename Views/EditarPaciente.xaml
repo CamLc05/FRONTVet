@@ -139,7 +139,7 @@
                 FontSize="17"
                 CornerRadius="20"
                 WidthRequest="100"
-                HeightRequest="20"
+                HeightRequest="50"
                 TextColor="#F7F7F2"
                 Clicked="Guardar_Clicked"
                 FontAttributes="Bold"/>
