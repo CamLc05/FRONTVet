@@ -14,9 +14,9 @@ namespace Veterinaria.Converters
             {
                 return status switch
                 {
-                    EstadoCita.Pendiente => Colors.Orange,
-                    EstadoCita.Activa => Colors.Blue,
-                    EstadoCita.Atendida => Colors.Green,
+                    EstadoCita.pendiente => Colors.Orange,
+                    EstadoCita.activa => Colors.Blue,
+                    EstadoCita.atendida => Colors.Green,
                     _ => Colors.Gray,
                 };
             }

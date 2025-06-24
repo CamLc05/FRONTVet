@@ -2,8 +2,8 @@ namespace Veterinaria.Models;
 
 public enum EstadoCita
 {
-    Pendiente,
-    Activa,
-    Atendida
+    pendiente,
+    activa,
+    atendida
 
 }

@@ -1,114 +1,223 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:views="clr-namespace:Veterinaria.Views.Componentes"
+             xmlns:componentes="clr-namespace:Veterinaria.Views.Componentes"
              x:Class="Veterinaria.Views.PacientesPages"
-             Title="listaPacientes"
+             Title="PacientesPages"
              BackgroundColor="#F5F5F5"
              x:Name="PageRef">
-    
+    <Grid>
+        <StackLayout VerticalOptions="Start" HorizontalOptions="Center" Padding="0" Margin="0">
 
-    <!--Margin="5,10,15,20"
-        Izquierda: 5
-        Arriba: 10
-        Derecha: 15
-        Abajo: 20-->
-   <Grid>
-            <StackLayout VerticalOptions="Start" HorizontalOptions="Center" Padding="0" Margin="0">
-                   
-                
-                <Grid RowDefinitions="Auto,*" Padding="10" Margin="20">
-                    <Grid Padding="10" VerticalOptions="Start" HorizontalOptions="Fill">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />   <!-- Flecha -->
-                            <ColumnDefinition Width="*" />      <!-- Logo -->
-                            <ColumnDefinition Width="Auto" />   <!-- Botón más -->
-                        </Grid.ColumnDefinitions>
 
-                       
+            <Grid RowDefinitions="Auto,*" Padding="10" Margin="20">
+                <Grid Padding="10" VerticalOptions="Start" HorizontalOptions="Fill">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <!-- Flecha -->
+                        <ColumnDefinition Width="*" />
+                        <!-- Logo -->
+                        <ColumnDefinition Width="Auto" />
+                        <!-- Botón más -->
+                    </Grid.ColumnDefinitions>
 
-                        <!-- Logo Centrado -->
-                        <Image Source="logovetnegro.png"
+
+
+                    <!-- Logo Centrado -->
+                    <Image Source="logovetnegro.png"
                                WidthRequest="170"
                                HeightRequest="80"
                                HorizontalOptions="Center"
                                VerticalOptions="Center"
-                               Grid.Column="1" /> 
+                               Grid.Column="1" />
 
-               
-                    </Grid>
+
                 </Grid>
+            </Grid>
 
-                <Label Text="PACIENTES"
+            <Label Text="PACIENTES"
                        FontSize="30"
                        FontAttributes="None"
                        TextColor="Black"
                        HorizontalOptions="Center"
                        Margin="0,20"/>
-                
-                    
-                <HorizontalStackLayout Padding="10" Spacing="10">
 
-                    <!-- Contenedor del Entry con borde redondeado -->
-                    <Grid Margin="20,20,0,20"  HorizontalOptions="Center">
-                        <Frame CornerRadius="25"
+
+            <HorizontalStackLayout Padding="10" Spacing="10">
+
+                <!-- Contenedor del Entry con borde redondeado -->
+                <Grid Margin="20,20,0,20"  HorizontalOptions="Center">
+                    <Frame CornerRadius="25"
                                BorderColor="#F17105"
                                BackgroundColor="#F5F5F5"
                                Padding="0"
                                HeightRequest="50"
                                WidthRequest="270"
                               >
-                            
-                            <Grid Padding="0,0">
-                                
 
-                                <!-- Campo de entrada -->
-                                <Entry x:Name="BuscarEntry"
+                        <Grid Padding="0,0">
+
+
+                            <!-- Campo de entrada -->
+                            <Entry Text="{Binding FiltroNombre}"
                                        Placeholder="Buscar..."
                                        BackgroundColor="#F5F5F5"
                                        TextColor="Black"
                                        FontSize="16"
                                         />
-                                <!-- Ícono de lupa -->
-                                <Image Source="lupa.png"
+                            <!-- Ícono de lupa -->
+                            <Image Source="lupa.png"
                                        HeightRequest="25"
                                        WidthRequest="25"
                                        VerticalOptions="Center"
                                        Margin="200,0,0,0"/>
-                            </Grid>
-                        </Frame>
-                    </Grid>
-                    <!-- Botón con ícono para agregar -->
-                        <ImageButton Source="plus.png"
+                        </Grid>
+                    </Frame>
+                </Grid>
+                <!-- Botón con ícono para agregar -->
+                <ImageButton Source="plus.png"
                                      BackgroundColor="Transparent"
                                      HeightRequest="25"
                                      WidthRequest="25"
-                                     Clicked="OnNuevoPacienteClicked" 
+                                     Command="{Binding NuevoPacienteCommand}"
                                      Margin="10,0,20,0"
                                    />
-                </HorizontalStackLayout>
+            </HorizontalStackLayout>
 
-                
-              
 
-                <CollectionView ItemsSource="{Binding Pacientes}" Margin="20">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <views:PacienteCardView Paciente="{Binding .}">
-                                <views:PacienteCardView.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding BindingContext.SeleccionarCommand, Source={x:Reference PageRef}}" 
-                                                          CommandParameter="{Binding .}" />
-                                </views:PacienteCardView.GestureRecognizers>
-                            </views:PacienteCardView>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-                
-            </StackLayout>
-        
-     </Grid>   
-    
 
- 
+
+            <CollectionView ItemsSource="{Binding Pacientes}" Margin="20">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <ScrollView>
+                            <VerticalStackLayout Padding="10" Spacing="10">
+
+                                <!-- CARD DESLIZABLE -->
+                                <Grid>
+
+                                    <!-- Fondo visible al deslizar (Eliminar) -->
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Fondo izquierda (Editar) -->
+                                        <Frame BackgroundColor="red"
+                       CornerRadius="20"
+                       Margin="5"
+                       HeightRequest="110"
+                       HorizontalOptions="Fill"
+                       VerticalOptions="Fill"
+                       Grid.Column="0"/>
+
+                                        <!-- Fondo derecha (Eliminar) -->
+                                        <Frame BackgroundColor="#F17105"
+                       CornerRadius="20"
+                       Margin="5"
+                       HeightRequest="110"
+                       HorizontalOptions="Fill"
+                       VerticalOptions="Fill"
+                       Grid.Column="1"/>
+                                    </Grid>
+
+                                    <!-- SwipeView encima -->
+                                    <SwipeView>
+                                        <SwipeView.LeftItems>
+                                            <SwipeItems>
+                                                <SwipeItem Text="Eliminar"
+                                   BackgroundColor="Transparent"
+                                   IconImageSource="eliminar1.png"
+                                   Command="{Binding BindingContext.EliminarCommand, Source={x:Reference PageRef}}"
+CommandParameter="{Binding .}" />
+                                            </SwipeItems>
+                                        </SwipeView.LeftItems>
+
+                                        <SwipeView.RightItems>
+                                            <SwipeItems>
+                                                <SwipeItem Text="Editar"
+                                   BackgroundColor="Transparent"
+                                   IconImageSource="editar1.png"
+                                   Command="{Binding BindingContext.EditarCommand, Source={x:Reference PageRef}}"
+CommandParameter="{Binding .}" />
+                                            </SwipeItems>
+                                        </SwipeView.RightItems>
+
+                                        <!-- Contenido deslizable -->
+                                        <Frame BackgroundColor="#E4DFDA"
+                       CornerRadius="20"
+                       Padding="5"
+                       Margin="5"
+                       HeightRequest="110">
+
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnVerPaciente"/>
+                                            </Frame.GestureRecognizers>
+
+                                            <Grid ColumnDefinitions="Auto,*,Auto"
+                          VerticalOptions="Center"
+                          Padding="5"
+                          RowSpacing="0">
+
+                                                <!-- Imagen circular -->
+                                                <Image Source="{Binding Paciente.FotoSource}"
+                               WidthRequest="90"
+                               HeightRequest="90"
+                               Aspect="AspectFill"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center">
+                                                    <Image.Clip>
+                                                        <EllipseGeometry Center="45,45" RadiusX="45" RadiusY="45" />
+                                                    </Image.Clip>
+                                                </Image>
+
+                                                <!-- Información del paciente -->
+                                                <StackLayout Grid.Column="1"
+                                     Padding="10,0"
+                                     Spacing="2"
+                                     VerticalOptions="Center">
+                                                    <Label Text="{Binding Nombre}" TextColor="Black"/>
+
+                                                    <Label Text="Especie:" FontAttributes="Bold" TextColor="Black"/>
+                                                    <Label Text="{Binding Especie}" TextColor="Gray"/>
+
+                                                    <Label Text="Raza:" FontAttributes="Bold" TextColor="Black"/>
+                                                    <Label Text="{Binding Raza}" TextColor="Gray"/>
+
+                                                    <Label Text="Propietario:" FontAttributes="Bold" TextColor="Black"/>
+                                                    <Label Text="{Binding Propietario.Nombre}" TextColor="Gray"/>
+
+                                                </StackLayout>
+
+                                                <!--última columna -->
+                                                <ImageButton
+                            Grid.Column="1"
+                            Source="info.png"
+                            BackgroundColor="Transparent"
+                            HeightRequest="25"
+                            WidthRequest="25"
+                            Command="{Binding BindingContext.DetallesCommand, Source={x:Reference PageRef}}"
+                            CommandParameter="{Binding .}"
+                            Margin="10,0,20,0"
+                            VerticalOptions="Center"
+                            HorizontalOptions="End" />
+
+
+                                            </Grid>
+                                        </Frame>
+                                    </SwipeView>
+                                </Grid>
+                            </VerticalStackLayout>
+                            </ScrollView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </StackLayout>
+
+    </Grid>
+
+
+
 </ContentPage>

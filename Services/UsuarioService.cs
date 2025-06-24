@@ -2,6 +2,8 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Veterinaria.Models;
+using Newtonsoft.Json;
+
 
 namespace Veterinaria.Services
 {
@@ -9,10 +11,14 @@ namespace Veterinaria.Services
     {
         private readonly HttpClient _httpClient;
         private const string BaseUrl = "https://veterinenis-d7cyg.ondigitalocean.app/api/usuarios";
-        private JsonSerializerOptions options = new JsonSerializerOptions
+        private readonly JsonSerializerOptions options = new()
         {
             PropertyNameCaseInsensitive = true,
-            Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) }
+            PropertyNamingPolicy = null,
+            Converters =
+            {
+                new JsonStringEnumConverter()
+            }
         };
 
         public UsuarioService(HttpClient httpClient)
@@ -23,46 +29,46 @@ namespace Veterinaria.Services
         // CREATE
         public async Task<bool> CrearUsuarioAsync(Usuario usuario)
         {
-            var response = await _httpClient.PostAsJsonAsync(BaseUrl, usuario);
+            var json = JsonConvert.SerializeObject(usuario);
+            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync(BaseUrl, content);
             return response.IsSuccessStatusCode;
         }
 
-        // READ
-        public async Task<List<Usuario>> ObtenerUsuariosAsync()
-        {
-            return await _httpClient.GetFromJsonAsync<List<Usuario>>(BaseUrl);
-        }
-        public async Task<Usuario> ObtenerUsuarioPorIdAsync(int id)
-        {
-            var response = await _httpClient.GetAsync($"{BaseUrl}/{id}");
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadFromJsonAsync<Usuario>(options);
-            }
-            return null;
-        }
         public class LoginResponse
         {
+            [JsonPropertyName("success")]
             public bool Success { get; set; }
+
+            [JsonPropertyName("usuario")]
             public Usuario Usuario { get; set; }
+
+            [JsonPropertyName("token")]
             public string Token { get; set; }
         }
+
         public async Task<Usuario> LoginAsync(string email, string password)
         {
             var loginData = new { nombre_usuario = email, contrasena = password };
-            var response = await _httpClient.PostAsJsonAsync($"{BaseUrl}/login", loginData);
+            var json = JsonConvert.SerializeObject(loginData);
+            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync($"{BaseUrl}/login", content);
 
             if (response.IsSuccessStatusCode)
             {
-                var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponse>(options);
+                var responseJson = await response.Content.ReadAsStringAsync();
+                var loginResponse = JsonConvert.DeserializeObject<LoginResponse>(responseJson);
                 return loginResponse?.Usuario;
             }
             return null;
         }
+
         // UPDATE
         public async Task<bool> ActualizarUsuarioAsync(int id, Usuario usuario)
         {
-            var response = await _httpClient.PutAsJsonAsync($"{BaseUrl}/{id}", usuario);
+            var json = JsonConvert.SerializeObject(usuario);
+            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            var response = await _httpClient.PutAsync($"{BaseUrl}/{id}", content);
             return response.IsSuccessStatusCode;
         }
 

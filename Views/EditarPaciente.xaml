@@ -49,7 +49,7 @@
                TextColor="Black"
         />
         <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300" HeightRequest="50">
-            <Editor Text="{Binding Nombre}" Placeholder="Nombre" BackgroundColor="Transparent" />
+            <Editor Text="{Binding Paciente.Nombre}" Placeholder="Nombre" BackgroundColor="Transparent" />
         </Frame>
 
         <!-- Raza -->
@@ -59,7 +59,7 @@
                TextColor="Black"
         />
         <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300" HeightRequest="50">
-            <Editor Text="{Binding Raza}" Placeholder="Raza" BackgroundColor="Transparent" />
+            <Editor Text="{Binding Paciente.Raza}" Placeholder="Raza" BackgroundColor="Transparent" />
         </Frame>
 
         <!-- Padecimiento -->
@@ -69,7 +69,7 @@
                TextColor="Black"
         />
         <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300" HeightRequest="50">
-            <Editor Text="{Binding Padecimiento}" Placeholder="Padecimiento" BackgroundColor="Transparent" />
+            <Editor Text="{Binding Paciente.Padecimiento}" Placeholder="Padecimiento" BackgroundColor="Transparent" />
         </Frame>
 
         <!-- Intervenciones -->
@@ -79,7 +79,7 @@
                TextColor="Black"
         />
         <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300" HeightRequest="50">
-            <Editor Text="{Binding Intervenciones}" Placeholder="Intervenciones" BackgroundColor="Transparent" />
+            <Editor Text="{Binding Paciente.Intervenciones}" Placeholder="Intervenciones" BackgroundColor="Transparent" />
         </Frame>
 
         <!-- Fecha nacimiento -->
@@ -89,7 +89,7 @@
                TextColor="Black"
         />
         <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300" HeightRequest="50">
-            <DatePicker Date="{Binding Fecha_nacimiento}" Format="dd/MM/yyyy" BackgroundColor="Transparent"/>
+            <DatePicker Date="{Binding Paciente.Fecha_nacimiento}" Format="dd/MM/yyyy" BackgroundColor="Transparent"/>
         </Frame>
 
         <!-- Especie (Picker) -->
@@ -101,7 +101,7 @@
         <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300" HeightRequest="50">
             <Picker Title="Especie"
                     ItemsSource="{Binding Especies}"
-                    SelectedItem="{Binding Especie}"
+                    SelectedItem="{Binding Paciente.Especie}"
                     BackgroundColor="Transparent" />
         </Frame>
 
@@ -114,7 +114,7 @@
         <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300" HeightRequest="50">
             <Picker Title="Sexo"
                     ItemsSource="{Binding Sexos}"
-                    SelectedItem="{Binding Sexo}"
+                    SelectedItem="{Binding Paciente.Sexo}"
                     BackgroundColor="Transparent" />
         </Frame>
 
@@ -127,7 +127,7 @@
         <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300" HeightRequest="50">
             <Picker Title="Propietario"
                     ItemsSource="{Binding Propietarios}"
-                    SelectedItem="{Binding Propietario}"
+                    SelectedItem="{Binding Paciente.Propietario}"
                     ItemDisplayBinding="{Binding Nombre}"
                     BackgroundColor="Transparent"/>
         </Frame>

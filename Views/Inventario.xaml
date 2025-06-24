@@ -74,7 +74,7 @@
                        BackgroundColor="Transparent"
                        VerticalOptions="Center" >
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnNuevoProducto"/>
+                        <TapGestureRecognizer />
                     </Image.GestureRecognizers>
                 </Image>    
             </HorizontalStackLayout>
@@ -104,7 +104,6 @@
                             <SwipeItem Text="Eliminar"
                                        BackgroundColor="Transparent"
                                        IconImageSource="eliminar1.png"
-                                       Invoked="OnEliminarSwipe"
                                        CommandParameter="{Binding .}" />
                         </SwipeItems>
                     </SwipeView.LeftItems>
@@ -114,7 +113,7 @@
                             <SwipeItem Text="Editar"
                                        BackgroundColor="Transparent"
                                        IconImageSource="editar1.png"
-                                       Invoked="OnEditarSwipe"
+                                       Command="{Binding BindingContext.SeleccionarCommand, Source={x:Reference PageRef}}"
                                        CommandParameter="{Binding .}" />
                         </SwipeItems>
                     </SwipeView.RightItems>
@@ -164,7 +163,6 @@
             HeightRequest="25"
             WidthRequest="25"
             CommandParameter="{Binding .}"
-            Clicked="OnDetallesProducto"
             Margin="10,0,20,0"
             VerticalOptions="Center"
             HorizontalOptions="End" />

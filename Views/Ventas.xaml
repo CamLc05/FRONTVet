@@ -42,19 +42,19 @@ HeightRequest="80" HorizontalOptions="Center" />
             </Frame>
 
             <!-- Lista de ventas -->
-            <CollectionView x:Name="VentasList">
+            <CollectionView ItemsSource="{Binding Facturas}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                     <Frame BackgroundColor="#E4DFDA" CornerRadius="15" Padding="10" Margin="0,5">
                             <Grid ColumnDefinitions="*,Auto">
                                 <VerticalStackLayout>
-                                    <Label Text="{Binding Tipo}" FontAttributes="Bold" FontSize="18" TextColor="Black"/>
-                                    <Label Text="{Binding Fecha}" FontSize="14" TextColor="Gray"/>
-                                    <Label Text="{Binding Total}" FontSize="14" TextColor="Black"/>
+                                    <Label Text="{Binding Cita.Motivo}" FontAttributes="Bold" FontSize="18" TextColor="Black"/>
+                                <Label Text="{Binding Cita.FechaCita, StringFormat='{0:dd/MM/yyyy HH:mm}'}}" FontSize="14" TextColor="Gray"/>
+                                <Label Text="{Binding CostoTotal, StringFormat='${0:F2}'}" FontSize="14" TextColor="Black"/>
                                 </VerticalStackLayout>
                                 <ImageButton  
                                          Grid.Column="1"  
-                                           
+                                         
                                          HeightRequest="30"  
                                          WidthRequest="30"  
                                          VerticalOptions="Center"  

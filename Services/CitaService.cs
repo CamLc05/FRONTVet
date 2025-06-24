@@ -1,6 +1,9 @@
 ﻿using System.Net.Http.Json;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Veterinaria.Models;
+using Newtonsoft.Json;
+
 
 namespace Veterinaria.Services
 {
@@ -8,10 +11,7 @@ namespace Veterinaria.Services
     {
         private readonly HttpClient _httpClient;
         private const string BaseUrl = "https://veterinenis-d7cyg.ondigitalocean.app/api/citas";
-        private JsonSerializerOptions options = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        };
+        
 
         public CitaService(HttpClient httpClient)
         {
@@ -21,30 +21,37 @@ namespace Veterinaria.Services
         // CREATE
         public async Task<bool> CrearCitaAsync(Cita cita)
         {
-            var response = await _httpClient.PostAsJsonAsync(BaseUrl, cita);
+            var json = JsonConvert.SerializeObject(cita);
+            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync(BaseUrl, content);
             return response.IsSuccessStatusCode;
         }
 
         // READ
         public async Task<List<Cita>> ObtenerCitasAsync()
         {
-            return await _httpClient.GetFromJsonAsync<List<Cita>>(BaseUrl);
+            var response = await _httpClient.GetAsync(BaseUrl);
+            if (!response.IsSuccessStatusCode) return new List<Cita>();
+            var json = await response.Content.ReadAsStringAsync();
+            Console.WriteLine("JSON recibido: " + json);
+            return JsonConvert.DeserializeObject<List<Cita>>(json);
         }
 
         public async Task<Cita> ObtenerCitaPorIdAsync(int id)
         {
             var response = await _httpClient.GetAsync($"{BaseUrl}/{id}");
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadFromJsonAsync<Cita>(options);
-            }
-            return null;
+            if (!response.IsSuccessStatusCode) return null;
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<Cita>(json);
         }
+
 
         // UPDATE
         public async Task<bool> ActualizarCitaAsync(int id, Cita cita)
         {
-            var response = await _httpClient.PutAsJsonAsync($"{BaseUrl}/{id}", cita);
+            var json = JsonConvert.SerializeObject(cita);
+            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            var response = await _httpClient.PutAsync($"{BaseUrl}/{id}", content);
             return response.IsSuccessStatusCode;
         }
 

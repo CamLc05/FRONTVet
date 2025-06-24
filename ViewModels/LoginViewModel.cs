@@ -38,7 +38,7 @@ namespace Veterinaria.ViewModels
             if (usuario != null)
             {
                 AppGlobals.UsuarioActual = usuario;
-                await  _page.Navigation.PushAsync(new Bienvenida());
+                ((App)Application.Current).GoToMainApp();
             }
             else
             {

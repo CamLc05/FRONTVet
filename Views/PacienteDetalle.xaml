@@ -32,7 +32,7 @@
                                HorizontalOptions="Start"
                                Grid.Column="0"> 
                             <Image.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Cancelar_Clicked"/>
+                                <TapGestureRecognizer />
                             </Image.GestureRecognizers>
                         </Image>    
 

@@ -1,13 +1,38 @@
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
 namespace Veterinaria.Models;
 
 public class Producto
 {
+    [JsonProperty("id")]
     public int Id { get; set; }
-    public string Nombre { get; set; }
-    public string Gramaje { get; set; }
-    public float Precio { get; set; }
-    public TipoProducto Tipo { get; set; }
-    public DateTime Fecha_vencimiento { get; set; }
-    public int Disponibilidad { get; set; }
 
+    [JsonProperty("nombre")]
+    public string Nombre { get; set; }
+
+    [JsonProperty("gramaje")]
+    public string Gramaje { get; set; }
+
+    [JsonProperty("precio")]
+    public float Precio { get; set; }
+
+    [JsonProperty("tipo")]
+    [JsonConverter(typeof(StringEnumConverter))]
+    public TipoProducto Tipo { get; set; }
+
+    [JsonProperty("fecha_vencimiento")]
+    public DateTime? Fecha_vencimiento { get; set; }
+
+    [JsonProperty("disponibilidad")]
+    public int Disponibilidad { get; set; }
+}
+
+// Clase contenedora para la respuesta de la API
+public class ProductosResponse
+{
+    [JsonProperty("productos")]
+    public List<Producto> Productos { get; set; }
 }

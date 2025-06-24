@@ -61,16 +61,44 @@
         </StackLayout>
 
         <Grid Grid.Row="1" RowDefinitions="Auto, Auto, *">
-            <Grid x:Name="SemanaGrid"
-                  Grid.Row="0"
-                  ColumnSpacing="20"
-                  RowSpacing="10"
-                  HorizontalOptions="Center">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-            </Grid>
+            <CollectionView ItemsSource="{Binding DiasSemana}"
+                ItemsLayout="HorizontalList"
+                HeightRequest="80"
+                Margin="0,10,0,0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="0,0,0,0" HorizontalOptions="Center" Spacing="2">
+                            <!-- Nombre del día -->
+                            <Label Text="{Binding Nombre}"
+                       FontSize="17"
+                       HorizontalTextAlignment="Center"
+                       TextColor="Black"/>
+                            <!-- Número del día, con fondo si es hoy -->
+                            <Frame Padding="0"
+                       CornerRadius="20"
+                       HasShadow="False"
+                       BackgroundColor="{Binding EsHoy}"
+                       HeightRequest="40"
+                       WidthRequest="40"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center">
+                                <Label Text="{Binding Numero}"
+                           FontSize="18"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           TextColor="{Binding EsHoy}"/>
+                            </Frame>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.SeleccionarDiaCommand, Source={x:Reference PageRef}}"
+                         CommandParameter="{Binding .}" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+
 
             <HorizontalStackLayout Grid.Row="1" Spacing="10" Margin="0,30,0,20" HorizontalOptions="Center">
                 <Grid>
@@ -81,7 +109,7 @@
                            HeightRequest="47"
                            WidthRequest="300">
                         <Grid Padding="0,0">
-                            <Entry x:Name="BuscarEntry"
+                            <Entry x:Name="BuscarEntry" 
                                    Placeholder="Buscar..."
                                    BackgroundColor="#F5F5F5"
                                    TextColor="Black"
@@ -98,6 +126,7 @@
                 <Image Source="plus.png"
                        WidthRequest="35"
                        HeightRequest="35"
+                       
                        HorizontalOptions="End"
                        VerticalOptions="Center"/>
             </HorizontalStackLayout>
@@ -108,12 +137,55 @@
                             VerticalOptions="FillAndExpand">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <views:CitaCardView Cita="{Binding .}">
-                            <views:CitaCardView.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding BindingContext.SeleccionarCitaCommand, Source={x:Reference PageRef}}"
-                                                      CommandParameter="{Binding .}" />
-                            </views:CitaCardView.GestureRecognizers>
-                        </views:CitaCardView>
+                        <Frame BackgroundColor="#E4DFDA"
+       BorderColor="Transparent"
+       HasShadow="True"
+       CornerRadius="20"
+       Margin="12"
+       WidthRequest="350">
+
+                            <HorizontalStackLayout Margin="-20" Padding="30, 30">
+                                <VerticalStackLayout VerticalOptions="Center" WidthRequest="190">
+                                    <HorizontalStackLayout Spacing="5">
+                                        <Image Source="iconopunto.png"
+               HeightRequest="10"
+               WidthRequest="10"
+               VerticalOptions="Center"
+               HorizontalOptions="Center" />
+                                        <Label Text="{Binding FechaCita, StringFormat='{0:HH:mm}'}"
+               FontSize="20"
+               FontAttributes="Bold"
+               TextColor="Black"/>
+                                    </HorizontalStackLayout>
+
+                                    <HorizontalStackLayout Spacing="10" Margin="15,5,0,0">
+                                        <Label Text="Paciente:" FontAttributes="Bold" TextColor="Black"/>
+                                        <Label Text="{Binding Paciente.Nombre}" TextColor="Gray"/>
+                                    </HorizontalStackLayout>
+
+                                    <HorizontalStackLayout Spacing="10" Margin="15,0,0,0">
+                                        <Label Text="Veterinario:" FontAttributes="Bold" TextColor="Black"/>
+                                        <Label Text="{Binding Veterinario.Nombre_pila}" TextColor="Gray"/>
+                                    </HorizontalStackLayout>
+
+                                    <HorizontalStackLayout Spacing="10" Margin="15,0,0,0">
+                                        <Label Text="Motivo:" FontAttributes="Bold" TextColor="Black"/>
+                                        <Label Text="{Binding Motivo}" TextColor="Gray"/>
+                                    </HorizontalStackLayout>
+
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Margin="-20">
+                                    <Image Source="fondocitas2.png"
+                   HeightRequest="170"
+                   WidthRequest="170"
+                   HorizontalOptions="End"
+                   VerticalOptions="Center"
+                   Aspect="AspectFit" Margin="0, 0, -20, -20"/>
+                                </VerticalStackLayout>
+
+
+                            </HorizontalStackLayout>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
                 <CollectionView.EmptyView>

@@ -1,6 +1,9 @@
 ﻿using System.Net.Http.Json;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Veterinaria.Models;
+using Newtonsoft.Json;
+
 
 namespace Veterinaria.Services
 {
@@ -8,10 +11,7 @@ namespace Veterinaria.Services
     {
         private readonly HttpClient _httpClient;
         private const string BaseUrl = "https://veterinenis-d7cyg.ondigitalocean.app/api/servicios";
-        private JsonSerializerOptions options = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        };
+        
 
         public ServicioService(HttpClient httpClient)
         {
@@ -21,30 +21,36 @@ namespace Veterinaria.Services
         // CREATE
         public async Task<bool> CrearServicioAsync(Servicio servicio)
         {
-            var response = await _httpClient.PostAsJsonAsync(BaseUrl, servicio);
+            var json = JsonConvert.SerializeObject(servicio);
+            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync(BaseUrl, content);
             return response.IsSuccessStatusCode;
         }
 
         // READ
         public async Task<List<Servicio>> ObtenerServiciosAsync()
         {
-            return await _httpClient.GetFromJsonAsync<List<Servicio>>(BaseUrl);
+            var response = await _httpClient.GetAsync(BaseUrl);
+            if (!response.IsSuccessStatusCode) return new List<Servicio>();
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<List<Servicio>>(json) ?? new List<Servicio>();
         }
 
         public async Task<Servicio> ObtenerServicioPorIdAsync(int id)
         {
             var response = await _httpClient.GetAsync($"{BaseUrl}/{id}");
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadFromJsonAsync<Servicio>(options);
-            }
-            return null;
+            if (!response.IsSuccessStatusCode) return null;
+            var json = await response.Content.ReadAsStringAsync();
+            var servicioResponse = JsonConvert.DeserializeObject<ServicioResponse>(json);
+            return servicioResponse?.Servicio;
         }
 
         // UPDATE
         public async Task<bool> ActualizarServicioAsync(int id, Servicio servicio)
         {
-            var response = await _httpClient.PutAsJsonAsync($"{BaseUrl}/{id}", servicio);
+            var json = JsonConvert.SerializeObject(servicio);
+            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            var response = await _httpClient.PutAsync($"{BaseUrl}/{id}", content);
             return response.IsSuccessStatusCode;
         }
 
@@ -54,5 +60,12 @@ namespace Veterinaria.Services
             var response = await _httpClient.DeleteAsync($"{BaseUrl}/{id}");
             return response.IsSuccessStatusCode;
         }
+    }
+
+    // Clase contenedora para la respuesta de la API
+    public class ServicioResponse
+    {
+        [JsonPropertyName("servicio")]
+        public Servicio Servicio { get; set; }
     }
 }

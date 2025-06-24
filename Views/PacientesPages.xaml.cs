@@ -1,34 +1,36 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Veterinaria.ViewModels;
-
+using Veterinaria.Models;
 namespace Veterinaria.Views;
 
 public partial class PacientesPages : ContentPage
 {
-    public PacientesPages()
+	public PacientesPages()
+	{
+		InitializeComponent();
+		BindingContext = new PacienteViewModel();
+	}
+
+    private void OnEliminarPaciente(object sender, Paciente paciente)
     {
-        InitializeComponent();
-        BindingContext = new PacienteViewModel();
+        if (BindingContext is PacienteViewModel vm)
+            vm.EliminarCommand.Execute(paciente);
     }
-    private async void OnNuevoPacienteClicked(object sender, EventArgs e)
+
+    private void OnEditarPaciente(object sender, Paciente paciente)
     {
-        await Navigation.PushAsync(new PacienteNuevo());
+        if (BindingContext is PacienteViewModel vm)
+            vm.EditarCommand.Execute(paciente);
     }
-    
-    private async void Cancelar_Clicked(object sender, EventArgs e)
+
+    private void OnDetallesPaciente(object sender, Paciente paciente)
     {
-        await Application.Current.MainPage.Navigation.PushAsync(new Inventario());
+        if (BindingContext is PacienteViewModel vm)
+            vm.DetallesCommand.Execute(paciente);
     }
-    
-    
-    
-        
-    private async void OnNUevoPaciente(object sender, EventArgs e)
+
+    private void OnVerPaciente(object sender, Paciente paciente)
     {
-        await Application.Current.MainPage.Navigation.PushAsync(new PacienteNuevo());
+        if (BindingContext is PacienteViewModel vm)
+            vm.SeleccionarCommand.Execute(paciente);
     }
 }

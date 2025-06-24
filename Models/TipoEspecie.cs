@@ -1,9 +1,11 @@
+using System.Runtime.Serialization;
+
 namespace Veterinaria.Models;
 
 public enum TipoEspecie
 {
+    [EnumMember(Value = "Perro")]
     Perro,
-    Gato,
-    Hamster,
-    Ave
+    [EnumMember(Value = "Gato")]
+    Gato
 }

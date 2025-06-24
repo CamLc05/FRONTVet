@@ -1,163 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Veterinaria.Views.PacienteNuevo"
-             Title="Nuevo Paciente">
-  <ScrollView>
-    <VerticalStackLayout Padding="10" Margin="20" Spacing="5" HorizontalOptions="Center">
-        
-        <!-- Encabezado con flecha y logo -->
-        <Grid RowDefinitions="Auto,*" Padding="10" Margin="20">
-            <Grid Padding="10" VerticalOptions="Start" HorizontalOptions="Fill">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+             Title="Nuevo Paciente"
+             x:Name="PageRef">
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Margin="20" Spacing="5" HorizontalOptions="Center">
 
-                <!-- Botón Flecha Izquierda -->
-                <Image Source="back1.png"
-                       WidthRequest="25"
-                       HeightRequest="25"
-                       Margin="0"
-                       BackgroundColor="Transparent"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Start"
-                       Grid.Column="0">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="Cancelar_Clicked"/>
-                    </Image.GestureRecognizers>
-                </Image>
+            <!-- ... Encabezado y títulos igual ... -->
 
-                <!-- Logo -->
-                <Image Source="logovetnegro.png"
-                       WidthRequest="170"
-                       HeightRequest="80"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center"
-                       Grid.Column="1" />
-            </Grid>
-        </Grid>
+            <!-- Nombre -->
+            <Label Text="Nombre" FontSize="14" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300">
+                <Editor Text="{Binding NuevoPaciente.Nombre}" Placeholder="Nombre del paciente" BackgroundColor="Transparent" TextColor="Black" AutoSize="TextChanges" HeightRequest="20" />
+            </Frame>
 
-        <!-- Título -->
-        <Label Text="NUEVO" FontSize="30" FontAttributes="None" HorizontalOptions="Center" />
-        <Label Text="Paciente" FontSize="15" FontAttributes="None" HorizontalOptions="Center" />
-
-        
-        <!-- Nombre -->
-        <Label Text="Nombre"
-               FontSize="14"
-               FontAttributes="Bold"
-               TextColor="Black"
-        />
-        <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300">
-            <Editor Text="{Binding Nombre}"
-                    Placeholder="Nombre del paciente"
-                    BackgroundColor="Transparent"
-                    TextColor="Black"
-                    AutoSize="TextChanges"
-                    HeightRequest="20" />
-        </Frame>
-
-        <!-- Especie -->
-        <Label Text="Especie"
-               FontSize="14"
-               FontAttributes="Bold"
-               TextColor="Black"
-        />
-        <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300">
-            <Picker Title="Especie"
-                    ItemsSource="{Binding TiposEspecie}"
-                    SelectedItem="{Binding Especie}"
+            <!-- Especie -->
+            <Label Text="Especie" FontSize="14" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300">
+                <Picker Title="Especie"
+                    ItemsSource="{Binding Especies}"
+                    SelectedItem="{Binding NuevoPaciente.Especie}"
                     BackgroundColor="Transparent"
                     TextColor="Black" />
-        </Frame>
+            </Frame>
 
-        <!-- Raza -->
-        <Label Text="Raza"
-               FontSize="14"
-               FontAttributes="Bold"
-               TextColor="Black"
-        />
-        <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300">
-            <Editor Text="{Binding Raza}"
-                    Placeholder="Raza"
-                    BackgroundColor="Transparent"
-                    TextColor="Black"
-                    AutoSize="TextChanges"
-                    HeightRequest="20" />
-        </Frame>
+            <!-- Raza -->
+            <Label Text="Raza" FontSize="14" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300">
+                <Editor Text="{Binding NuevoPaciente.Raza}" Placeholder="Raza" BackgroundColor="Transparent" TextColor="Black" AutoSize="TextChanges" HeightRequest="20" />
+            </Frame>
 
-        <!-- Sexo -->
-        <Label Text="Sexo"
-               FontSize="14"
-               FontAttributes="Bold"
-               TextColor="Black"
-        />
-        <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300">
-            <Picker Title="Sexo"
-                    ItemsSource="{Binding TiposSexo}"
-                    SelectedItem="{Binding Sexo}"
+            <!-- Sexo -->
+            <Label Text="Sexo" FontSize="14" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300">
+                <Picker Title="Sexo"
+                    ItemsSource="{Binding Sexos}"
+                    SelectedItem="{Binding NuevoPaciente.Sexo}"
                     BackgroundColor="Transparent"
                     TextColor="Black" />
-        </Frame>
+            </Frame>
 
-        <!-- Fecha de nacimiento -->
-        <Label Text="Fecha de nacimiento"
-               FontSize="14"
-               FontAttributes="Bold"
-               TextColor="Black"
-        />
-        <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300">
-            <DatePicker Date="{Binding Fecha_nacimiento}"
-                        Visual="None"
-                        Format="dd/MM/yyyy"
-                        BackgroundColor="Transparent"
-                        TextColor="Black" />
-        </Frame>
+            <!-- Fecha de nacimiento -->
+            <Label Text="Fecha de nacimiento" FontSize="14" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300">
+                <DatePicker Date="{Binding NuevoPaciente.Fecha_nacimiento}" Visual="None" Format="dd/MM/yyyy" BackgroundColor="Transparent" TextColor="Black" />
+            </Frame>
 
-        <!-- Padecimiento -->
-        <Label Text="Padecimientos"
-               FontSize="14"
-               FontAttributes="Bold"
-               TextColor="Black"
-        />
-        <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300">
-            <Editor Text="{Binding Padecimiento}"
-                    Placeholder="Alergias, enfermedades..."
-                    BackgroundColor="Transparent"
-                    TextColor="Black"
-                    AutoSize="TextChanges"
-                    HeightRequest="20" />
-        </Frame>
+            <!-- Padecimiento -->
+            <Label Text="Padecimientos" FontSize="14" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300">
+                <Editor Text="{Binding NuevoPaciente.Padecimiento}" Placeholder="Alergias, enfermedades..." BackgroundColor="Transparent" TextColor="Black" AutoSize="TextChanges" HeightRequest="20" />
+            </Frame>
 
-            <Label Text="Buscar propietario"
-               FontSize="14"
-               FontAttributes="Bold"
-               TextColor="Black" />
+            <!-- Intervenciones -->
+            <Label Text="Intervenciones" FontSize="14" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300">
+                <Editor Text="{Binding NuevoPaciente.Intervenciones}" Placeholder="Intervenciones" BackgroundColor="Transparent" TextColor="Black" AutoSize="TextChanges" HeightRequest="20" />
+            </Frame>
+
+            <!-- Buscar propietario -->
+            <Label Text="Buscar propietario" FontSize="14" FontAttributes="Bold" TextColor="Black" />
             <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300">
                 <Entry x:Name="BuscarPropietarioEntry"
-                       Placeholder="Buscar propietario por nombre"
-                       BackgroundColor="Transparent"
-                       TextColor="Black"
-                       FontSize="16"
-                       TextChanged="BuscarPropietarioEntry_TextChanged"/>
+                   Text="{Binding BuscarPropietario}"
+                   Placeholder="Buscar propietario por nombre"
+                   BackgroundColor="Transparent"
+                   TextColor="Black"
+                   FontSize="16"/>
             </Frame>
 
             <!-- Lista dinámica de propietarios -->
             <CollectionView x:Name="PropietariosListView"
-                ItemsSource="{Binding Propietarios}"
-                SelectionMode="Single"
-                SelectionChanged="PropietariosListView_SelectionChanged"
-                IsVisible="{Binding Propietarios.Count, Converter={StaticResource ListNotEmptyConverter}}">
+                        ItemsSource="{Binding PropietariosFiltrados}"
+                        SelectionMode="Single"
+                        IsVisible="{Binding PropietariosListVisible}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Padding="10" BackgroundColor="#E4DFDA" Margin="5" CornerRadius="10" WidthRequest="300">
-                            <Label Text="{Binding Nombre}"
-               FontSize="16"
-               TextColor="Black"
-               VerticalOptions="Center" />
+                            <Grid>
+                                <Label Text="{Binding Nombre}"  FontSize="16" TextColor="Black" VerticalOptions="Center"/>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                    Command="{Binding BindingContext.SeleccionarPropietarioCommand, Source={x:Reference PageRef}}"
+                                    CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -165,29 +93,36 @@
                     <Label Text="No se encontraron propietarios" HorizontalOptions="Center" />
                 </CollectionView.EmptyView>
             </CollectionView>
+
+            <!-- Picker de propietario seleccionado -->
+            <Label Text="Propietario" FontSize="14" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300">
+                <Picker Title="Propietario"
+                    ItemsSource="{Binding Propietarios}"
+                    SelectedItem="{Binding SelectedPropietario}"
+                    ItemDisplayBinding="{Binding Nombre}"
+                    BackgroundColor="Transparent"/>
+            </Frame>
+
             <Button Text="¿No encuentras tu propietario? Agrégalo aquí"
-                    Clicked="OnAgregarPropietario_Clicked"
-                    BackgroundColor="Transparent"
-                    TextColor="#F17105"
-                    FontAttributes="Italic"
-                    FontSize="14"
-                    HorizontalOptions="Center"
-                    Margin="0,5" />
+                Command="{Binding AgregarPropietarioCommand}"
+                BackgroundColor="Transparent"
+                TextColor="#F17105"
+                FontAttributes="Italic"
+                FontSize="14"
+                HorizontalOptions="Center"
+                Margin="0,5" />
 
             <!-- Botón Guardar -->
-        <Button Text="Guardar"
+            <Button Text="Guardar"
                 BackgroundColor="#F17105"
                 FontSize="17"
                 CornerRadius="20"
                 WidthRequest="100"
                 HeightRequest="20"
                 TextColor="#F7F7F2"
-                Clicked="Guardar_Clicked"
+                Command="{Binding GuardarCommand}"
                 FontAttributes="Bold"/>
-
-        
-    </VerticalStackLayout>
-</ScrollView>
-
-    
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

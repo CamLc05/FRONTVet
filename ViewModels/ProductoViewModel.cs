@@ -1,35 +1,55 @@
-using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using System.ComponentModel; 
-using System.Runtime.CompilerServices; 
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Veterinaria.Models;
 using Veterinaria.Services;
 using Microsoft.Maui.Controls;
 
 namespace Veterinaria.ViewModels;
 
-
-
-
 public class ProductoViewModel : INotifyPropertyChanged
 {
-    public ObservableCollection<Producto> Productos { get; set; }
+    private readonly ProductoService _productoService;
+
+    public ObservableCollection<Producto> Productos { get; set; } = new();
+
     public ICommand SeleccionarCommand { get; }
-    
-    
+    public ICommand RefrescarCommand { get; }
+
     public ProductoViewModel()
     {
-        var lista = FakeDatabase.ObtenerProductos();
-        Productos = new ObservableCollection<Producto>(lista);
-       
+        _productoService = new ProductoService(new HttpClient());
+
         SeleccionarCommand = new Command<Producto>(async (producto) =>
         {
-            await Shell.Current.GoToAsync("productoForm", true, new Dictionary<string, object>
+            if (producto != null)
             {
-                { "Producto", producto }
-            });
+                await Shell.Current.GoToAsync("productoForm", true, new Dictionary<string, object>
+                {
+                    { "Producto", producto }
+                });
+            }
         });
+
+        RefrescarCommand = new Command(async () => await CargarProductosAsync());
+
+        _ = CargarProductosAsync();
+    }
+
+    private async Task CargarProductosAsync()
+    {
+        var productos = await _productoService.ObtenerProductosAsync();
+        Productos.Clear();
+        if (productos != null)
+        {
+            foreach (var p in productos)
+            {
+                Productos.Add(p);
+                Console.WriteLine(p);
+            }
+               
+        }
     }
 
     public event PropertyChangedEventHandler PropertyChanged;

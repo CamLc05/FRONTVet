@@ -8,29 +8,22 @@ using Veterinaria.Models;
 
 namespace Veterinaria.Views;
 
+[QueryProperty(nameof(Paciente), "Paciente")]
 public partial class PacienteDetalle : ContentPage
 {
-    public PacienteDetalle(Paciente paciente)
+    private Paciente _paciente;
+    public Paciente Paciente
+    {
+        get => _paciente;
+        set
+        {
+            _paciente = value;
+            BindingContext = _paciente; // O usa un ViewModel si prefieres
+        }
+    }
+    public PacienteDetalle()
     {
         InitializeComponent();
-        BindingContext = paciente;
-    }
-    
-    private async void OnVolverClicked(object sender, EventArgs e)
-    {
-        await Navigation.PopAsync();
-    }
-
-    private async void OnEditarClicked(object sender, EventArgs e)
-    {
-        // Navegar a la página de edición, pásale el paciente
-        //  await Navigation.PushAsync(new EditarPacientePage(_paciente));
-        
-        
-    }
-    
-    private async void Cancelar_Clicked(object sender, EventArgs e)
-    {
-        await Application.Current.MainPage.Navigation.PushAsync(new PacientesPages());
+        BindingContext = new PacienteDetalleViewModel(Paciente);
     }
 }

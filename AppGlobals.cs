@@ -10,5 +10,6 @@ namespace Veterinaria
     public static class AppGlobals
     {
         public static Usuario UsuarioActual { get; set; }
+        public static DateTime FechaSeleccionada { get; set; } = DateTime.Now;
     }
 }

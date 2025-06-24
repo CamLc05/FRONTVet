@@ -1,36 +1,37 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Veterinaria.Models; 
+using Veterinaria.ViewModels;
+using Veterinaria.Models;
 
 namespace Veterinaria.Views;
 
+[QueryProperty(nameof(Paciente), "Paciente")]
 public partial class EditarPaciente : ContentPage
 {
-    public Paciente Paciente { get; set; }
-    
-    public EditarPaciente(Paciente paciente)
+    private EditarPacienteViewModel _viewModel;
+
+    public Paciente Paciente
+    {
+        get => _viewModel?.Paciente;
+        set
+        {
+            if (_viewModel != null)
+                _viewModel.Paciente = value;
+        }
+    }
+
+    public EditarPaciente()
     {
         InitializeComponent();
-        Paciente = paciente;
-        BindingContext = this;
+        _viewModel = new EditarPacienteViewModel();
+        BindingContext = _viewModel;
     }
-    
 
     private async void Guardar_Clicked(object sender, EventArgs e)
     {
-        // Aquí podrías actualizar la base fake si hicieras una modificación real
-        await DisplayAlert("Guardado", "El producto ha sido actualizado.", "OK");
-        await Application.Current.MainPage.Navigation.PushAsync(new PacientesPages());
+        await _viewModel.GuardarAsync();
     }
 
     private async void Cancelar_Clicked(object sender, EventArgs e)
     {
-        await Application.Current.MainPage.Navigation.PushAsync(new PacientesPages());
+        await _viewModel.CancelarAsync();
     }
-
-
-
 }
