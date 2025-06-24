@@ -9,9 +9,6 @@
              Title="Citas"
              BackgroundColor="#F5F5F5">
 
-    <ContentPage.BindingContext>
-        <viewmodels:CitasViewModel />
-    </ContentPage.BindingContext>
 
     <ContentPage.Resources>
         <converters:CitaStatusToColorConverter x:Key="CitaStatusToColorConverter" />
@@ -40,17 +37,6 @@
                        FontAttributes="None"
                        HorizontalOptions="Start"
                        Margin="0,20,30,10"/>
-
-                <Image Source="iconocalendario.png"
-                       HeightRequest="27"
-                       WidthRequest="27"
-                       VerticalOptions="End"
-                       HorizontalOptions="Center"
-                       Margin="0,0,0,10">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnEditar" />
-                    </Image.GestureRecognizers>
-                </Image>
             </HorizontalStackLayout>
 
             <BoxView HeightRequest="0.5"
@@ -130,7 +116,7 @@
                        HorizontalOptions="End"
                        VerticalOptions="Center">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnPlusTapped" />
+                        <TapGestureRecognizer Command="{Binding AgregarCitaCommand}" />
                     </Image.GestureRecognizers>
                 </Image>
             </HorizontalStackLayout>
@@ -141,7 +127,21 @@
                             VerticalOptions="FillAndExpand">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame BackgroundColor="#E4DFDA"
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Editar"
+                                   BackgroundColor="#FFC107"
+                                   Command="{Binding BindingContext.EditarCitaCommand, Source={x:Reference PageRef}}"
+                                   CommandParameter="{Binding .}" />
+                                    <SwipeItem Text="Eliminar"
+                                   BackgroundColor="#F44336"
+                                   Command="{Binding BindingContext.EliminarCitaCommand, Source={x:Reference PageRef}}"
+                                   CommandParameter="{Binding .}" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+
+                            <Frame BackgroundColor="#E4DFDA"
        BorderColor="Transparent"
        HasShadow="True"
        CornerRadius="20"
@@ -190,6 +190,7 @@
 
                             </HorizontalStackLayout>
                         </Frame>
+                        </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
                 <CollectionView.EmptyView>

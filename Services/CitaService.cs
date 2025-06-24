@@ -3,6 +3,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Veterinaria.Models;
 using Newtonsoft.Json;
+using Veterinaria.ViewModels;
 
 
 namespace Veterinaria.Services
@@ -19,7 +20,7 @@ namespace Veterinaria.Services
         }
 
         // CREATE
-        public async Task<bool> CrearCitaAsync(Cita cita)
+        public async Task<bool> CrearCitaAsync(CitaRequestDto cita)
         {
             var json = JsonConvert.SerializeObject(cita);
             var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
@@ -47,7 +48,7 @@ namespace Veterinaria.Services
 
 
         // UPDATE
-        public async Task<bool> ActualizarCitaAsync(int id, Cita cita)
+        public async Task<bool> ActualizarCitaAsync(int id, CitaRequestDto cita)
         {
             var json = JsonConvert.SerializeObject(cita);
             var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");

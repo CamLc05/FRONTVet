@@ -6,6 +6,13 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="20">
+            <HorizontalStackLayout Padding="0,10,0,0" Spacing="10">
+                <ImageButton Source="back1.png"
+                 BackgroundColor="Transparent"
+                 WidthRequest="32"
+                 HeightRequest="32"
+                 Clicked="OnBackClicked"/>
+            </HorizontalStackLayout>
 
             <Image Source="logovetnegro.png"
                    WidthRequest="170"
@@ -23,22 +30,12 @@
            
 
             <!-- Campo para el nombre del paciente -->
-            <Label Text="Nombre del paciente:"
-                   FontSize="18"
-                   TextColor="#121113"
-                   HorizontalOptions="Start" />
+            <Label Text="Paciente:" FontSize="18" TextColor="#121113" HorizontalOptions="Start" />
+            <Picker Title="Selecciona un paciente"
+                ItemsSource="{Binding Pacientes}"
+                ItemDisplayBinding="{Binding Nombre}"
+                SelectedItem="{Binding PacienteSeleccionado}" />    
 
-            <Frame BackgroundColor="#E4DFDA"
-                   CornerRadius="25"
-                   Padding="10,5"
-                   BorderColor="#F1F1F1"
-                   HeightRequest="50">
-                <Entry x:Name="NombreEntry"
-                       Placeholder="Ingresa el nombre"
-                       BackgroundColor="Transparent"
-                       TextColor="#121113"
-                       FontSize="16"/>
-            </Frame>
 
             <!-- Campo para el motivo -->
             <Label Text="Motivo:"
@@ -55,81 +52,45 @@
                 <Entry x:Name="MotivoEntry"
                        Placeholder="Ingresa el motivo"
                        BackgroundColor="Transparent"
+                       Text="{Binding NuevaCita.Motivo}"
                        TextColor="#121113"
                        FontSize="16"/>
             </Frame>
 
             <!-- Campo para detalles -->
+            <Label Text="Detalles:" FontSize="18" TextColor="#121113" HorizontalOptions="Start" Margin="0,10" />
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="25" Padding="10,5" BorderColor="#F1F1F1" HeightRequest="50">
+                <Entry Text="{Binding NuevaCita.Detalles}" Placeholder="Detalles de la cita" BackgroundColor="Transparent" TextColor="#121113" FontSize="16"/>
+            </Frame>
+
+
             
-
-            <!-- Título: Fechas disponibles -->
-            <Label Text="Fechas disponibles:"
-                   FontSize="18"
-                   TextColor="#121113"
-                   HorizontalOptions="Start"
-                   Margin="0,10" />
-
-            <Label Text="(Gris - no disponible)"
-                   FontSize="12"
-                   TextColor="#121113"
-                   HorizontalOptions="Start"
-                   Margin="0,10" />
-
-            <Label x:Name="lblFecha"
-                    FontSize="20"
-                    TextColor="Black"
-                    HorizontalOptions="Center"
-                    Margin="0,10" />
             
-            <!-- Calendario de fechas disponibles -->
-            <Grid x:Name="CalendarioGrid" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto" 
-                  ColumnDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto" ColumnSpacing="5" RowSpacing="5">
+            <Label Text="Fecha:" FontSize="18" TextColor="#121113" HorizontalOptions="Start" Margin="0,10" />
+            <DatePicker Date="{Binding NuevaCita.FechaCita}" Format="dd/MM/yyyy" />
 
-                <!-- Días de la semana -->
-                <Label Text="L" HorizontalTextAlignment="Center" FontSize="14" Grid.Row="0" />
-                <Label Text="M" HorizontalTextAlignment="Center" FontSize="14" Grid.Row="0" />
-                <Label Text="M" HorizontalTextAlignment="Center" FontSize="14" Grid.Row="0" />
-                <Label Text="J" HorizontalTextAlignment="Center" FontSize="14" Grid.Row="0" />
-                <Label Text="V" HorizontalTextAlignment="Center" FontSize="14" Grid.Row="0" />
-                <Label Text="S" HorizontalTextAlignment="Center" FontSize="14" Grid.Row="0" />
-                <Label Text="D" HorizontalTextAlignment="Center" FontSize="14" Grid.Row="0" />
+            <Label Text="Hora:" FontSize="18" TextColor="#121113" HorizontalOptions="Start" Margin="0,10" />
+            <TimePicker Time="{Binding NuevaCita.FechaCita, Mode=TwoWay}" />
+            
+            <Label Text="Veterinario:" FontSize="18" TextColor="#121113" HorizontalOptions="Start" />
+            <Picker Title="Selecciona un veterinario"
+            ItemsSource="{Binding Veterinarios}"
+            ItemDisplayBinding="{Binding Nombre_pila}"
+            SelectedItem="{Binding VeterinarioSeleccionado}" />
 
-                <!-- Fechas del mes (estos días se llenarán dinámicamente en C#) -->
-                <Button Text="1" BackgroundColor="Gray" TextColor="White" Grid.Row="1" Grid.Column="0" Clicked="OnDateSelected" />
-                <Button Text="2" BackgroundColor="Gray" TextColor="White" Grid.Row="1" Grid.Column="1" Clicked="OnDateSelected" />
-                <Button Text="3" BackgroundColor="White" TextColor="Black" Grid.Row="1" Grid.Column="2" Clicked="OnDateSelected" />
-                <Button Text="4" BackgroundColor="White" TextColor="Black" Grid.Row="1" Grid.Column="3" Clicked="OnDateSelected" />
-                <Button Text="5" BackgroundColor="White" TextColor="Black" Grid.Row="1" Grid.Column="4" Clicked="OnDateSelected" />
-                <Button Text="6" BackgroundColor="White" TextColor="Black" Grid.Row="1" Grid.Column="5" Clicked="OnDateSelected" />
-                <Button Text="7" BackgroundColor="Gray" TextColor="White" Grid.Row="1" Grid.Column="6" Clicked="OnDateSelected" />
-                <!-- ... Continuar con el resto de los días -->
-            </Grid>
+            <Label Text="Peso (kg):" FontSize="18" TextColor="#121113" HorizontalOptions="Start" Margin="0,10" />
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="25" Padding="10,5" BorderColor="#F1F1F1" HeightRequest="50">
+                <Entry Text="{Binding NuevaCita.Peso}" Placeholder="Peso del paciente" Keyboard="Numeric" BackgroundColor="Transparent" TextColor="#121113" FontSize="16"/>
+            </Frame>
 
-            <!-- Horario -->
-            <Label Text="Horario:"
-                   FontSize="18"
-                   TextColor="#121113"
-                   HorizontalOptions="Start"
-                   Margin="0,20,0,10" />
-
-            <Picker Title="Selecciona...">
-                <Picker.Items>
-                    <x:String>9:00 AM - 10:00 AM</x:String>
-                    <x:String>10:00 AM - 11:00 AM</x:String>
-                    <x:String>11:00 AM - 12:00 PM</x:String>
-                    <x:String>1:00 PM - 2:00 PM</x:String>
-                    <x:String>2:00 PM - 3:00 PM</x:String>
-                </Picker.Items>
-            </Picker>
-
-            <!-- Botón para confirmar la cita -->
             <Button Text="Confirmar cita"
-                    BackgroundColor="#F17105"
-                    TextColor="White"
-                    HeightRequest="50"
-                    FontSize="18"
-                    CornerRadius="20"
-                    Clicked="Guardar_Clicked"/>
+            BackgroundColor="#F17105"
+            TextColor="White"
+            HeightRequest="50"
+            FontSize="18"
+            CornerRadius="20"
+            Command="{Binding GuardarCitaCommand}" />
+
 
         </VerticalStackLayout>
     </ScrollView>

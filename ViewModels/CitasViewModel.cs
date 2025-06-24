@@ -59,6 +59,10 @@ namespace Veterinaria.ViewModels
         public ICommand SeleccionarCitaCommand { get; }
         public ICommand RefrescarCitasCommand { get; }
         public ICommand SeleccionarDiaCommand { get; }
+        public ICommand EditarCitaCommand { get; }
+        public ICommand EliminarCitaCommand { get; }
+        public ICommand AgregarCitaCommand { get; }
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -75,11 +79,56 @@ namespace Veterinaria.ViewModels
             SeleccionarCitaCommand = new Command<Cita>(async (cita) => await SeleccionarCitaAsync(cita));
             RefrescarCitasCommand = new Command(async () => await CargarCitasPorFechaAsync(fechaSeleccionada));
             SeleccionarDiaCommand = new Command<DiaSemana>(async (dia) => await SeleccionarDiaAsync(dia));
+            EditarCitaCommand = new Command<Cita>(async (cita) => await EditarCitaAsync(cita));
+            EliminarCitaCommand = new Command<Cita>(async (cita) => await EliminarCitaAsync(cita));
+            AgregarCitaCommand = new Command(async () => await AgregarCitaAsync());
+
             fechaSeleccionada = DateTime.Today;
 
 
             _ = CargarCitasPorFechaAsync(fechaSeleccionada);
         }
+        private async Task EditarCitaAsync(Cita cita)
+        {
+            if (cita == null)
+                return;
+
+            // Aquí puedes navegar a la página de edición, pasando la cita
+            await Shell.Current.GoToAsync("EditarCitaPage", true, new Dictionary<string, object>
+    {
+        { "Cita", cita }
+    });
+        }
+
+        private async Task EliminarCitaAsync(Cita cita)
+        {
+            if (cita == null)
+                return;
+
+            bool confirm = await Application.Current.MainPage.DisplayAlert(
+                "¿Eliminar?", $"¿Eliminar la cita de {cita.Paciente?.Nombre}?", "Sí", "Cancelar");
+
+            if (confirm)
+            {
+                var exito = await _citaService.EliminarCitaAsync(cita.Id);
+                if (exito)
+                {
+                    Citas.Remove(cita);
+                    await Application.Current.MainPage.DisplayAlert("Eliminado", "Cita eliminada correctamente.", "OK");
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "No se pudo eliminar la cita.", "OK");
+                }
+            }
+        }
+
+        private async Task AgregarCitaAsync()
+        {
+            // Navega a la página de nueva cita
+            await Shell.Current.GoToAsync("AgregarCitaPage");
+        }
+
         private async Task SeleccionarDiaAsync(DiaSemana dia)
         {
             if (dia != null)

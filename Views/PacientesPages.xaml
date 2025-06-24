@@ -161,16 +161,7 @@ CommandParameter="{Binding .}" />
                           RowSpacing="0">
 
                                                 <!-- Imagen circular -->
-                                                <Image Source="{Binding Paciente.FotoSource}"
-                               WidthRequest="90"
-                               HeightRequest="90"
-                               Aspect="AspectFill"
-                               HorizontalOptions="Start"
-                               VerticalOptions="Center">
-                                                    <Image.Clip>
-                                                        <EllipseGeometry Center="45,45" RadiusX="45" RadiusY="45" />
-                                                    </Image.Clip>
-                                                </Image>
+                                                
 
                                                 <!-- Información del paciente -->
                                                 <StackLayout Grid.Column="1"

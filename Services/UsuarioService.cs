@@ -47,6 +47,20 @@ namespace Veterinaria.Services
             public string Token { get; set; }
         }
 
+        public async Task<List<Usuario>> ObtenerVeterinariosAsync()
+        {
+            var response = await _httpClient.GetAsync(BaseUrl);
+            if (!response.IsSuccessStatusCode) return new List<Usuario>();
+            var json = await response.Content.ReadAsStringAsync();
+            Console.WriteLine("JSON: " + json);
+            var usuarios = JsonConvert.DeserializeObject<List<Usuario>>(json) ?? new List<Usuario>();
+            Console.WriteLine("USUARIOS: " + usuarios);
+            var vet = usuarios.Where(u => u.Rol == Rol.veterinario).ToList();
+            Console.WriteLine(vet);
+            // Filtra solo los que tienen el rol 'veterinario'
+            return vet;
+        }
+
         public async Task<Usuario> LoginAsync(string email, string password)
         {
             var loginData = new { nombre_usuario = email, contrasena = password };

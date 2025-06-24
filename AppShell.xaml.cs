@@ -12,6 +12,8 @@ namespace Veterinaria
             Routing.RegisterRoute(nameof(PacienteDetalle), typeof(PacienteDetalle));
             Routing.RegisterRoute(nameof(EditarPaciente), typeof(EditarPaciente));
             Routing.RegisterRoute(nameof(PacienteNuevo), typeof(PacienteNuevo));
+            Routing.RegisterRoute("EditarCitaPage", typeof(EditarCita));
+            Routing.RegisterRoute("AgregarCitaPage", typeof(NuevaCita));
 
 
         }
