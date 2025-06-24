@@ -128,7 +128,11 @@
                        HeightRequest="35"
                        
                        HorizontalOptions="End"
-                       VerticalOptions="Center"/>
+                       VerticalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPlusTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
             </HorizontalStackLayout>
 
             <CollectionView Grid.Row="2"
