@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Veterinaria.Views.RegistroRol"
+             Title="RegistroRol"
+             NavigationPage.HasNavigationBar="False"
+             Background="#F5F5F5">
+    <Grid>
+        <Image Source="fondoregistro2.png"
+       Aspect="AspectFill"
+       ZIndex="-1" />
+
+        <StackLayout VerticalOptions="Start" HorizontalOptions="Center">
+            <Image Source="logovetnegro.png"
+               WidthRequest="250"
+               HeightRequest="150"
+               Margin="0,30,0,0"
+               />
+
+            <Label Text="Regístrate"
+                   FontSize="30"
+                   FontAttributes="Bold"
+                   TextColor="#121113"
+                   HorizontalOptions="Center" 
+                   Margin="1,0,0,40"/>
+
+            <Label  Text="¿Qué rol cumples?"
+                    FontSize="25"
+                    TextColor="Black"
+                    HorizontalOptions="Center" 
+                    Margin="1,0,0,60"/>
+
+            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*,*"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center"
+                  ColumnSpacing="25"
+                  RowSpacing="10">
+
+                <!-- Íconos en la fila 0 -->
+                <Image Source="iconoadmin.png" 
+                       Grid.Row="0" Grid.Column="0" 
+                       HeightRequest="70" WidthRequest="70" 
+                       HorizontalOptions="Center"
+                       />
+
+                <Image Source="iconoadmin.png"
+                       Grid.Row="0" Grid.Column="0" 
+                       HeightRequest="70" WidthRequest="70" 
+                       HorizontalOptions="Center">
+
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="rolAdmin"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="iconovet.png" 
+                       Grid.Row="0" 
+                       Grid.Column="1" 
+                       HeightRequest="70" 
+                       WidthRequest="70" 
+                       HorizontalOptions="Center"/>
+
+                <Image Source="iconoasistente.png" 
+                       Grid.Row="0" Grid.Column="2" 
+                       HeightRequest="70" 
+                       WidthRequest="70" 
+                       HorizontalOptions="Center"/>
+
+                <!-- Textos en la fila 1 -->
+                <Label Text="Administrador" 
+                       Grid.Row="1" 
+                       Grid.Column="0" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+
+                <Label Text="Veterinario" 
+                       Grid.Row="1" 
+                       Grid.Column="1" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+
+                <Label Text="Asistente" 
+                       Grid.Row="1" 
+                       Grid.Column="2" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+
+            </Grid>
+        </StackLayout>
+
+    </Grid>
+</ContentPage>

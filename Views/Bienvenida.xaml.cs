@@ -15,7 +15,6 @@ public partial class Bienvenida : ContentPage
     public Bienvenida()
     {
         InitializeComponent();
-        BindingContext = this;
     }
 
     private async void logout(object sender, EventArgs e)
