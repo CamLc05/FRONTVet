@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Veterinaria.Views.Registro"
+             xmlns:controls="clr-namespace:Veterinaria.Controls"
+             Title="Registro"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#F5F5F5">
+    <Grid>
+        <Image Source="fondoregistro2.png"
+           Aspect="AspectFill"
+           ZIndex="0" />
+
+        <StackLayout VerticalOptions="Start" HorizontalOptions="Center">
+            <Image Source="logovetnegro.png"
+                   WidthRequest="250"
+                   HeightRequest="150"
+                   Margin="0,30,0,0"
+                   />
+
+            <Label Text="Regístrate"
+               FontSize="30"
+               FontAttributes="Bold"
+               TextColor="#121113"
+               HorizontalOptions="Center" 
+               Margin="1,0,0,40"/>
+
+            <Label Text="Nombre"
+                   TextColor="#121113"
+                   FontAttributes="Bold"
+                   FontSize="17"/>
+
+            <Entry Placeholder="Ingresa tu nombre"
+                   PlaceholderColor="#222725"
+                   TextColor="#121113"
+                   Keyboard="Text"
+                   Text="{Binding Nombre}"
+                   Margin="0,0,0,0"/>
+
+            <BoxView HeightRequest="0.5"
+                     Color="#F17105"
+                     HorizontalOptions="Fill"
+                     Margin="0,0,0,30" />
+
+            <Label Text="Email"
+                   TextColor="#121113"
+                   FontAttributes="Bold"
+                   FontSize="17"/>
+
+            <Entry Placeholder="Ingresa tu correo"
+                   PlaceholderColor="#222725"
+                   TextColor="#121113"
+                   Keyboard="Email"
+                   Text="{Binding Email}"
+                   Margin="0,0,0,0"
+                   />
+
+            <BoxView HeightRequest="0.5"
+                     Color="#F17105"
+                     HorizontalOptions="Fill"
+                     Margin="0,0,0,30" />
+
+            <Label Text="Contraseña"
+                   TextColor="#121113"
+                   FontAttributes="Bold"
+                   FontSize="17"/>
+
+            <controls:PasswordEntryControl
+                    Placeholder="Ingresa una contraseña"
+                    PlaceholderColor="#222725"
+                    TextColor="#121113"
+                    PasswordText="{Binding Password}"
+                    Margin="0,0,0,0"/>
+
+            <BoxView HeightRequest="0.5"
+                     Color="#F17105"
+                     HorizontalOptions="Fill"
+                     Margin="0,0,0,15" />
+
+            <Label HorizontalOptions="Center"
+                   Margin="0,10"
+                   Text="¿Qué rol cumples?"
+                   TextColor="Gray"
+                   FontSize="15"
+                   FontAttributes="Bold">
+
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding TuComandoParaLaAccion}"
+                        Tapped="MostrarMenuRol"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+        </StackLayout>
+    </Grid>
+</ContentPage>

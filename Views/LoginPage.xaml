@@ -2,8 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Veterinaria.Controls"
-             x:Class="Veterinaria.LoginPage">
-
+             x:Class="Veterinaria.LoginPage"
+             NavigationPage.HasNavigationBar="False"
+             Title="LoginPage"
+             BackgroundColor="#F5F5F5">
 
     <Grid>
         <Image Source="fondobienvenido.png"
@@ -14,15 +16,16 @@
             <Image Source="logovetnegro.png"
                        WidthRequest="250"
                        HeightRequest="150"
-                       Margin="0,30,0,30"
+                       Margin="0,30,0,0"
                        />
 
-            <Label Text="Log In"
+            <Label Text="Inicio de sesión"
                    FontSize="30"
                    FontAttributes="Bold"
                    TextColor="#121113"
                    HorizontalOptions="Center" 
-                   Margin="0,20"/>
+                   Margin="1,0,-40,40"
+                   WidthRequest="250"/>
 
             <Label Text="Email"
                    TextColor="#121113"
@@ -36,12 +39,12 @@
                    Text="{Binding Email}"
                    Margin="0,0,0,0"
                    />
-            
+
             <BoxView HeightRequest="0.5"
              Color="#F17105"
              HorizontalOptions="Fill"
              Margin="0,0,0,30" />
-            
+
             <Label Text="Contraseña"
                    TextColor="#121113"
                    FontAttributes="Bold"
@@ -57,7 +60,7 @@
             <BoxView HeightRequest="0.5"
                      Color="#F17105"
                      HorizontalOptions="Fill"
-                     Margin="0,0,0,50" />
+                     Margin="0,0,0,40" />
 
             <Button Text="Ingresar"
                     Command="{Binding LoginCommand}"
@@ -66,7 +69,26 @@
                     CornerRadius="20"
                     HeightRequest="50"
                     TextColor="#F7F7F2"
+                    Clicked="onClick"
                     FontAttributes="Bold"/>
+
+            <Label HorizontalOptions="Center"
+                   Margin="0,10">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="¿Aún no tienes cuenta? " TextColor="Gray"/>
+                        <Span Text="Regístrate"
+                              FontAttributes="Bold"
+                              TextColor="Gray"/>
+                    </FormattedString>
+                </Label.FormattedText>
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding TuComandoParaLaAccion}"
+                        Tapped="onClickRegistro"/>
+                </Label.GestureRecognizers>
+            </Label>
+
 
         </StackLayout>
     </Grid>
