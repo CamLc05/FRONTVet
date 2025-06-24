@@ -8,6 +8,7 @@ namespace Veterinaria
         {
             InitializeComponent();
             //Routing.RegisterRoute("pacienteForm", typeof(PacienteFormPage)); 
+            Shell.SetNavBarIsVisible(this, false);
 
 
         }

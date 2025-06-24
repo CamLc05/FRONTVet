@@ -9,7 +9,7 @@
     Shell.TabBarBackgroundColor="#F5F5F5"
     Shell.TabBarTitleColor="#F17105"          
     Shell.TabBarUnselectedColor="#9E9E9E"
-    Title="Veterinaria"
+    Shell.NavBarIsVisible="False"
      >
 
     <TabBar>

@@ -5,58 +5,65 @@
              x:Class="Veterinaria.Views.Ventas"
              Title="Ventas"
              BackgroundColor="#F5F5F5">
+
     <VerticalStackLayout Padding="20" Spacing="15">
-        
 
             <!-- Logo -->
-            <Image Source="vetcare_logo.png" HeightRequest="50" HorizontalOptions="Center" />
+        <Image Source="logovetnegro.png" WidthRequest="170"
+HeightRequest="80" HorizontalOptions="Center" />
 
             <!-- Título -->
-            <Label Text="VENTAS"
-               FontSize="24"
-               HorizontalOptions="Center"
-               TextColor="Black"
-               FontAttributes="Bold" />
+            <Label Text="VENTAS"  
+               FontSize="24"  
+               HorizontalOptions="Center"  
+               TextColor="Black"  
+                />
 
             <!-- Buscador -->
-            <Grid ColumnDefinitions="*,Auto" BackgroundColor="#FDF6F1" Padding="10" 
-                  HeightRequest="50" VerticalOptions="Start">
-                <Entry x:Name="SearchEntry"
-                   Placeholder="Buscar..."
-                   BackgroundColor="Transparent"
-                   TextColor="Black" />
-                <ImageButton Source="filter_icon.png"
-                         Grid.Column="1"
-                         BackgroundColor="Transparent"
-                         HeightRequest="24"
-                         WidthRequest="24"
-                         VerticalOptions="Center"
-                         HorizontalOptions="Center" />
-            </Grid>
+        <Frame BackgroundColor="Transparent" CornerRadius="20" BorderColor="Orange" Padding="0" HeightRequest="50" VerticalOptions="Start">
+                <Grid ColumnDefinitions="*,Auto" Padding="5">
+                    <Entry x:Name="SearchEntry"  
+                   Placeholder="Buscar..."  
+                   BackgroundColor="Transparent"  
+                   TextColor="Black"  
+                   Margin="0,0,0,0"
+                  ></Entry>
+
+                    <ImageButton
+                    Grid.Column="1"  
+                    BackgroundColor="Transparent"  
+                    HeightRequest="24"  
+                    WidthRequest="24"  
+                    VerticalOptions="Center"  
+                    HorizontalOptions="Center"  
+                    Source="lupa.png" />
+                    <!-- Usa el nombre del icono registrado en tu proyecto -->
+                </Grid>
+            </Frame>
 
             <!-- Lista de ventas -->
             <CollectionView x:Name="VentasList">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame BackgroundColor="#EDE1D6" CornerRadius="15" Padding="10" Margin="0,5">
+                    <Frame BackgroundColor="#E4DFDA" CornerRadius="15" Padding="10" Margin="0,5">
                             <Grid ColumnDefinitions="*,Auto">
                                 <VerticalStackLayout>
                                     <Label Text="{Binding Tipo}" FontAttributes="Bold" FontSize="18" TextColor="Black"/>
                                     <Label Text="{Binding Fecha}" FontSize="14" TextColor="Gray"/>
                                     <Label Text="{Binding Total}" FontSize="14" TextColor="Black"/>
                                 </VerticalStackLayout>
-                                <ImageButton Source="info_icon.png"
-                                         Grid.Column="1"
-                                         BackgroundColor="Transparent"
-                                         HeightRequest="30"
-                                         WidthRequest="30"
-                                         VerticalOptions="Center"
-                                         HorizontalOptions="End"/>
+                                <ImageButton  
+                                         Grid.Column="1"  
+                                           
+                                         HeightRequest="30"  
+                                         WidthRequest="30"  
+                                         VerticalOptions="Center"  
+                                         HorizontalOptions="End"
+                                         Source="info.png"/>
                             </Grid>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
-    </VerticalStackLayout>
-</ContentPage>
+        </VerticalStackLayout>
+    </ContentPage>
