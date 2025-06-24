@@ -1,7 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using Microsoft.Maui.Controls.Handlers.Compatibility; // ¡Asegúrate de añadir esta línea!
+using Microsoft.Maui.Controls.Handlers.Compatibility; 
 
-namespace Veterinaria; // Tu namespace actual
+namespace Veterinaria; 
+
 
 public static class MauiProgram
 {

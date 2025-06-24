@@ -1,0 +1,12 @@
+<resources>
+    <!-- Tema base de MAUI para el splash screen -->
+    <style name="Maui.SplashTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/maui_splash</item>
+        <item name="android:statusBarColor">#FF5722</item>
+    </style>
+    <!-- Tema base de MAUI para toda la app -->
+    <style name="Maui.MainTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">#FF5722</item>
+        <!-- Otros atributos de tu tema principal aquí -->
+    </style>
+</resources>
