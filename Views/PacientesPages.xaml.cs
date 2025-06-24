@@ -18,4 +18,17 @@ public partial class PacientesPages : ContentPage
     {
         await Navigation.PushAsync(new PacienteNuevo());
     }
+    
+    private async void Cancelar_Clicked(object sender, EventArgs e)
+    {
+        await Application.Current.MainPage.Navigation.PushAsync(new Inventario());
+    }
+    
+    
+    
+        
+    private async void OnNUevoPaciente(object sender, EventArgs e)
+    {
+        await Application.Current.MainPage.Navigation.PushAsync(new PacienteNuevo());
+    }
 }

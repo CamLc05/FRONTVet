@@ -1,13 +1,62 @@
 <?xml version="1.0" encoding="utf-8" ?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Veterinaria.Views.Ventas"
              Title="Ventas"
              BackgroundColor="#F5F5F5">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout Padding="20" Spacing="15">
+        
+
+            <!-- Logo -->
+            <Image Source="vetcare_logo.png" HeightRequest="50" HorizontalOptions="Center" />
+
+            <!-- Título -->
+            <Label Text="VENTAS"
+               FontSize="24"
+               HorizontalOptions="Center"
+               TextColor="Black"
+               FontAttributes="Bold" />
+
+            <!-- Buscador -->
+            <Grid ColumnDefinitions="*,Auto" BackgroundColor="#FDF6F1" Padding="10" 
+                  HeightRequest="50" VerticalOptions="Start">
+                <Entry x:Name="SearchEntry"
+                   Placeholder="Buscar..."
+                   BackgroundColor="Transparent"
+                   TextColor="Black" />
+                <ImageButton Source="filter_icon.png"
+                         Grid.Column="1"
+                         BackgroundColor="Transparent"
+                         HeightRequest="24"
+                         WidthRequest="24"
+                         VerticalOptions="Center"
+                         HorizontalOptions="Center" />
+            </Grid>
+
+            <!-- Lista de ventas -->
+            <CollectionView x:Name="VentasList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="#EDE1D6" CornerRadius="15" Padding="10" Margin="0,5">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding Tipo}" FontAttributes="Bold" FontSize="18" TextColor="Black"/>
+                                    <Label Text="{Binding Fecha}" FontSize="14" TextColor="Gray"/>
+                                    <Label Text="{Binding Total}" FontSize="14" TextColor="Black"/>
+                                </VerticalStackLayout>
+                                <ImageButton Source="info_icon.png"
+                                         Grid.Column="1"
+                                         BackgroundColor="Transparent"
+                                         HeightRequest="30"
+                                         WidthRequest="30"
+                                         VerticalOptions="Center"
+                                         HorizontalOptions="End"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
     </VerticalStackLayout>
 </ContentPage>

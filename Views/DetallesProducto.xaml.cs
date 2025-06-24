@@ -4,33 +4,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Veterinaria.Models;
+using Veterinaria.Services; 
 
 
-namespace Veterinaria.Views;
+namespace Veterinaria;
 
-public partial class PacienteDetalle : ContentPage
+public partial class DetallesProducto : ContentPage
 {
-    public PacienteDetalle(Paciente paciente)
+    public DetallesProducto(Producto producto)
     {
         InitializeComponent();
-        BindingContext = paciente;
+        BindingContext = producto;
+        
     }
     
     private async void OnVolverClicked(object sender, EventArgs e)
     {
-        await Navigation.PopAsync();
+        
+        await Application.Current.MainPage.Navigation.PushAsync(new MainPage());
     }
 
     private async void OnEditarClicked(object sender, EventArgs e)
     {
         // Navegar a la página de edición, pásale el paciente
         //  await Navigation.PushAsync(new EditarPacientePage(_paciente));
-        
-        
     }
     
-    private async void Cancelar_Clicked(object sender, EventArgs e)
+    private async void OnNuevoProducto(object sender, EventArgs e)
     {
-        await Application.Current.MainPage.Navigation.PushAsync(new PacientesPages());
+        // Navegar a la página de neuvo producto
+        await Application.Current.MainPage.Navigation.PushAsync(new NuevoProducto());
     }
+    
 }

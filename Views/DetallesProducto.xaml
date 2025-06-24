@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Veterinaria.DetallesProducto"
+             Title="Detalle del Producto"
+             BackgroundColor="#F5F5F5">
+    
+    
+    <Grid RowDefinitions="Auto,*" Padding="10" Margin="20">
+       
+        <Grid RowDefinitions="Auto,*" Padding="10" Margin="20">
+            <Grid Padding="10" VerticalOptions="Start" HorizontalOptions="Fill">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />   <!-- Flecha -->
+                    <ColumnDefinition Width="*" />      <!-- Logo -->
+                    <ColumnDefinition Width="Auto" />   <!-- Botón más -->
+                </Grid.ColumnDefinitions>
+
+                <!-- Botón Flecha Izquierda -->
+                <Image Source="back1.png"
+                       WidthRequest="25"
+                       HeightRequest="25"
+                       Margin="0"
+                       BackgroundColor="Transparent"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start"
+                       Grid.Column="0"> <!-- ✅ Aquí -->
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnVolverClicked"/>
+                    </Image.GestureRecognizers>
+                </Image>    
+
+                <!-- Logo Centrado -->
+                <Image Source="logovetnegro.png"
+                       WidthRequest="170"
+                       HeightRequest="80"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Grid.Column="1" /> 
+
+               
+            </Grid>
+        </Grid>
+
+
+        <!-- Contenido desplazable -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="20" HorizontalOptions="Center" VerticalOptions="Start" Padding="20">
+                
+               
+                
+                <!-- Nombre -->
+                    <Label Text="{Binding Nombre}"
+                           FontSize="25"
+                           FontAttributes="Bold"
+                           Padding="10"
+                           HorizontalOptions="Center" />
+                
+             
+                
+                <!-- Gramaje -->
+                <Label Text="Gramaje"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="Black" />
+                <Frame BackgroundColor="#E4DFDA"  CornerRadius="20" Margin="10" Padding="10" WidthRequest="300" HeightRequest="50">
+                    <Label Text="{Binding Gramaje}" FontSize="16" />
+                </Frame>
+
+                <!-- Precio -->
+                <Label Text="Precio"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="Black" />
+                <Frame BackgroundColor="#E4DFDA"  CornerRadius="20" Margin="10" Padding="10" WidthRequest="300" HeightRequest="50">
+                    <Label Text="{Binding Precio, StringFormat='${0:F2}'}" FontSize="16" />
+                </Frame>
+
+                <!-- Tipo de producto -->
+                <Label Text="Tipo de producto"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="Black" />
+                <Frame BackgroundColor="#E4DFDA"  CornerRadius="20" Margin="10" Padding="10" WidthRequest="300" HeightRequest="50">
+                    <Label Text="{Binding Tipo.Nombre}" FontSize="16" />
+                </Frame>
+
+                <!-- Fecha de vencimiento -->
+                <Label Text="Fecha de vencimiento"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="Black" />
+                <Frame BackgroundColor="#E4DFDA"  CornerRadius="20" Margin="10" Padding="10" WidthRequest="300" HeightRequest="50">
+                    <Label Text="{Binding Fecha_vencimiento, StringFormat='{0:dd/MM/yyyy}'}" FontSize="16" />
+                </Frame>
+
+                <!-- Disponibilidad -->
+                <Label Text="Disponibilidad"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="Black" />
+                <Frame BackgroundColor="#E4DFDA"  CornerRadius="20" Margin="10" Padding="10" WidthRequest="300" HeightRequest="50">
+                    <Label Text="{Binding Disponibilidad}" FontSize="16" />
+                </Frame>
+ 
+            </VerticalStackLayout>
+        </ScrollView>
+        
+        
+       
+    </Grid>
+</ContentPage>

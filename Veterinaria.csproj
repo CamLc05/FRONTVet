@@ -64,10 +64,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Communist" Version="0.9.1" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="12.0.0" />
+		<PackageReference Include="CommunityToolkit.Maui.Core" Version="12.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.80" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.6" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="System.Net.Security" Version="4.3.2" />
 	</ItemGroup>
 
 	<ItemGroup>

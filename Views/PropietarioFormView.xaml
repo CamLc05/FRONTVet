@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Veterinaria.Views.PropietarioFormView"
+             Title="Propietario">
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Padding="20">
+                <Label Text="{Binding Titulo}" FontSize="22" FontAttributes="Bold"/>
+
+                <Label Text="Nombre"/>
+                <Entry Text="{Binding Propietario.Nombre}"/>
+
+                <Label Text="Apellido"/>
+                <Entry Text="{Binding Propietario.Apellido}"/>
+
+                <Label Text="Número de Teléfono"/>
+                <Picker ItemsSource="{Binding Propietario.Num_telefono}"/>
+
+                <Label Text="Email"/>
+                <Picker ItemsSource="{Binding Propietario.Email}"/>
+
+                
+                <Label Text="Direccion"/>
+                <Picker ItemsSource="{Binding Propietario.Direccion}" />
+
+                <Label Text="Fecha de creación"/>
+                <Picker ItemsSource="{Binding Propietarios.Fecha_creacion}"/>
+
+
+                
+                <!-- Botón de guardar -->
+                <Button Text="Guardar" Command="{Binding GuardarCommand}" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -6,21 +6,22 @@ using System.Threading.Tasks;
 
 namespace Veterinaria.Views;
 
-public partial class PacienteNuevo : ContentPage
+public partial class NuevoPropietario : ContentPage
 {
-    public PacienteNuevo()
+    public NuevoPropietario()
     {
         InitializeComponent();
     }
+    
     private async void Guardar_Clicked(object sender, EventArgs e)
     {
-        // Aquí podrías actualizar la base fake si hicieras una modificación real
+      
         await DisplayAlert("Guardado", "El producto ha sido creado.", "OK");
-        await Application.Current.MainPage.Navigation.PushAsync(new Inventario());
+        await Application.Current.MainPage.Navigation.PushAsync(new NuevoPropietario());
     }
 
     private async void Cancelar_Clicked(object sender, EventArgs e)
     {
-        await Application.Current.MainPage.Navigation.PushAsync(new PacientesPages());
+        await Application.Current.MainPage.Navigation.PushAsync(new NuevoPropietario());
     }
 }
