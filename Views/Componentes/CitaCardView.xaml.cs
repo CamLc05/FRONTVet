@@ -1,3 +1,5 @@
+using Veterinaria.Views;
+
 namespace Veterinaria.Views // Asegúrate de que el namespace coincida
 {
     public partial class CitaCardView : ContentView
@@ -15,6 +17,12 @@ namespace Veterinaria.Views // Asegúrate de que el namespace coincida
         {
             InitializeComponent();
             BindingContext = this; // Asegura que el BindingContext de este ContentView sea la Cita
+        }
+
+        private async void OnEditarCitaClicked(object sender, EventArgs e)
+        {
+            // Navega a NuevaCita pasando la cita actual para editar
+            await Application.Current.MainPage.Navigation.PushAsync(new NuevaCita(Cita));
         }
     }
 }

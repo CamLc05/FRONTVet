@@ -47,6 +47,8 @@
                     <Label Text="{Binding Motivo}" TextColor="Gray"/>
                 </HorizontalStackLayout>
 
+                
+
             </VerticalStackLayout>
             <VerticalStackLayout Margin="-20">
                 <Image Source="fondocitas2.png"
@@ -55,7 +57,17 @@
                        HorizontalOptions="End"
                        VerticalOptions="Center"
                        Aspect="AspectFit" Margin="0, 0, -20, -20"/>
+                <Button 
+Text="Editar"
+BackgroundColor="#F17105"
+TextColor="White"
+CornerRadius="10"
+Padding="10,2"
+HorizontalOptions="End"
+Clicked="OnEditarCitaClicked"/>
             </VerticalStackLayout>
+            
+            
                 
 
         </HorizontalStackLayout>

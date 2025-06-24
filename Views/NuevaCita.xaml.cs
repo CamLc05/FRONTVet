@@ -1,16 +1,36 @@
 using System.Globalization;
+using Veterinaria.Models;
 
 namespace Veterinaria.Views;
 
 public partial class NuevaCita : ContentPage
-{
-    private DateTime fechaSeleccionada;
+    {
+        private DateTime fechaSeleccionada;
+    private Cita citaEditando;
+
+    // Constructor para nueva cita
     public NuevaCita()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         fechaSeleccionada = DateTime.Now;
         LlenarCalendario();
     }
+
+    // Constructor para editar cita
+    public NuevaCita(Cita cita) : this()
+    {
+        citaEditando = cita;
+        if (citaEditando != null)
+        {
+            // Poblar los campos de la UI
+            NombreEntry.Text = citaEditando.Paciente?.Nombre ?? "";
+            MotivoEntry.Text = citaEditando.Motivo ?? "";
+            fechaSeleccionada = citaEditando.FechaCita;
+            // Si tienes Picker para horario, selecciona el valor correspondiente aquí
+            // Si tienes más campos, asígnalos aquí
+        }
+    }
+
     private void OnDateSelected(object sender, EventArgs e)
     {
         // Obtienes el botón que fue presionado
@@ -86,8 +106,28 @@ public partial class NuevaCita : ContentPage
         }
     }
 
+    private async void Guardar_Clicked(object sender, EventArgs e)
+    {
+        // Obtén los valores de la UI
+        string nombrePaciente = NombreEntry.Text;
+        string motivo = MotivoEntry.Text;
+        // Puedes obtener el horario seleccionado del Picker si lo necesitas
 
+        if (citaEditando != null)
+        {
+            // EDITAR: Actualiza la cita existente
+            if (citaEditando.Paciente != null)
+                citaEditando.Paciente.Nombre = nombrePaciente;
+            citaEditando.Motivo = motivo;
+            citaEditando.FechaCita = fechaSeleccionada; // Ya está actualizado si el usuario cambió la fecha
 
-    // Evento para manejar la selección de la fecha
+            await DisplayAlert("Editado", "La cita ha sido actualizada.", "OK");
+        }
+        else
+        {
+            // Lógica para crear una nueva cita (opcional)
+        }
 
+        await Navigation.PopAsync();
+    }
 }

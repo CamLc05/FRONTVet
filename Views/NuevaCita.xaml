@@ -126,10 +126,10 @@
             <Button Text="Confirmar cita"
                     BackgroundColor="#F17105"
                     TextColor="White"
-                    Command="{Binding ConfirmarCitaCommand}"
                     HeightRequest="50"
                     FontSize="18"
-                    CornerRadius="20" />
+                    CornerRadius="20"
+                    Clicked="Guardar_Clicked"/>
 
         </VerticalStackLayout>
     </ScrollView>
