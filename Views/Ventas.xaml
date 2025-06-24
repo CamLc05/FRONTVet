@@ -14,56 +14,120 @@ HeightRequest="80" HorizontalOptions="Center" />
 
             <!-- Título -->
             <Label Text="VENTAS"  
-               FontSize="24"  
-               HorizontalOptions="Center"  
-               TextColor="Black"  
+                   FontSize="30"
+                   FontAttributes="None"
+                   TextColor="Black"
+                   HorizontalOptions="Center"
+                   Margin="0,20"  
                 />
+            
+            
+                 <HorizontalStackLayout Padding="10" Spacing="10">
 
-            <!-- Buscador -->
-        <Frame BackgroundColor="Transparent" CornerRadius="20" BorderColor="Orange" Padding="0" HeightRequest="50" VerticalOptions="Start">
-                <Grid ColumnDefinitions="*,Auto" Padding="5">
-                    <Entry x:Name="SearchEntry"  
-                   Placeholder="Buscar..."  
-                   BackgroundColor="Transparent"  
-                   TextColor="Black"  
-                   Margin="0,0,0,0"
-                  ></Entry>
+                    <!-- Contenedor del Entry con borde redondeado -->
+                    <Grid Margin="20,20,0,20"  HorizontalOptions="Center">
+                        <Frame CornerRadius="25"
+                               BorderColor="#F17105"
+                               BackgroundColor="#F5F5F5"
+                               Padding="0"
+                               HeightRequest="50"
+                               WidthRequest="270"
+                              >
+                            
+                            <Grid Padding="0,0">
+                                
 
-                    <ImageButton
-                    Grid.Column="1"  
-                    BackgroundColor="Transparent"  
-                    HeightRequest="24"  
-                    WidthRequest="24"  
-                    VerticalOptions="Center"  
-                    HorizontalOptions="Center"  
-                    Source="lupa.png" />
-                    <!-- Usa el nombre del icono registrado en tu proyecto -->
-                </Grid>
-            </Frame>
-
-            <!-- Lista de ventas -->
-            <CollectionView x:Name="VentasList">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                    <Frame BackgroundColor="#E4DFDA" CornerRadius="15" Padding="10" Margin="0,5">
-                            <Grid ColumnDefinitions="*,Auto">
-                                <VerticalStackLayout>
-                                    <Label Text="{Binding Tipo}" FontAttributes="Bold" FontSize="18" TextColor="Black"/>
-                                    <Label Text="{Binding Fecha}" FontSize="14" TextColor="Gray"/>
-                                    <Label Text="{Binding Total}" FontSize="14" TextColor="Black"/>
-                                </VerticalStackLayout>
-                                <ImageButton  
-                                         Grid.Column="1"  
-                                           
-                                         HeightRequest="30"  
-                                         WidthRequest="30"  
-                                         VerticalOptions="Center"  
-                                         HorizontalOptions="End"
-                                         Source="info.png"/>
+                                <!-- Campo de entrada -->
+                                <Entry x:Name="BuscarEntry"
+                                       Placeholder="Buscar..."
+                                       BackgroundColor="#F5F5F5"
+                                       TextColor="Black"
+                                       FontSize="16"
+                                        />
+                                <!-- Ícono de lupa -->
+                                <Image Source="lupa.png"
+                                       HeightRequest="25"
+                                       WidthRequest="25"
+                                       VerticalOptions="Center"
+                                       Margin="200,0,0,0"/>
                             </Grid>
                         </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                    </Grid>
+                   
+                </HorizontalStackLayout>
+
+                
+            
+
+            <!-- Lista de ventas -->
+            <CollectionView x:Name="VentasList" ItemsSource="{Binding Ventas}">
+    <CollectionView.ItemTemplate>
+        <DataTemplate>
+            <!-- Contenedor deslizable -->
+            <SwipeView>
+                <SwipeView.LeftItems>
+                    <SwipeItems>
+                        <SwipeItem Text="Eliminar"
+                                   BackgroundColor="Transparent"
+                                   IconImageSource="eliminar1.png"
+                                   Invoked="OnEliminarSwipe"
+                                   CommandParameter="{Binding .}" />
+                    </SwipeItems>
+                </SwipeView.LeftItems>
+
+                <SwipeView.RightItems>
+                    <SwipeItems>
+                        <SwipeItem Text="Editar"
+                                   BackgroundColor="Transparent"
+                                   IconImageSource="editar1.png"
+                                   Invoked="OnEditarSwipe"
+                                   CommandParameter="{Binding .}" />
+                    </SwipeItems>
+                </SwipeView.RightItems>
+
+                <!-- Tarjeta de venta -->
+                <Frame BackgroundColor="#E4DFDA"
+                       CornerRadius="20"
+                       Padding="10"
+                       Margin="5"
+                       HeightRequest="110">
+
+                    <Grid ColumnDefinitions="*,Auto"
+                          VerticalOptions="Center"
+                          Padding="5"
+                          RowSpacing="5">
+
+                        <!-- Información de la venta -->
+                        <VerticalStackLayout Grid.Column="0"
+                                             Spacing="2"
+                                             VerticalOptions="Center"
+                                             Padding="5,0">
+                            <Label Text="Tipo:" FontAttributes="Bold" TextColor="Black"/>
+                            <Label Text="{Binding Tipo}" TextColor="Gray"/>
+
+                            <Label Text="Fecha:" FontAttributes="Bold" TextColor="Black"/>
+                            <Label Text="{Binding Fecha}" TextColor="Gray"/>
+
+                            <Label Text="Total:" FontAttributes="Bold" TextColor="Black"/>
+                            <Label Text="{Binding Total, StringFormat='${0:F2}'}" TextColor="Gray"/>
+                        </VerticalStackLayout>
+
+                        <!-- Botón de información -->
+                        <ImageButton  
+                            Grid.Column="1"
+                            HeightRequest="30"  
+                            WidthRequest="30"  
+                            VerticalOptions="Center"  
+                            HorizontalOptions="End"
+                            Source="info.png"
+                            CommandParameter="{Binding .}"
+                            Clicked="OnDetallesVenta" />
+                    </Grid>
+                </Frame>
+            </SwipeView>
+        </DataTemplate>
+    </CollectionView.ItemTemplate>
+</CollectionView>
+
         </VerticalStackLayout>
     </ContentPage>
