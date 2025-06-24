@@ -38,9 +38,25 @@
                        VerticalOptions="Center"
                        Grid.Column="1" />
             </Grid>
+            
         </Grid>
+            <!-- Nuevo botón para tomar foto -->
+            <Button
+    Text="📷 Tomar foto"
+    Clicked="OnTakePhotoClicked"
+    BackgroundColor="#F17105"
+    TextColor="White"
+    CornerRadius="20"
+    Margin="0,20"/>
 
-        <!-- Título -->
+            <!-- Control donde mostrarás la foto -->
+            <Image
+    x:Name="FotoPreview"
+    Aspect="AspectFill"
+    HeightRequest="200"
+    WidthRequest="200"
+    HorizontalOptions="Center"/>
+            <!-- Título -->
         <Label Text="NUEVO" FontSize="30" FontAttributes="None" HorizontalOptions="Center" />
         <Label Text="Paciente" FontSize="15" FontAttributes="None" HorizontalOptions="Center" />
 

@@ -42,10 +42,14 @@ HeightRequest="80" HorizontalOptions="Center" />
             </Frame>
 
             <!-- Lista de ventas -->
-            <CollectionView x:Name="VentasList">
+            <CollectionView x:Name="VentasList"
+                            SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                     <Frame BackgroundColor="#E4DFDA" CornerRadius="15" Padding="10" Margin="0,5">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnVentaTapped" />
+                            </Frame.GestureRecognizers>
                             <Grid ColumnDefinitions="*,Auto">
                                 <VerticalStackLayout>
                                     <Label Text="{Binding Tipo}" FontAttributes="Bold" FontSize="18" TextColor="Black"/>

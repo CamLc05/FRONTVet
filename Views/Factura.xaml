@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Veterinaria.Views.factura"
+             Title="Factura"
+             BackgroundColor="#F5F5F5">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="18">
+
+            <!-- Encabezado -->
+            <Image Source="logovetnegro.png" HeightRequest="60" HorizontalOptions="Center"/>
+            <Label Text="Factura" FontSize="28" FontAttributes="Bold" HorizontalOptions="Center"/>
+            <Button Text="Volver a Ventas"
+        Clicked="OnVolverAVentasClicked"
+        BackgroundColor="Orange"
+        TextColor="White"
+        HorizontalOptions="Center"
+        Margin="0,30,0,0"/>
+            <!-- Datos generales -->
+            <Frame Padding="10" BackgroundColor="White" CornerRadius="10">
+                <VerticalStackLayout>
+                    <Label Text="{Binding Factura.Id, StringFormat='Factura #{0}'}" FontAttributes="Bold"/>
+                    <Label Text="{Binding Factura.Fecha_creacion, StringFormat='Fecha: {0:dd/MM/yyyy}'}"/>
+                    <Label Text="{Binding Factura.Metodo_pago, StringFormat='Método de pago: {0}'}"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Datos del paciente y cita -->
+            <Frame Padding="10" BackgroundColor="White" CornerRadius="10">
+                <VerticalStackLayout>
+                    <Label Text="{Binding Factura.Paciente.Nombre, StringFormat='Paciente: {0}'}"/>
+                    <Label Text="{Binding Factura.Paciente.Propietario.Nombre, StringFormat='Propietario: {0}'}"/>
+                    <Label Text="{Binding Factura.Cita.Motivo, StringFormat='Motivo: {0}'}"/>
+                    <Label Text="{Binding Factura.Cita.FechaCita, StringFormat='Cita: {0:dd/MM/yyyy HH:mm}'}"/>
+                    <Label Text="{Binding Factura.Cita.Veterinario.Nombre_usuario, StringFormat='Veterinario: {0}'}"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Detalle de servicios -->
+            <Frame Padding="10" BackgroundColor="White" CornerRadius="10">
+                <VerticalStackLayout>
+                    <Label Text="Servicios:" FontAttributes="Bold"/>
+                    <CollectionView ItemsSource="{Binding Factura.Cita.Servicios}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <HorizontalStackLayout>
+                                    <Label Text="{Binding Nombre}" />
+                                    <Label Text="{Binding Costo, StringFormat='${0:F2}'}" HorizontalOptions="EndAndExpand"/>
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Detalle de medicamentos/productos -->
+            <Frame Padding="10" BackgroundColor="White" CornerRadius="10">
+                <VerticalStackLayout>
+                    <Label Text="Medicamentos:" FontAttributes="Bold"/>
+                    <CollectionView ItemsSource="{Binding Factura.Cita.Medicamentos}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <HorizontalStackLayout>
+                                    <Label Text="{Binding Key.Nombre}" />
+                                    <Label Text="{Binding Value, StringFormat='Cantidad: {0}'}" />
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Total -->
+            <Frame Padding="10" BackgroundColor="White" CornerRadius="10">
+                <HorizontalStackLayout>
+                    <Label Text="Total:" FontAttributes="Bold" FontSize="18"/>
+                    <Label Text="{Binding Factura.costo_total, StringFormat='${0:F2}'}" FontSize="18" HorizontalOptions="EndAndExpand"/>
+                </HorizontalStackLayout>
+            </Frame>
+
+            
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

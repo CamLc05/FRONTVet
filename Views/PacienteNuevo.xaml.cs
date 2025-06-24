@@ -4,6 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Veterinaria.Models;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Storage;
+
+
+
 
 namespace Veterinaria.Views;
 
@@ -17,6 +22,52 @@ public partial class PacienteNuevo : ContentPage
         CargarPropietarios(); // Simula la carga de propietarios.
         BindingContext = this;
     }
+
+    async void OnTakePhotoClicked(object sender, EventArgs e)
+    {
+        // 1) Chequear + pedir permiso de cámara
+        var status = await Permissions.CheckStatusAsync<Permissions.Camera>();
+        if (status != PermissionStatus.Granted)
+            status = await Permissions.RequestAsync<Permissions.Camera>();
+
+        if (status != PermissionStatus.Granted)
+        {
+            await DisplayAlert("Permisos", "Sin permiso de cámara no podemos tomar la foto.", "OK");
+            return;
+        }
+
+        // 2) Abrir la cámara con MediaPicker
+        try
+        {
+            var photo = await MediaPicker.Default.CapturePhotoAsync();
+            if (photo == null)
+                return;
+
+            // 3) Mostrar previsualización
+            var stream = await photo.OpenReadAsync();
+            FotoPreview.Source = ImageSource.FromFile(photo.FullPath);
+
+            // 4) Leer bytes si necesitas enviarlos al backend
+            using var ms = new MemoryStream();
+            await stream.CopyToAsync(ms);
+            byte[] fotoBytes = ms.ToArray();
+
+            // … aquí podrías preparar tu MultipartFormDataContent y enviarlo …
+        }
+        catch (FeatureNotSupportedException)
+        {
+            await DisplayAlert("Error", "La cámara no está soportada en este dispositivo.", "OK");
+        }
+        catch (PermissionException)
+        {
+            await DisplayAlert("Error", "No se concedieron permisos para la cámara.", "OK");
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error inesperado", ex.Message, "OK");
+        }
+    }
+
 
     private void CargarPropietarios()
     {
