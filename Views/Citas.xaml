@@ -83,7 +83,7 @@
                         <Grid Padding="0,0">
                             <Entry x:Name="BuscarEntry"
                                    Placeholder="Buscar..."
-                                   BackgroundColor="#F5F5F5"
+                                   BackgroundColor="Transparent"
                                    TextColor="Black"
                                    FontSize="16"/>
                             <Image Source="lupa.png"
@@ -99,7 +99,12 @@
                        WidthRequest="35"
                        HeightRequest="35"
                        HorizontalOptions="End"
-                       VerticalOptions="Center"/>
+                       VerticalOptions="Center">
+
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnClickNuevaCita"/>
+                    </Image.GestureRecognizers>
+                </Image>
             </HorizontalStackLayout>
 
             <CollectionView Grid.Row="2"

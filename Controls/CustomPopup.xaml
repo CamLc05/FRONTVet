@@ -18,12 +18,14 @@
         <Label Text="Sesión cerrada"
                 FontAttributes="Bold"
                 FontSize="20"
+                TextColor="Black"
                 HorizontalOptions="Center" 
                 Margin="0,15"/>
 
         <Label Text="Haz cerrado sesión con éxito"
                 FontAttributes="Bold"
                 FontSize="15"
+                TextColor="Black"
                 HorizontalOptions="Center"
                 LineBreakMode="WordWrap"
                 MaxLines="2" 

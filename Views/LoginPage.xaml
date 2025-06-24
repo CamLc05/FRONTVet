@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Veterinaria.Controls"
              x:Class="Veterinaria.LoginPage"
+             NavigationPage.HasNavigationBar="False"
              Title="LoginPage"
              BackgroundColor="#F5F5F5">
 
@@ -15,7 +16,7 @@
             <Image Source="logovetnegro.png"
                        WidthRequest="250"
                        HeightRequest="150"
-                       Margin="0,30,0,30"
+                       Margin="0,30,0,0"
                        />
 
             <Label Text="Log In"
@@ -23,7 +24,7 @@
                    FontAttributes="Bold"
                    TextColor="#121113"
                    HorizontalOptions="Center" 
-                   Margin="0,20"/>
+                   Margin="0,25"/>
 
             <Label Text="Email"
                    TextColor="#121113"
@@ -69,6 +70,16 @@
                     TextColor="#F7F7F2"
                     Clicked="onClick"
                     FontAttributes="Bold"/>
+
+            <Button Text="¿Aún no tienes cuenta? Regístrate"
+                    Command="{Binding TuComandoParaLaAccion}"
+                    Clicked="onClickRegistro"
+                    FontSize="15"
+                    BackgroundColor="Transparent"  
+                    TextColor="Gray"              
+                    BorderColor="Transparent"      
+                    FontAttributes="None"
+                    Margin="0,3"/>
 
         </StackLayout>
     </Grid>

@@ -5,45 +5,45 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Veterinaria"
     xmlns:views="clr-namespace:Veterinaria.Views"
-    Shell.FlyoutBehavior="Flyout"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="False"
     Shell.TabBarBackgroundColor="#F5F5F5"
-    Shell.TabBarTitleColor="#F17105"          
+    Shell.TabBarTitleColor="#F17105"
     Shell.TabBarUnselectedColor="#9E9E9E"
     Title="Veterinaria"
      >
 
+
     <TabBar>
-        <!-- Bienvenida será la primera pestaña, y por lo tanto la que se muestra al iniciar -->
-        <ShellContent
-        Title="Inicio"
-        Icon="iconoinicio.png"
-        ContentTemplate="{DataTemplate views:Bienvenida}"
-        Route="bienvenida" />
+            <ShellContent
+            Title="Inicio"
+            Icon="iconoinicio.png" ContentTemplate="{DataTemplate views:Bienvenida}"
+            Route="MainPage" />
 
-        <ShellContent
-        Title="Pacientes" 
-        Icon="iconopaciente2.png"
-        ContentTemplate="{DataTemplate views:PacientesPages}"
-        Route="paciente" />
+            <ShellContent
+            Title="Pacientes"
+            Icon="iconopaciente2.png"
+            ContentTemplate="{DataTemplate views:PacientesPages}"
+            Route="PacientesPage" />
 
-        <ShellContent
-        Title="Citas" 
-        Icon="iconocita.png"
-        ContentTemplate="{DataTemplate views:Citas}"
-        Route="cita" />
+            <ShellContent
+            Title="Citas"
+            Icon="iconocita.png"
+            ContentTemplate="{DataTemplate views:Citas}"
+            Route="Citas" />
 
-        <ShellContent
-        Title="Inventario" 
-        Icon="iconoinventario.png"
-        ContentTemplate="{DataTemplate views:Inventario}"
-        Route="inventario" />
+            <ShellContent
+            Title="Inventario"
+            Icon="iconoinventario.png"
+            ContentTemplate="{DataTemplate views:Inventario}"
+            Route="InventarioPage" />
 
-        <ShellContent
-        Title="Ventas" 
-        Icon="iconoventas.png"
-        ContentTemplate="{DataTemplate views:Ventas}"
-        Route="venta" />
+            <ShellContent
+            Title="Ventas"
+            Icon="ventas_icon.png"
+            ContentTemplate="{DataTemplate views:Ventas}"
+            Route="VentasPage" />
 
-    </TabBar>
+        </TabBar>
 
 </Shell>

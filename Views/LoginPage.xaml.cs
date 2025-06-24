@@ -13,4 +13,8 @@ public partial class LoginPage : ContentPage
 	{
         ((App)Application.Current).GoToMainApp();
     }
+    private async void onClickRegistro(object sender, EventArgs e)
+    {
+        await Application.Current.MainPage.Navigation.PushAsync(new Registro());
+    }
 }

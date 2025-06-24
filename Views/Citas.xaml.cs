@@ -33,6 +33,7 @@ public partial class Citas : ContentPage
                 var label = new Label
                 {
                     Text = diasSemana[col],
+                    TextColor = Colors.Black,
                     HorizontalTextAlignment = TextAlignment.Center,
                     FontSize = 17
                 };
@@ -55,6 +56,7 @@ public partial class Citas : ContentPage
                         CornerRadius = 20,
                         HasShadow = false,
                         BackgroundColor = Color.FromArgb("#F17105"),
+                        BorderColor = Colors.Transparent,
                         HorizontalOptions = LayoutOptions.Center,
                         VerticalOptions = LayoutOptions.Center,
                         WidthRequest = 40,
@@ -106,6 +108,11 @@ public partial class Citas : ContentPage
     }
 
     private async void OnEditar(object sender, EventArgs e)
+    {
+        await Application.Current.MainPage.Navigation.PushAsync(new Calendario());
+    }
+
+    private async void OnClickNuevaCita(object sender, EventArgs e)
     {
         await Application.Current.MainPage.Navigation.PushAsync(new Calendario());
     }
