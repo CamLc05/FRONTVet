@@ -25,5 +25,12 @@ public partial class PacienteDetalle : ContentPage
     {
         // Navegar a la página de edición, pásale el paciente
         //  await Navigation.PushAsync(new EditarPacientePage(_paciente));
+        
+        
+    }
+    
+    private async void Cancelar_Clicked(object sender, EventArgs e)
+    {
+        await Application.Current.MainPage.Navigation.PushAsync(new Inventario());
     }
 }

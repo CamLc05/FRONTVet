@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Veterinaria.Models; 
+using Veterinaria.Models;
+using Veterinaria.Views;
 
 
 namespace Veterinaria
@@ -27,7 +28,7 @@ public partial class EditarProductoPage : ContentPage
     {
         // Aquí podrías actualizar la base fake si hicieras una modificación real
         await DisplayAlert("Guardado", "El producto ha sido actualizado.", "OK");
-        await Application.Current.MainPage.Navigation.PushAsync(new MainPage());
+        await Application.Current.MainPage.Navigation.PushAsync(new PacientesPages());
     }
 
     private async void Cancelar_Clicked(object sender, EventArgs e)

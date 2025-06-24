@@ -8,6 +8,8 @@
     <ScrollView>
         <VerticalStackLayout Padding="30" Spacing="5" HorizontalOptions="Center">
            
+            
+            
             <Grid RowDefinitions="Auto,*" Padding="10" Margin="20">
                 <Grid Padding="10" VerticalOptions="Start" HorizontalOptions="Fill">
                     <Grid.ColumnDefinitions>

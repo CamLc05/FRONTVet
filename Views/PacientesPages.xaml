@@ -17,12 +17,29 @@
    <Grid>
             <StackLayout VerticalOptions="Start" HorizontalOptions="Center" Padding="0" Margin="0">
                    
-                <Image Source="logovetnegro.png"
-                       WidthRequest="170"
-                       HeightRequest="80"
-                       Margin="0,20,0,5"
-                />
-           
+                
+                <Grid RowDefinitions="Auto,*" Padding="10" Margin="20">
+                    <Grid Padding="10" VerticalOptions="Start" HorizontalOptions="Fill">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />   <!-- Flecha -->
+                            <ColumnDefinition Width="*" />      <!-- Logo -->
+                            <ColumnDefinition Width="Auto" />   <!-- Botón más -->
+                        </Grid.ColumnDefinitions>
+
+                       
+
+                        <!-- Logo Centrado -->
+                        <Image Source="logovetnegro.png"
+                               WidthRequest="170"
+                               HeightRequest="80"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Grid.Column="1" /> 
+
+               
+                    </Grid>
+                </Grid>
+
                 <Label Text="PACIENTES"
                        FontSize="30"
                        FontAttributes="None"

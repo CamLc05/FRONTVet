@@ -15,6 +15,8 @@ namespace Veterinaria.Views.Componentes;
 
 public partial class PacienteCardView : ContentView
 {
+    public List<Paciente> Pacientes { get; set; } = new();
+
     public PacienteCardView()
     {
         InitializeComponent();
@@ -35,42 +37,48 @@ public partial class PacienteCardView : ContentView
     }
 
 
+  
     private async void OnEliminarSwipe(object sender, EventArgs e)
     {
         if (sender is SwipeItem item && item.CommandParameter is Paciente paciente)
         {
-            await MostrarPopup();
+            bool confirm = await Application.Current.MainPage.DisplayAlert("¿Eliminar?", $"¿Eliminar {paciente.Nombre}?", "Sí", "Cancelar");
+            if (confirm)
+            {
+                // Aquí no puedes removerlo de la lista local. Deberías emitir un evento.
+                Console.WriteLine("Paciente eliminado: " + paciente.Nombre);
+            }
         }
     }
+
+    private async void OnDetallesPaciente(object sender, EventArgs e)
+    {
+        if (sender is ImageButton button && button.CommandParameter is Paciente paciente)
+        {
+            Console.WriteLine("Detalles de: " + paciente.Nombre);
+            await Application.Current.MainPage.Navigation.PushAsync(new PacienteDetalle(paciente));
+        }
+    }
+
+
 
     private async void OnEditarSwipe(object sender, EventArgs e)
     {
         if (sender is SwipeItem item && item.CommandParameter is Paciente paciente)
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new PacienteDetalle(paciente));
+            await Application.Current.MainPage.Navigation.PushAsync(new EditarPaciente(paciente));
             Console.WriteLine("Editar: " + paciente.Nombre);
         }
     }
 
     private async void OnVerPaciente(object sender, EventArgs e)
     {
-        var recognizer = sender as TapGestureRecognizer;
-        var paciente = recognizer?.BindingContext as Paciente;
-
-        if (paciente != null)
+        if (sender is VisualElement element && element.BindingContext is Paciente paciente)
         {
-            // Navegar a la página detalle, pasando el paciente
             await Application.Current.MainPage.Navigation.PushAsync(new PacienteDetalle(paciente));
         }
     }
-    private async void OnDetallesPaciente(object sender, EventArgs e)
-    {
-        if (sender is ImageButton button && button.CommandParameter is Producto paciente)
-        {
-            Console.WriteLine("entro");
-            await Application.Current.MainPage.Navigation.PushAsync(new PacienteDetalle(Paciente));
-        }
-    }
+   
 
     private async Task MostrarPopup()
     {

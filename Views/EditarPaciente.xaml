@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Veterinaria.Views.EditarPaciente"
+             BackgroundColor="#F5F5F5">
+    
+      <ScrollView>
+    <VerticalStackLayout Padding="30" Spacing="5" HorizontalOptions="Center">
+       
+        <!-- Encabezado -->
+        <Grid RowDefinitions="Auto,*" Padding="10" Margin="20">
+            <Grid Padding="10" VerticalOptions="Start" HorizontalOptions="Fill">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Flecha -->
+                <Image Source="back1.png"
+                       WidthRequest="25"
+                       HeightRequest="25"
+                       VerticalOptions="Center"
+                       Grid.Column="0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Cancelar_Clicked"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <!-- Logo -->
+                <Image Source="logovetnegro.png"
+                       WidthRequest="170"
+                       HeightRequest="80"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Grid.Column="1"/>
+            </Grid>
+        </Grid>
+
+        <!-- Títulos -->
+        <Label Text="EDITAR" FontSize="30" HorizontalOptions="Center"/>
+        <Label Text="Paciente" FontSize="15" HorizontalOptions="Center"/>
+
+        <!-- Nombre -->
+        <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300" HeightRequest="50">
+            <Editor Text="{Binding Nombre}" Placeholder="Nombre" BackgroundColor="Transparent" />
+        </Frame>
+
+        <!-- Raza -->
+        <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300" HeightRequest="50">
+            <Editor Text="{Binding Raza}" Placeholder="Raza" BackgroundColor="Transparent" />
+        </Frame>
+
+        <!-- Padecimiento -->
+        <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300" HeightRequest="50">
+            <Editor Text="{Binding Padecimiento}" Placeholder="Padecimiento" BackgroundColor="Transparent" />
+        </Frame>
+
+        <!-- Intervenciones -->
+        <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300" HeightRequest="50">
+            <Editor Text="{Binding Intervenciones}" Placeholder="Intervenciones" BackgroundColor="Transparent" />
+        </Frame>
+
+        <!-- Fecha nacimiento -->
+        <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300" HeightRequest="50">
+            <DatePicker Date="{Binding Fecha_nacimiento}" Format="dd/MM/yyyy" BackgroundColor="Transparent"/>
+        </Frame>
+
+        <!-- Especie (Picker) -->
+        <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300" HeightRequest="50">
+            <Picker Title="Especie"
+                    ItemsSource="{Binding Especies}"
+                    SelectedItem="{Binding Especie}"
+                    BackgroundColor="Transparent" />
+        </Frame>
+
+        <!-- Sexo (Picker) -->
+        <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300" HeightRequest="50">
+            <Picker Title="Sexo"
+                    ItemsSource="{Binding Sexos}"
+                    SelectedItem="{Binding Sexo}"
+                    BackgroundColor="Transparent" />
+        </Frame>
+
+        <!-- Propietario -->
+        <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300" HeightRequest="50">
+            <Picker Title="Propietario"
+                    ItemsSource="{Binding Propietarios}"
+                    SelectedItem="{Binding Propietario}"
+                    ItemDisplayBinding="{Binding Nombre}"
+                    BackgroundColor="Transparent"/>
+        </Frame>
+
+        <!-- Botón Guardar -->
+        
+        <Button Text="Guardar"
+                BackgroundColor="#F17105"
+                FontSize="17"
+                CornerRadius="20"
+                WidthRequest="100"
+                HeightRequest="20"
+                TextColor="#F7F7F2"
+                Clicked="Guardar_Clicked"
+                FontAttributes="Bold"/>
+    </VerticalStackLayout>
+</ScrollView>
+
+</ContentPage>
