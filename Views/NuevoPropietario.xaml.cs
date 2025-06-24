@@ -25,3 +25,5 @@ public partial class NuevoPropietario : ContentPage
         await Application.Current.MainPage.Navigation.PushAsync(new NuevoPropietario());
     }
 }
+
+//f17105

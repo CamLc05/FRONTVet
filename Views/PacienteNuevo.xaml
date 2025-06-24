@@ -132,20 +132,49 @@
                     HeightRequest="20" />
         </Frame>
 
-        <!-- Propietario (solo nombre editable) -->
-        <Label Text="Propietario"
+            <Label Text="Buscar propietario"
                FontSize="14"
                FontAttributes="Bold"
-               TextColor="Black"
-        />
-        <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300">
-            <Entry Text="{Binding Propietario.Nombre}"
-                   Placeholder="Nombre del propietario"
-                   BackgroundColor="Transparent"
-                   TextColor="Black"/>
-        </Frame>
+               TextColor="Black" />
+            <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300">
+                <Entry x:Name="BuscarPropietarioEntry"
+                       Placeholder="Buscar propietario por nombre"
+                       BackgroundColor="Transparent"
+                       TextColor="Black"
+                       FontSize="16"
+                       TextChanged="BuscarPropietarioEntry_TextChanged"/>
+            </Frame>
 
-        <!-- Botón Guardar -->
+            <!-- Lista dinámica de propietarios -->
+            <CollectionView x:Name="PropietariosListView"
+                ItemsSource="{Binding Propietarios}"
+                SelectionMode="Single"
+                SelectionChanged="PropietariosListView_SelectionChanged"
+                IsVisible="{Binding Propietarios.Count, Converter={StaticResource ListNotEmptyConverter}}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" BackgroundColor="#E4DFDA" Margin="5" CornerRadius="10" WidthRequest="300">
+                            <Label Text="{Binding Nombre}"
+               FontSize="16"
+               TextColor="Black"
+               VerticalOptions="Center" />
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Label Text="No se encontraron propietarios" HorizontalOptions="Center" />
+                </CollectionView.EmptyView>
+            </CollectionView>
+            <Button Text="¿No encuentras tu propietario? Agrégalo aquí"
+                    Clicked="OnAgregarPropietario_Clicked"
+                    BackgroundColor="Transparent"
+                    TextColor="#F17105"
+                    FontAttributes="Italic"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Margin="0,5" />
+
+            <!-- Botón Guardar -->
         <Button Text="Guardar"
                 BackgroundColor="#F17105"
                 FontSize="17"
