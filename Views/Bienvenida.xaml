@@ -28,7 +28,7 @@
                HorizontalOptions="Center" 
                Margin="0,20"/>
 
-            <Label Text="Juan Pérez" 
+            <Label Text="{Binding NombrePila}" 
                TextColor="#121113"
                FontSize="20"
                HorizontalOptions="Center" 
@@ -38,7 +38,7 @@
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Tienes permiso de: " FontSize="17" FontFamily="QuicksandLight"/>
-                        <Span Text="Veterinario" TextColor="#F17105" FontSize="17"/>
+                        <Span Text="{Binding RolUsuario}" TextColor="#F17105" FontSize="17"/>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>

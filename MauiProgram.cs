@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
-using Microsoft.Maui.Controls.Handlers.Compatibility; 
-
-namespace Veterinaria; 
-
+using Microsoft.Maui.Controls.Handlers.Compatibility; // ¡Asegúrate de añadir esta línea!
+using Veterinaria.Services;
+namespace Veterinaria; // Tu namespace actual
 
 public static class MauiProgram
 {
@@ -29,7 +28,7 @@ public static class MauiProgram
                 handlers.AddHandler(typeof(Entry), typeof(Veterinaria.CustomEntryHandler));
 #endif
             });
-
+        builder.Services.AddOptionsWithValidateOnStart<UsuarioService>();
 
 #if DEBUG
         builder.Logging.AddDebug();
