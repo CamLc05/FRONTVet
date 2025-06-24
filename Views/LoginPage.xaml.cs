@@ -21,10 +21,6 @@ public partial class LoginPage : ContentPage
         BindingContext = viewModel;
     }
 
-    private async void onClick(object sender, EventArgs e)
-    {
-        ((App)Application.Current).GoToMainApp();
-    }
     private async void onClickRegistro(object sender, EventArgs e)
     {
         await Application.Current.MainPage.Navigation.PushAsync(new Registro());

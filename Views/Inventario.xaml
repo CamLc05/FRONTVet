@@ -65,7 +65,7 @@
 
                 <!-- Tercera columna -->
                 <VerticalStackLayout Grid.Column="4" HorizontalOptions="Center">
-                    <Image Source="estetica.png" WidthRequest="50" HeightRequest="50">
+                    <Image Source="iconoestetica.png" WidthRequest="50" HeightRequest="50">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SeleccionarCategoriaCommand}" CommandParameter="{x:Static models:TipoProducto.estetica}" />
                         </Image.GestureRecognizers>
