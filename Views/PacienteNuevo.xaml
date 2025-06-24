@@ -5,7 +5,7 @@
              x:Class="Veterinaria.Views.PacienteNuevo"
              Title="Nuevo Paciente">
   <ScrollView>
-    <VerticalStackLayout Padding="30" Spacing="5" HorizontalOptions="Center">
+    <VerticalStackLayout Padding="10" Margin="20" Spacing="5" HorizontalOptions="Center">
         
         <!-- Encabezado con flecha y logo -->
         <Grid RowDefinitions="Auto,*" Padding="10" Margin="20">
@@ -44,8 +44,14 @@
         <Label Text="NUEVO" FontSize="30" FontAttributes="None" HorizontalOptions="Center" />
         <Label Text="Paciente" FontSize="15" FontAttributes="None" HorizontalOptions="Center" />
 
+        
         <!-- Nombre -->
-        <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300">
+        <Label Text="Nombre"
+               FontSize="14"
+               FontAttributes="Bold"
+               TextColor="Black"
+        />
+        <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300">
             <Editor Text="{Binding Nombre}"
                     Placeholder="Nombre del paciente"
                     BackgroundColor="Transparent"
@@ -55,7 +61,12 @@
         </Frame>
 
         <!-- Especie -->
-        <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300">
+        <Label Text="Especie"
+               FontSize="14"
+               FontAttributes="Bold"
+               TextColor="Black"
+        />
+        <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Padding="10" WidthRequest="300">
             <Picker Title="Especie"
                     ItemsSource="{Binding TiposEspecie}"
                     SelectedItem="{Binding Especie}"
@@ -64,6 +75,11 @@
         </Frame>
 
         <!-- Raza -->
+        <Label Text="Raza"
+               FontSize="14"
+               FontAttributes="Bold"
+               TextColor="Black"
+        />
         <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300">
             <Editor Text="{Binding Raza}"
                     Placeholder="Raza"
@@ -74,6 +90,11 @@
         </Frame>
 
         <!-- Sexo -->
+        <Label Text="Sexo"
+               FontSize="14"
+               FontAttributes="Bold"
+               TextColor="Black"
+        />
         <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300">
             <Picker Title="Sexo"
                     ItemsSource="{Binding TiposSexo}"
@@ -83,6 +104,11 @@
         </Frame>
 
         <!-- Fecha de nacimiento -->
+        <Label Text="Fecha de nacimiento"
+               FontSize="14"
+               FontAttributes="Bold"
+               TextColor="Black"
+        />
         <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300">
             <DatePicker Date="{Binding Fecha_nacimiento}"
                         Visual="None"
@@ -92,6 +118,11 @@
         </Frame>
 
         <!-- Padecimiento -->
+        <Label Text="Padecimientos"
+               FontSize="14"
+               FontAttributes="Bold"
+               TextColor="Black"
+        />
         <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300">
             <Editor Text="{Binding Padecimiento}"
                     Placeholder="Alergias, enfermedades..."
@@ -102,6 +133,11 @@
         </Frame>
 
         <!-- Propietario (solo nombre editable) -->
+        <Label Text="Propietario"
+               FontSize="14"
+               FontAttributes="Bold"
+               TextColor="Black"
+        />
         <Frame BackgroundColor="#E4DFDA" CornerRadius="20" Margin="10" Padding="10" WidthRequest="300">
             <Entry Text="{Binding Propietario.Nombre}"
                    Placeholder="Nombre del propietario"

@@ -31,6 +31,6 @@ public partial class PacienteDetalle : ContentPage
     
     private async void Cancelar_Clicked(object sender, EventArgs e)
     {
-        await Application.Current.MainPage.Navigation.PushAsync(new Inventario());
+        await Application.Current.MainPage.Navigation.PushAsync(new PacientesPages());
     }
 }

@@ -33,7 +33,7 @@ public partial class PacienteCardView : ContentView
     private static void OnPacienteChanged(BindableObject bindable, object oldValue, object newValue)
     {
         var control = (PacienteCardView)bindable;
-        control.BindingContext = control;
+        control.BindingContext = newValue;
     }
 
 

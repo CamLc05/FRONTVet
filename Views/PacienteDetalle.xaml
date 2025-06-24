@@ -30,7 +30,7 @@
                                BackgroundColor="Transparent"
                                VerticalOptions="Center"
                                HorizontalOptions="Start"
-                               Grid.Column="0"> <!-- ✅ Aquí -->
+                               Grid.Column="0"> 
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="Cancelar_Clicked"/>
                             </Image.GestureRecognizers>
@@ -176,15 +176,7 @@
         </ScrollView>
         
         
-        <!---boton izquierda-->
-        <ImageButton Source="back.png"
-                     WidthRequest="30"
-                     HeightRequest="30"
-                     Margin="10"
-                     BackgroundColor="Transparent"
-                     Clicked="OnVolverClicked"
-                     HorizontalOptions="Start"
-                     VerticalOptions="Start" />
+       
     </Grid>
       
  
